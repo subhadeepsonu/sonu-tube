@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id        String      @id @default(uuid())
+  name      String
+  email     String      @unique
+  password  String
+  imgurl    String
+  blog      blog[]
+  followers followers[]
+  following following[]
+  commet    commet[]
+  like      blogLike[]
+  bookmark  bookMark[]
+}
+
+model blog {
+  id          Int        @id @default(autoincrement())
+  title       String
+  discription String
+  imgurl      String
+  userId      String
+  createdat   DateTime   @default(now())
+  user        user       @relation(fields: [userId], references: [id])
+  commet      commet[]
+  like        blogLike[]
+  bookmark    bookMark[]
+}
+
+model followers {
+  id         Int    @id @default(autoincrement())
+  followerId String
+  user       user   @relation(fields: [followerId], references: [id])
+  userId     String
+}
+
+model following {
+  id          Int    @id @default(autoincrement())
+  followingid String
+  user        user   @relation(fields: [followingid], references: [id])
+  userId      String
+}
+
+model commet {
+  id     Int    @id @default(autoincrement())
+  userId String
+  blogId Int
+  commet String
+  user   user   @relation(fields: [userId], references: [id])
+  blog   blog   @relation(fields: [blogId], references: [id])
+}
+
+model blogLike {
+  id     Int    @id @default(autoincrement())
+  userId String
+  blogId Int
+  user   user   @relation(fields: [userId], references: [id])
+  blog   blog   @relation(fields: [blogId], references: [id])
+}
+
+model bookMark {
+  id     Int    @id @default(autoincrement())
+  userId String
+  blogId Int
+  user   user   @relation(fields: [userId], references: [id])
+  blog   blog   @relation(fields: [blogId], references: [id])
+}
