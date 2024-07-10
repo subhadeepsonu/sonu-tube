@@ -30,6 +30,8 @@ model user {
   annoucementbookmark annoucementbookmark[]
   annoucementdislike  annoucementdislike[]
   video               video[]
+  like                like[]
+  announcementcomment announcementcomment[]
 }
 
 model video {
@@ -46,6 +48,7 @@ model video {
   watchlater  watchlater[]
   dislike     dislike[]
   views       views[]
+  like        like[]
 }
 
 model comment {
@@ -63,6 +66,8 @@ model like {
   id      Int    @id @default(autoincrement())
   userId  String
   videoId Int
+  user    user   @relation(fields: [userId], references: [id])
+  video   video  @relation(fields: [videoId], references: [id])
 }
 
 model dislike {
@@ -115,6 +120,7 @@ model annoucement {
   annoucementlike     annoucementlike[]
   annoucementbookmark annoucementbookmark[]
   annoucementdislike  annoucementdislike[]
+  announcementcomment announcementcomment[]
 }
 
 model annoucementlike {
@@ -139,4 +145,13 @@ model annoucementbookmark {
   annoucementid Int
   user          user        @relation(fields: [userid], references: [id])
   annoucement   annoucement @relation(fields: [annoucementid], references: [id])
+}
+
+model announcementcomment {
+  id             Int         @id @default(autoincrement())
+  comment        String
+  userid         String
+  announcementid Int
+  user           user        @relation(fields: [userid], references: [id])
+  announcement   annoucement @relation(fields: [announcementid], references: [id])
 }
