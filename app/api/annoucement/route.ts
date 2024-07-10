@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod"
-import { annoucementDeleteSchema, annoucementSchema } from "./schema";
+import { announcementDeleteSchema, announcementSchema } from "./schema";
 import prisma from "@/db";
 export async function POST(req:NextRequest){
     try {
-        const data:z.infer<typeof annoucementSchema> = await req.json()
-        const check = annoucementSchema.safeParse(data)
+        const data:z.infer<typeof announcementSchema> = await req.json()
+        const check = announcementSchema.safeParse(data)
         if(!check.success){
             return NextResponse.json({
                 success:false,
@@ -33,8 +33,8 @@ export async function POST(req:NextRequest){
 
 export async function DELETE(req:NextRequest){
     try {
-        const data:z.infer<typeof annoucementDeleteSchema> = await req.json()
-        const check = annoucementDeleteSchema.safeParse(data)
+        const data:z.infer<typeof announcementDeleteSchema> = await req.json()
+        const check = announcementDeleteSchema.safeParse(data)
         if(!check.success){
             return NextResponse.json({
                 success:false,

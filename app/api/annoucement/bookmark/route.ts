@@ -1,43 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { annoucementDislikeSchema } from "./schema";
+import { announcementBookmarkSchema } from "./schema";
 import z from "zod"
 import prisma from "@/db";
-
 export async function POST(req:NextRequest){
     try {
-        const data:z.infer<typeof annoucementDislikeSchema> = await req.json()
-        const check = annoucementDislikeSchema.safeParse(data)
+        const data:z.infer<typeof announcementBookmarkSchema> = await req.json()
+        const check = announcementBookmarkSchema.safeParse(data)
         if(!check.success){
             return NextResponse.json({
                 success:false,
                 message:`${check.error}`
             })
         }
-        const isLiked = await prisma.annoucementlike.findMany({
-            where:{
-                annoucementid:data.announcementid,
-                userid:data.userid
-            }
-        })
-        if(isLiked){
-            await prisma.annoucementlike.deleteMany({
-                where:{
-                    annoucementid:data.announcementid,
-                    userid:data.userid
-                }
-            })
-            const response = await prisma.annoucementdislike.create({
-                data:{
-                    annoucementid:data.announcementid,
-                    userid:data.userid
-                }
-            })
-            return NextResponse.json({
-                success:true,
-                message:response
-            })
-        }
-        const response = await prisma.annoucementdislike.create({
+        const response = await prisma.annoucementbookmark.create({
             data:{
                 annoucementid:data.announcementid,
                 userid:data.userid
@@ -57,15 +32,15 @@ export async function POST(req:NextRequest){
 
 export async function DELETE(req:NextRequest){
     try {
-        const data:z.infer<typeof annoucementDislikeSchema> = await req.json()
-        const check = annoucementDislikeSchema.safeParse(data)
+        const data:z.infer<typeof announcementBookmarkSchema> = await req.json()
+        const check = announcementBookmarkSchema.safeParse(data)
         if(!check.success){
             return NextResponse.json({
                 success:false,
                 message:`${check.error}`
             })
         }
-        const response = await prisma.annoucementdislike.deleteMany({
+        const response = await prisma.annoucementbookmark.deleteMany({
             where:{
                 annoucementid:data.announcementid,
                 userid:data.userid
