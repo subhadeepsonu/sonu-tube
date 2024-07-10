@@ -14,19 +14,22 @@ datasource db {
 }
 
 model user {
-  id              String            @id @default(uuid())
-  name            String
-  email           String
-  password        String
-  imgurl          String
-  comment         comment[]
-  watchlater      watchlater[]
-  dislike         dislike[]
-  follows         follows[]
-  commentlike     commentlike[]
-  views           views[]
-  annoucement     annoucement[]
-  annoucementlike annoucementlike[]
+  id                  String                @id @default(uuid())
+  name                String
+  email               String                @unique
+  password            String
+  imgurl              String
+  comment             comment[]
+  watchlater          watchlater[]
+  dislike             dislike[]
+  follows             follows[]
+  commentlike         commentlike[]
+  views               views[]
+  annoucement         annoucement[]
+  annoucementlike     annoucementlike[]
+  annoucementbookmark annoucementbookmark[]
+  annoucementdislike  annoucementdislike[]
+  video               video[]
 }
 
 model video {
@@ -37,6 +40,8 @@ model video {
   videourl    String
   publish     Boolean      @default(true)
   createdat   DateTime     @default(now())
+  userid      String
+  user        user         @relation(fields: [userid], references: [id])
   comment     comment[]
   watchlater  watchlater[]
   dislike     dislike[]
@@ -101,16 +106,34 @@ model views {
 }
 
 model annoucement {
-  id              Int               @id @default(autoincrement())
-  title           String
-  discription     String
-  userid          String
-  creeatedat      DateTime          @default(now())
-  user            user              @relation(fields: [userid], references: [id])
-  annoucementlike annoucementlike[]
+  id                  Int                   @id @default(autoincrement())
+  title               String
+  discription         String
+  userid              String
+  createdat           DateTime              @default(now())
+  user                user                  @relation(fields: [userid], references: [id])
+  annoucementlike     annoucementlike[]
+  annoucementbookmark annoucementbookmark[]
+  annoucementdislike  annoucementdislike[]
 }
 
 model annoucementlike {
+  id            Int         @id @default(autoincrement())
+  userid        String
+  annoucementid Int
+  user          user        @relation(fields: [userid], references: [id])
+  annoucement   annoucement @relation(fields: [annoucementid], references: [id])
+}
+
+model annoucementdislike {
+  id            Int         @id @default(autoincrement())
+  userid        String
+  annoucementid Int
+  user          user        @relation(fields: [userid], references: [id])
+  annoucement   annoucement @relation(fields: [annoucementid], references: [id])
+}
+
+model annoucementbookmark {
   id            Int         @id @default(autoincrement())
   userid        String
   annoucementid Int
