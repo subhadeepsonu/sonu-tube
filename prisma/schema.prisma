@@ -14,67 +14,106 @@ datasource db {
 }
 
 model user {
-  id        String      @id @default(uuid())
-  name      String
-  email     String      @unique
-  password  String
-  imgurl    String
-  blog      blog[]
-  followers followers[]
-  following following[]
-  commet    commet[]
-  like      blogLike[]
-  bookmark  bookMark[]
+  id              String            @id @default(uuid())
+  name            String
+  email           String
+  password        String
+  imgurl          String
+  comment         comment[]
+  watchlater      watchlater[]
+  dislike         dislike[]
+  follows         follows[]
+  commentlike     commentlike[]
+  views           views[]
+  annoucement     annoucement[]
+  annoucementlike annoucementlike[]
 }
 
-model blog {
-  id          Int        @id @default(autoincrement())
+model video {
+  id          Int          @id @default(autoincrement())
   title       String
   discription String
-  imgurl      String
+  thumnailurl String
+  videourl    String
+  publish     Boolean      @default(true)
+  createdat   DateTime     @default(now())
+  comment     comment[]
+  watchlater  watchlater[]
+  dislike     dislike[]
+  views       views[]
+}
+
+model comment {
+  id          Int           @id @default(autoincrement())
+  comment     String
   userId      String
-  createdat   DateTime   @default(now())
-  user        user       @relation(fields: [userId], references: [id])
-  commet      commet[]
-  like        blogLike[]
-  bookmark    bookMark[]
+  videoId     Int
+  createdat   DateTime      @default(now())
+  user        user          @relation(fields: [userId], references: [id])
+  video       video         @relation(fields: [videoId], references: [id])
+  commentlike commentlike[]
 }
 
-model followers {
-  id         Int    @id @default(autoincrement())
-  followerId String
-  user       user   @relation(fields: [followerId], references: [id])
-  userId     String
+model like {
+  id      Int    @id @default(autoincrement())
+  userId  String
+  videoId Int
 }
 
-model following {
-  id          Int    @id @default(autoincrement())
-  followingid String
-  user        user   @relation(fields: [followingid], references: [id])
-  userId      String
+model dislike {
+  id      Int    @id @default(autoincrement())
+  userId  String
+  videoId Int
+  user    user   @relation(fields: [userId], references: [id])
+  video   video  @relation(fields: [videoId], references: [id])
 }
 
-model commet {
-  id     Int    @id @default(autoincrement())
-  userId String
-  blogId Int
-  commet String
-  user   user   @relation(fields: [userId], references: [id])
-  blog   blog   @relation(fields: [blogId], references: [id])
+model watchlater {
+  id      Int    @id @default(autoincrement())
+  userId  String
+  vedioId Int
+  user    user   @relation(fields: [userId], references: [id])
+  video   video  @relation(fields: [vedioId], references: [id])
 }
 
-model blogLike {
-  id     Int    @id @default(autoincrement())
-  userId String
-  blogId Int
-  user   user   @relation(fields: [userId], references: [id])
-  blog   blog   @relation(fields: [blogId], references: [id])
+model follows {
+  id        Int    @id @default(autoincrement())
+  follwerId String
+  userId    String
+  follower  user   @relation(fields: [follwerId], references: [id])
 }
 
-model bookMark {
-  id     Int    @id @default(autoincrement())
-  userId String
-  blogId Int
-  user   user   @relation(fields: [userId], references: [id])
-  blog   blog   @relation(fields: [blogId], references: [id])
+model commentlike {
+  id        Int     @id @default(autoincrement())
+  userid    String
+  commentid Int
+  user      user    @relation(fields: [userid], references: [id])
+  comment   comment @relation(fields: [commentid], references: [id])
+}
+
+model views {
+  id       Int      @id @default(autoincrement())
+  userid   String
+  videoid  Int
+  viewedat DateTime @default(now())
+  user     user     @relation(fields: [userid], references: [id])
+  video    video    @relation(fields: [videoid], references: [id])
+}
+
+model annoucement {
+  id              Int               @id @default(autoincrement())
+  title           String
+  discription     String
+  userid          String
+  creeatedat      DateTime          @default(now())
+  user            user              @relation(fields: [userid], references: [id])
+  annoucementlike annoucementlike[]
+}
+
+model annoucementlike {
+  id            Int         @id @default(autoincrement())
+  userid        String
+  annoucementid Int
+  user          user        @relation(fields: [userid], references: [id])
+  annoucement   annoucement @relation(fields: [annoucementid], references: [id])
 }
