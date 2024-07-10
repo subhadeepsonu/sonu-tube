@@ -31,7 +31,8 @@ export async function POST(req: NextRequest){
             data:{
                 email:data.email.toLowerCase(),
                 name:data.name,
-                password:hash
+                password:hash,
+                imgurl:data.imgurl
             }
         })
         const token = jwt.sign(response,process.env.JWT_SECERT!)
