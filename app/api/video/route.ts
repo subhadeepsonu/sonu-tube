@@ -2,6 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { videoDeleteSchema, videoSchema } from "./schema";
 import prisma from "@/db";
 import z from "zod"
+import { revalidatePath } from "next/cache";
+export async function GET(){
+    try {
+        const response = await prisma.video.findMany({})
+        return NextResponse.json({
+            success:true,
+            message:response
+        })
+    } catch (error) {
+        return NextResponse.json({
+            success:false,
+            message:`${error}`
+        })
+    }
+}
 export  async function POST(req:NextRequest){
     try {
         const data:z.infer<typeof videoSchema> = await req.json()
@@ -21,6 +36,7 @@ export  async function POST(req:NextRequest){
                 userid:data.userid
             }
         })
+        revalidatePath('/')
         return NextResponse.json({
             success:true,
             message:response

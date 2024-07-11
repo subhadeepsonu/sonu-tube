@@ -1,12 +1,17 @@
-"use client"
+import VideoCard from "@/components/cards/videocard";
+import GetAllVideos from "@/data/getallvideo";
 
-import dynamic from "next/dynamic";
-
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
-export default function Home() {
+export default async function Home() {
+  const data = await GetAllVideos()
   return (
-    <div className="h-screen w-full flex justify-center items-center" >
-      <ReactPlayer controls={true} playing={true} url={"https://res.cloudinary.com/dzwbh0yob/video/upload/v1720553636/pklhbokbcaxykrmbcnfp.mp4"}></ReactPlayer>
+    <div className="min-h-screen w-full flex-col flex justify-start items-center pt-20 pl-24" >
+      <div className="grid grid-cols-4 gap-5">
+      {data.map((video)=>{
+          return <VideoCard userimage={video.user.imgurl} name={video.user.name} views={video._count.views} imgrul={video.thumnailurl} title={video.title} >
+          </VideoCard>
+      })}
+      </div>
+      
     </div>
   );
 }

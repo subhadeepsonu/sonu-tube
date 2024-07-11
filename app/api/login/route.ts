@@ -27,7 +27,8 @@ export async function POST(req:NextRequest){
                 const token = jwt.sign(IsOld,process.env.JWT_SECERT!)
                 return NextResponse.json({
                     success:true,
-                    message:token
+                    message:"Login successful",
+                    token:token
                 })
             }
             else{

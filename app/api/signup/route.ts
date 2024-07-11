@@ -38,7 +38,8 @@ export async function POST(req: NextRequest){
         const token = jwt.sign(response,process.env.JWT_SECERT!)
         return NextResponse.json({
             success:true,
-            message:token
+            message:"Signup successfull",
+            token:token
         })
     } catch (error) {
         return NextResponse.json({
