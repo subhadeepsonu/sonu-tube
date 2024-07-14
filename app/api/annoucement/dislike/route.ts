@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { annoucementDislikeSchema } from "./schema";
 import z from "zod"
 import prisma from "@/db";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req:NextRequest){
     try {
@@ -43,6 +44,7 @@ export async function POST(req:NextRequest){
                 userid:data.userid
             }
         })
+        revalidatePath('/announcement')
         return NextResponse.json({
             success:true,
             message:response
@@ -72,6 +74,7 @@ export async function DELETE(req:NextRequest){
                 userid:data.userid
             }
         })
+        revalidatePath('/announcement')
         return NextResponse.json({
             success:true,
             message:response

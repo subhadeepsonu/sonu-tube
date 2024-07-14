@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { annoucementCommentSchema } from "./schema";
 import z from "zod"
 import prisma from "@/db";
+import { revalidatePath } from "next/cache";
 export async function POST(req:NextRequest){
     try {
         const data:z.infer<typeof annoucementCommentSchema> = await req.json()
@@ -19,6 +20,7 @@ export async function POST(req:NextRequest){
                 userid:data.userid
             }
         })
+        revalidatePath('/announcement')
         return NextResponse.json({
             success:true,
             message:response
