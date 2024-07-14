@@ -44,6 +44,7 @@ export async function POST(req:NextRequest){
                 userid:data.userid
             }
         })
+        revalidatePath('/announcement')
         return NextResponse.json({
             success:true,
             message:response
