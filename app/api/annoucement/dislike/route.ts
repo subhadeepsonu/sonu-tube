@@ -59,6 +59,7 @@ export async function DELETE(req:NextRequest){
     try {
         const data:z.infer<typeof annoucementDislikeSchema> = await req.json()
         const check = annoucementDislikeSchema.safeParse(data)
+        console.log(data)
         if(!check.success){
             return NextResponse.json({
                 success:false,
