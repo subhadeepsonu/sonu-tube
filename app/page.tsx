@@ -1,6 +1,5 @@
 import VideoCard from "@/components/cards/videocard";
 import GetAllVideos from "@/data/getallvideo";
-
 export default async function Home() {
   const data = await GetAllVideos()
   return (
@@ -11,7 +10,6 @@ export default async function Home() {
           </VideoCard>
       })}
       </div>
-      
     </div>
   );
 }

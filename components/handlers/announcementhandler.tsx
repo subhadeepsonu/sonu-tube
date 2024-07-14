@@ -6,7 +6,6 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 import Cookies from "universal-cookie";
-
 export default function AnnoucementHandler(props: any) {
   const [token, setToken] = useState<string | null>(null);
   const [decoded, setDecoded] = useState<any>(null);
@@ -14,7 +13,6 @@ export default function AnnoucementHandler(props: any) {
   const [dislikes, setDislikes] = useState(props.dislikes);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       const cookie = new Cookies();
