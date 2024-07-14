@@ -1,3 +1,4 @@
+"use server"
 import { NextRequest, NextResponse } from "next/server";
 import { annoucementLikeSchema } from "./schema";
 import z from "zod"

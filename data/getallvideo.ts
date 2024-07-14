@@ -1,5 +1,6 @@
 "use server"
 import prisma from "@/db"
+import { revalidatePath } from "next/cache"
 export default async function GetAllVideos(){
     try {
         const response = prisma.video.findMany({
@@ -25,6 +26,7 @@ export default async function GetAllVideos(){
                 }
             }
         })
+        revalidatePath('/')
         return response
     } catch (error) {
         throw new Error(`${error}`)
