@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { annoucementLikeSchema } from "./schema";
 import z from "zod"
 import prisma from "@/db";
+import { revalidatePath } from "next/cache";
 export async function POST(req:NextRequest){
     try {
         const data:z.infer<typeof annoucementLikeSchema> = await req.json()
@@ -31,6 +32,7 @@ export async function POST(req:NextRequest){
                     userid:data.userid
                 }
             })
+            revalidatePath('/announcement')
             return NextResponse.json({
                 success:true,
                 message:response
@@ -71,6 +73,7 @@ export async function DELETE(req:NextRequest){
                 annoucementid:data.announcementid
             }
         })
+        revalidatePath('/announcement')
         return NextResponse.json({
             success:true,
             message:response
