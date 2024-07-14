@@ -25,7 +25,7 @@ export default function AnnoucementHandler(props: any) {
         setDecoded(decodedToken);
       }
     }
-  }, []);
+  }, [props.likes,props.dislikes,props.userlike,props.userdislike]);
 
   useEffect(() => {
     if (decoded) {
