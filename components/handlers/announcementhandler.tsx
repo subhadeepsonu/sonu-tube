@@ -12,7 +12,7 @@ import Cookies from "universal-cookie";
 export default function AnnoucementHandler(props:any){
     
     const cookie =  new Cookies()
-    const token = cookie.get("token")
+    const token = cookie.get("token") || ""
     const decoded:any = jwtDecode(token)
     const [likes,setLikes]=useState(props.likes)
     const [dislikes,setDislikes]=useState(props.dislikes)
