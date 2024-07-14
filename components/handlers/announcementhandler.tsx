@@ -10,23 +10,14 @@ import axios from "axios";
 import {jwtDecode} from "jwt-decode"
 import Cookies from "universal-cookie";
 export default function AnnoucementHandler(props:any){
-    const [token, setToken] = useState<string | null>(null);
-    const [decoded, setDecoded] = useState<any>(null);
+    
+    const cookie =  new Cookies()
+    const token = cookie.get("token")
+    const decoded:any = jwtDecode(token)
     const [likes,setLikes]=useState(props.likes)
     const [dislikes,setDislikes]=useState(props.dislikes)
     const [liked,SetLiked]=useState(false)
     const [disliked,SetDisliked]=useState(false)
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-          const cookie = new Cookies();
-          const token = cookie.get("token");
-          if (token) {
-            setToken(token);
-            const decodedToken: any = jwtDecode(token);
-            setDecoded(decodedToken);
-          }
-        }
-      }, []);
     useEffect(()=>{
         console.log(decoded)
         const userliked= props.userlike
