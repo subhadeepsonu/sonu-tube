@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import z from "zod"
 import { announcementDeleteSchema, announcementSchema } from "./schema";
 import prisma from "@/db";
+import { revalidatePath } from "next/cache";
 export async function POST(req:NextRequest){
     try {
         const data:z.infer<typeof announcementSchema> = await req.json()
@@ -12,6 +13,7 @@ export async function POST(req:NextRequest){
                 message:`${check.error}`
             })
         }
+        revalidatePath('/announcement')
         const response = await prisma.annoucement.create({
             data:{
                 discription:data.discription,
