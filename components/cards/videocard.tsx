@@ -7,7 +7,7 @@ export default function VideoCard(props:any){
         </div>
         <div className="w-80 h-24 flex p-2">
         <Avatar className="flex justify-center items-center">
-        <AvatarImage className="w-16" src={props.userimage} alt="pp"></AvatarImage>
+        <AvatarImage className="w-16" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg" alt="pp"></AvatarImage>
         </Avatar>
         <div className="flex flex-col justify-start items-center">
         <p className=" h-1/2 truncate pl-2 text-clip w-60 text-xl font-semibold" >{props.title}dd ddddd dddd ddd</p>
