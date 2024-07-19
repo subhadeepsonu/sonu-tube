@@ -17,11 +17,12 @@ try {
  throw new Error(`${error}`)   
 }
 }
-export async function RemoveBookMark(BookMarkid:number){
+export async function RemoveBookMark(userid:string,annoucementid:number){
     try {
-        const response  = await prisma.annoucementbookmark.delete({
+        const response  = await prisma.annoucementbookmark.deleteMany({
             where:{
-                id:BookMarkid
+                userid:userid,
+                annoucementid:annoucementid
             }
         })
         revalidatePath('/announcement')
