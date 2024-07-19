@@ -3,9 +3,11 @@ import { FaComments } from "react-icons/fa";
 import { BiLike, BiDislike, BiSolidLike, BiSolidDislike } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 import Cookies from "universal-cookie";
+import { AnnouncementAddLike, AnnouncementDeletelike } from "@/actions/annoucements/like";
+import { AnnouncementAddDislike, AnnouncementDeleteDislike } from "@/actions/annoucements/unlike";
+import CommentCard from "../cards/commentButton";
 export default function AnnoucementHandler(props: any) {
   const [token, setToken] = useState<string | null>(null);
   const [decoded, setDecoded] = useState<any>(null);
@@ -45,44 +47,16 @@ export default function AnnoucementHandler(props: any) {
   }, [decoded, props.userlike, props.userdislike]);
 
   const MutateAddLike =  useMutation({
-    mutationFn:async ()=>{
-        const data = await axios.post("/api/annoucement/like",{
-            userid:decoded.id,
-            announcementid:props.id
-        })
-        return  data.data
-    }
+    mutationFn:()=> AnnouncementAddLike(decoded.id,props.id)
 })
 const MutateRemoveLike = useMutation({
-    mutationFn:async ()=>{
-        const data = await axios.delete("/api/annoucement/like",{
-            data:{
-                userid:decoded.id,
-                announcementid:props.id
-            }
-        })
-        return data.data
-    }
+    mutationFn:()=>AnnouncementDeletelike(decoded.id,props.id)
 })
 const MutateAddDislike = useMutation({
-    mutationFn:async ()=>{
-        const data = await axios.post("/api/annoucement/dislike",{
-            userid:decoded.id,
-            announcementid:props.id
-        })
-        return data.data
-    }
+    mutationFn:()=>AnnouncementAddDislike(decoded.id,props.id)
 })
 const MutateRemoveDislike = useMutation({
-    mutationFn:async ()=>{
-        const data = await axios.delete("/api/annoucement/dislike",{
-            data:{
-                userid:decoded.id,
-                announcementid:props.id
-            }
-        })
-        return data.data
-    }
+    mutationFn:()=>AnnouncementDeleteDislike(decoded.id,props.id)
 })
 
   return (
@@ -136,7 +110,8 @@ const MutateRemoveDislike = useMutation({
           />
         )}
       </div>
-      <FaComments className="hover:cursor-pointer text-2xl" />
+      
+      {/* <CommentCard id={props.id} ></CommentCard> */}
     </div>
   );
 }
