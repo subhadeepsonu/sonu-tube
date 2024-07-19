@@ -26,7 +26,6 @@ export default async function GetAllVideos(){
                 }
             }
         })
-        revalidatePath('/')
         return response
     } catch (error) {
         throw new Error(`${error}`)

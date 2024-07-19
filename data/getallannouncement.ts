@@ -38,7 +38,7 @@ export async function GetAllAnnouncements(){
                 }
             }
         })
-        revalidatePath('/announcement')
+        
         return response
     } catch (error) {
         throw new  Error(`${error}`)
