@@ -29,7 +29,7 @@ export default async function CommentButton(props:{
                     <div className="h-full w-full overflow-y-scroll overflow-x-hidden">
                     <AnnouncementAddComment announcementid={props.id} userid={decoded.id}></AnnouncementAddComment>
                     {data.map((comment)=>{
-                        return <CommentCard imgurl={comment.user.imgurl} username={comment.user.name} comment={comment.comment}></CommentCard>
+                        return <CommentCard key={comment.id} imgurl={comment.user.imgurl} username={comment.user.name} comment={comment.comment}></CommentCard>
                     })}
                     </div>
                     
