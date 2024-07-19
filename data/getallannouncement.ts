@@ -35,6 +35,13 @@ export async function GetAllAnnouncements(){
 
                         }
                     }
+                },
+                annoucementbookmark:{
+                    include:{
+                        user:{
+                            
+                        }
+                    }
                 }
             }
         })

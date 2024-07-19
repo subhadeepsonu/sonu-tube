@@ -9,7 +9,7 @@ export async function GetLikes(){
                 id:"desc"
             }
         })
-        // revalidatePath('/text')
+
         return response
     } catch (error) {
         throw new Error(`${error}`)
