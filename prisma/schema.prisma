@@ -63,11 +63,12 @@ model comment {
 }
 
 model like {
-  id      Int    @id @default(autoincrement())
-  userId  String
-  videoId Int
-  user    user   @relation(fields: [userId], references: [id])
-  video   video  @relation(fields: [videoId], references: [id])
+  id        Int      @id @default(autoincrement())
+  userId    String
+  videoId   Int
+  createdAt DateTime @default(now())
+  user      user     @relation(fields: [userId], references: [id])
+  video     video    @relation(fields: [videoId], references: [id])
 }
 
 model dislike {

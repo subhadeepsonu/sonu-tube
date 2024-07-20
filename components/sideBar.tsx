@@ -6,12 +6,10 @@ import { IoHomeOutline } from "react-icons/io5";
 import { BiLike } from "react-icons/bi";
 import { RiChatHistoryLine } from "react-icons/ri";
 import { RiChatHistoryFill } from "react-icons/ri";
-import { PiTelevisionSimpleDuotone } from "react-icons/pi";
 import { AiOutlineProfile } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 import { IoHomeSharp } from "react-icons/io5";
 import { PiSpeakerLowDuotone } from "react-icons/pi";
-import { PiTelevisionSimpleFill } from "react-icons/pi";
 import { PiSpeakerLowFill } from "react-icons/pi";
 export default function SideBar(){
     const pathname = usePathname()
@@ -22,7 +20,7 @@ export default function SideBar(){
         return null
     }
     return <div className="w-24 z-10 h-full hidden md:flex fixed left-0  justify-start items-start pt-20  bg-white  shadow-sm ">
-        <div className="w-full h-5/6 flex-col flex justify-between items-center">
+        <div className="w-full h-4/6 flex-col flex justify-between items-center">
         <Link className="flex justify-center items-center flex-col" href={'/'}>
         {(()=>{
             if(pathname=="/"){
@@ -68,17 +66,6 @@ export default function SideBar(){
             }
         })()}
         <p className="text-xs">Announments</p>
-        </Link>
-        <Link className="flex justify-center items-center flex-col" href={'/channel'}>
-        {(()=>{
-            if(pathname=="/channel"){
-                return <PiTelevisionSimpleFill  className="text-2xl" />
-            }
-            else{
-                return <PiTelevisionSimpleDuotone  className="text-2xl"/>
-            }
-        })()}
-        <p className="text-xs">Channel</p>
         </Link>
         <Link className="flex justify-center items-center flex-col" href={'/more'}>
         {(()=>{

@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { AiFillProfile, AiOutlineProfile } from "react-icons/ai"
+import { BiLike, BiSolidLike } from "react-icons/bi"
 import { IoHomeOutline, IoHomeSharp } from "react-icons/io5"
 import { PiSpeakerLowDuotone, PiSpeakerLowFill, PiTelevisionSimpleDuotone, PiTelevisionSimpleFill } from "react-icons/pi"
 export default function BottomNav(){
@@ -27,13 +28,13 @@ export default function BottomNav(){
             }
         })()}
         </Link>
-        <Link href={"/channel"}>
+        <Link href={"/liked"}>
         {(()=>{
-            if(pathname=="/channel"){
-                return <PiTelevisionSimpleFill  className="text-2xl" />
+            if(pathname=="/liked"){
+                return <BiSolidLike  className="text-2xl" />
             }
             else{
-                return <PiTelevisionSimpleDuotone  className="text-2xl"/>
+                return <BiLike  className="text-2xl" />
             }
         })()}
         </Link>
