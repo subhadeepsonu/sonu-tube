@@ -16,22 +16,17 @@ export default async function VideoPlay({params}:{params:{
     const data = await GetVideoById(id)
     const token:any = cookies().get("token")
     const decoded:any = jwtDecode(token?.value)
-    return <div className="h-screen w-full flex flex-col justify-start items-start pt-20 pl-24  bg-gray-50">
+    return <div className="min-h-screen w-full flex flex-col justify-start items-start pb-20 md:pb-0 pt-20   bg-gray-50">
 
-        <div className="h-[450px] w-full">
+        <div className="md:h-[450px] h-[300px] w-full">
         <VideoPlayer url={data?.videourl!} ></VideoPlayer>
         </div>
         <div className="">
         <p className="text-3xl font-semibold p-2">
             {data?.title}
         </p>
-        <div className="flex justify-between items-center ">
-        <p className="pl-2 text-lg border-2 bg-white border-gray-100 rounded-full px-2 py-1 shadow-sm">views: {data?._count.views}</p>
-        <VideoHandler dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
-        </div>
-        </div>
-        <div className="w-full bg-white">
-        <div className="pl-2 flex items-center">
+        <div className="flex justify-start items-center ">
+        <div className="flex items-center px-2 mr-2 bg-white rounded-full border-2 border-gray-100">
             <Avatar className="w-9 h-9 ">
                 <AvatarImage className="rounded-full object-cover" src={data?.user.imgurl}>
                 </AvatarImage>
@@ -43,8 +38,12 @@ export default async function VideoPlay({params}:{params:{
             <p className="p-2">
                 {data?.user.name}
             </p>
-           
         </div>
+        <p className="pl-2 text-lg border-2 bg-white border-gray-100 rounded-full px-2 py-1 shadow-sm">views: {data?._count.views}</p>
+        <VideoHandler dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
+        </div>
+        </div>
+        <div className="w-full bg-white">
         <p className="pl-2 pt-2 text-lg font-semibold">Discription</p>
         <p className=" pl-2">{data?.discription}</p>
         </div>
