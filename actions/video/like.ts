@@ -23,6 +23,7 @@ export async function AddLikeVideo(userid:string,videoid:number){
                 }
             })
             revalidatePath("/video/[id]")
+            revalidatePath("/liked")
             return response
         }else{
             const response = await prisma.like.create({
@@ -32,6 +33,7 @@ export async function AddLikeVideo(userid:string,videoid:number){
                 }
             })
             revalidatePath("/video/[id]")
+            revalidatePath("/liked")
             return response
         }
     } catch (error) {
@@ -47,6 +49,7 @@ export async function RemoveLikeVideo(userid:string,videoid:number){
             }
         })
         revalidatePath("/video/[id]")
+        revalidatePath("/liked")
         return response
     } catch (error) {
         throw  new Error(`${error}`)

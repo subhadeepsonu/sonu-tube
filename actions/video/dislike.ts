@@ -23,6 +23,7 @@ export async function AddDisLikeVideo(userid:string,videoid:number){
                 }
             })
             revalidatePath("/video/[id]")
+            revalidatePath("/liked")
             return response
         }else{
             const response = await prisma.dislike.create({
@@ -32,6 +33,7 @@ export async function AddDisLikeVideo(userid:string,videoid:number){
                 }
             })
             revalidatePath("/video/[id]")
+            revalidatePath("/liked")
             return response
         }
     } catch (error) {
@@ -47,6 +49,7 @@ export async function RemoveDisLikeVideo(userid:string,videoid:number){
             }
         })
         revalidatePath("/video/[id]")
+        revalidatePath("/liked")
         return response
     } catch (error) {
         throw  new Error(`${error}`)
