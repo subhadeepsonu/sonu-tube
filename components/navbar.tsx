@@ -3,7 +3,9 @@ import Link from "next/link"
 import { Button } from "./ui/button";
 import Cookies from "universal-cookie";
 import { redirect, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 export default function Navbar(){
+    const router = useRouter()
     const pathname = usePathname()
     if(pathname=="/auth"){
         return null
@@ -16,7 +18,8 @@ export default function Navbar(){
         <Button onClick={()=>{
             const cookie = new Cookies()
             cookie.remove('token')
-            redirect("/auth")
+            router.refresh()  
+            router.push("/auth")
         }}>Log Out</Button>
         </Link>
         </div>
