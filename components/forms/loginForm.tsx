@@ -38,7 +38,8 @@ export default function LoginForm(){
             if(data.success){
                 toast.success(data.message)
                 cookie.set('token',data.token)
-                redirect('/')
+                router.refresh()  
+                router.push("/")
             }
             if(!data.success){
                 toast.error(data.message)
