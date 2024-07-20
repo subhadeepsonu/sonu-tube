@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import Cookies from "universal-cookie"
 export default function LoginForm(){
     const router = useRouter()
@@ -38,7 +38,7 @@ export default function LoginForm(){
             if(data.success){
                 toast.success(data.message)
                 cookie.set('token',data.token)
-                router.push('/')
+                redirect('/')
             }
             if(!data.success){
                 toast.error(data.message)

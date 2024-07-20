@@ -16,7 +16,7 @@ import { signUpSchema } from "@/app/api/signup/schema"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import Cookie from "universal-cookie"
 export default function SignupForm(){
     const cookie = new Cookie()
@@ -39,7 +39,7 @@ export default function SignupForm(){
             if(data.success){
                 toast.success(data.message)
                 cookie.set('token',`${data.token}`)
-                router.push('/')
+                redirect('/')
             }
             if(!data.success){
                 toast.error(data.message)
