@@ -1,5 +1,4 @@
 "use client";
-import { FaComments } from "react-icons/fa";
 import { BiLike, BiDislike, BiSolidLike, BiSolidDislike } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -7,7 +6,6 @@ import {jwtDecode} from "jwt-decode";
 import Cookies from "universal-cookie";
 import { AnnouncementAddLike, AnnouncementDeletelike } from "@/actions/annoucements/like";
 import { AnnouncementAddDislike, AnnouncementDeleteDislike } from "@/actions/annoucements/unlike";
-import CommentCard from "../cards/commentButton";
 export default function AnnoucementHandler(props: any) {
   const [token, setToken] = useState<string | null>(null);
   const [decoded, setDecoded] = useState<any>(null);

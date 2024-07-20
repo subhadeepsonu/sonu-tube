@@ -40,7 +40,7 @@ export default async function VideoPlay({params}:{params:{
             </p>
         </div>
         <p className="pl-2 text-lg border-2 bg-white border-gray-100 rounded-full px-2 py-1 shadow-sm">views: {data?._count.views}</p>
-        <VideoHandler dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
+        <VideoHandler id={data?.id!} dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
         </div>
         </div>
         <div className="w-full bg-white">
