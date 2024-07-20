@@ -106,7 +106,7 @@ model views {
   userid    String
   videoid   Int
   viewedat  DateTime @default(now())
-  updatedat DateTime
+  updatedat DateTime @default(now())
   user      user     @relation(fields: [userid], references: [id])
   video     video    @relation(fields: [videoid], references: [id])
 }
