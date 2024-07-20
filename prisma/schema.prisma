@@ -102,12 +102,13 @@ model commentlike {
 }
 
 model views {
-  id       Int      @id @default(autoincrement())
-  userid   String
-  videoid  Int
-  viewedat DateTime @default(now())
-  user     user     @relation(fields: [userid], references: [id])
-  video    video    @relation(fields: [videoid], references: [id])
+  id        Int      @id @default(autoincrement())
+  userid    String
+  videoid   Int
+  viewedat  DateTime @default(now())
+  updatedat DateTime
+  user      user     @relation(fields: [userid], references: [id])
+  video     video    @relation(fields: [videoid], references: [id])
 }
 
 model annoucement {
