@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
 export default function VideoPlayer(props:{
     url:string
 }){
-    return <div className='h-full w-full '>
+    return <div className='h-full w-full px-2 '>
         <ReactPlayer controls={true} height={"100%"} width={"100%"}   url={props.url}></ReactPlayer>
     </div>
     
