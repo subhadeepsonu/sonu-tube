@@ -21,6 +21,7 @@ export async  function views(userid:string,videoid:number){
                 }
             })
             console.log(update)
+            revalidatePath("/")
             revalidatePath("/history")
             return update
         }else{
@@ -31,6 +32,7 @@ export async  function views(userid:string,videoid:number){
                     updatedat:date.getTime().toString()
                 }
             })
+            revalidatePath("/")
             revalidatePath("/history")
             console.log(create)
             return create
