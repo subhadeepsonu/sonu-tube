@@ -1,4 +1,5 @@
 import { GetVideoById } from "@/actions/video/videobyid"
+import { views } from "@/actions/video/view";
 import VideoHandler from "@/components/handlers/videohandler";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Avatar } from "@radix-ui/react-avatar";
@@ -8,7 +9,6 @@ import { cookies } from "next/headers";
 const VideoPlayer = dynamic(() => import('@/components/cards/videoPlayer'), {
     ssr: false,
   });
-
 export default async function VideoPlay({params}:{params:{
     id:string
 }}){
@@ -16,8 +16,8 @@ export default async function VideoPlay({params}:{params:{
     const data = await GetVideoById(id)
     const token:any = cookies().get("token")
     const decoded:any = jwtDecode(token?.value)
+    const check = await views(decoded.id,id)
     return <div className="min-h-screen w-full flex flex-col justify-start items-start pb-20 md:pb-0 pt-20   bg-gray-50">
-
         <div className="md:h-[450px] h-[300px] w-full">
         <VideoPlayer url={data?.videourl!} ></VideoPlayer>
         </div>
