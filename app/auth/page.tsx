@@ -11,7 +11,7 @@ import LoginForm from "@/components/forms/loginForm";
 import SignupForm from "@/components/forms/signupform";
 export default function AuthPage(){
     return <div className="h-screen w-full flex justify-center items-center bg-gray-100">
-        <div className="h-2/3 w-2/3 md:w-3/4 lg:w-2/3 xl:w-1/2 shadow-sm rounded-lg border-2 border-gray-100 flex justify-center items-center bg-white">
+        <div className="h-2/3 w-3/4 md:w-3/4 lg:w-2/3 xl:w-1/2 shadow-sm rounded-lg border-2 border-gray-100 flex justify-center items-center bg-white">
         <Tabs defaultValue="Login" className="h-full w-full md:w-1/2 flex-col flex justify-center items-center">
             <TabsList className="w-2/3"  >
                 <TabsTrigger className="w-1/2" value="Login">

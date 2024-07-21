@@ -7,6 +7,9 @@ import { IoHomeOutline, IoHomeSharp } from "react-icons/io5"
 import { PiSpeakerLowDuotone, PiSpeakerLowFill, PiTelevisionSimpleDuotone, PiTelevisionSimpleFill } from "react-icons/pi"
 export default function BottomNav(){
     const pathname = usePathname()
+    if(pathname=="/auth"){
+        return  null
+    }
     return <div className="w-full h-16 fixed bottom-0 bg-white border-t-2 items-center justify-around shadow-sm flex md:hidden">
         <Link href={"/"}>
         {(()=>{
