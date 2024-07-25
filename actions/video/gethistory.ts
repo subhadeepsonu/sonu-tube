@@ -8,6 +8,23 @@ export async function GetHistory(userid:string){
             },
             orderBy:{
                 updatedat:"desc"
+            },
+            include:{
+                video:{
+                    select:{
+                        _count:{
+                            select:{
+                                views:true
+                            }
+                        },
+                        id:true,
+                        thumnailurl:true,
+                        title:true
+                    }
+                },
+                user:{
+
+                }
             }
         })
         return response
