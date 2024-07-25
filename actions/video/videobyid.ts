@@ -1,7 +1,5 @@
 "use server"
-
 import prisma from "@/db"
-
 export async function GetVideoById(id:number){
     try {
         const response = await prisma.video.findUnique({
@@ -34,12 +32,14 @@ export async function GetVideoById(id:number){
                 comment:{
                     include:{
                         user:{
-                            
+
                         }
+                    },
+                    orderBy:{
+                        id:"desc"
                     }
                 }
             },
-
         })
         console.log(response)
         return response

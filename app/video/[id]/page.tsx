@@ -24,11 +24,11 @@ export default async function VideoPlay({params}:{params:{
         <VideoPlayer url={data?.videourl!} ></VideoPlayer>
         </div>
         <div className="">
-        <p className="text-3xl font-semibold p-2">
+        <p className="text-3xl font-semibold px-5">
             {data?.title}
         </p>
-        <div className="flex justify-start items-center ">
-        <div className="flex items-center px-2 mr-2 bg-white rounded-full shadow-sm">
+        <div className="flex justify-start items-center px-5 ">
+        <div className="flex items-center  mr-2 bg-white rounded-full shadow-sm">
             <Avatar className="w-9 h-9 ">
                 <AvatarImage className="rounded-full object-cover" src={data?.user.imgurl}>
                 </AvatarImage>
@@ -45,9 +45,9 @@ export default async function VideoPlay({params}:{params:{
         <VideoHandler id={data?.id!} dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
         </div>
         </div>
-        <div className="w-full bg-white px-5">
-        <p className="pl-2 pt-2 text-lg font-semibold">Discription</p>
-        <p className=" pl-2">{data?.discription}</p>
+        <div className="w-full  px-5">
+        <p className="p-2 pt-2 text-xl font-semibold">Discription</p>
+        <p className=" bg-white w-full  shadow-sm p-2">{data?.discription}</p>
         </div>
         <div className=" mt-2 w-full  flex flex-col justify-start items-center px-5 ">
         <div className="w-full flex justify-between items-center">
