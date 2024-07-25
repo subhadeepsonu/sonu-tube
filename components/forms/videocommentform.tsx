@@ -11,11 +11,11 @@ import {
   } from "@/components/ui/form"
 import { Button } from "../ui/button";
 import { useMutation } from "@tanstack/react-query";
-import { AnnouncementPostComment } from "@/actions/annoucements/comment";
 import { Textarea } from "../ui/textarea";
-export default function AnnouncementAddComment(props:{
+import { VideoPostComment } from "@/actions/video/comment";
+export default function VideoAddComment(props:{
     userid:string,
-    announcementid:number
+    Videoid:number
 }){
     const CommentSchema = z.object({
         comment:z.string().min(3,{message:"Minimum 3 letters"})
@@ -26,23 +26,23 @@ export default function AnnouncementAddComment(props:{
     })
     const values =  form.getValues()
     const MutateAddComment = useMutation({
-        mutationFn:()=>AnnouncementPostComment(props.userid,props.announcementid,values.comment),
+        mutationFn:()=>VideoPostComment(values.comment,props.userid,props.Videoid),
         onSettled:()=>{
             form.setValue("comment","")
         }
     },
 )
     return <Form {...form} >
-        <form  className="w-11/12" onSubmit={form.handleSubmit(()=>{
+        <form  className=" w-full bg-white mb-5" onSubmit={form.handleSubmit(()=>{
             MutateAddComment.mutate()
         })}>
                 <FormField
           control={form.control}
           name="comment"
           render={({ field }) => (
-            <FormItem className="mt-2">
+            <FormItem className="pt-2">
               <FormControl>
-                <Textarea className="mx-2" placeholder="Your Comment" {...field} />
+                <Textarea className="px-2" placeholder="Your Comment" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
