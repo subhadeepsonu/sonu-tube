@@ -1,6 +1,13 @@
 import Link from "next/link";
-export default function VideoCard(props:any){
-    return <Link href={`/video/${props.id}`}> <div className="w-80 h-72 bg-white rounded-lg border-2 border-gray-200 flex flex-col justify-center items-start hover:cursor-pointer">
+export default function VideoCard(props:{
+    id:number,
+    imgurl:string,
+    userimage:string,
+    title:string,
+    name:string,
+    views:number
+}){
+    return <Link href={`/video/${props.id}`}> <div className="w-80 h-72 bg-white rounded-lg border-2 border-gray-50  shadow-sm flex flex-col justify-center items-start hover:cursor-pointer">
         <div className="w-80 p-2 h-52">
         <img className="object-cover h-full w-full rounded-lg" src={props.imgurl} alt="image"></img>
         </div>
