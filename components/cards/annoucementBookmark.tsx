@@ -25,8 +25,6 @@ export default function AnnouncementBookmark(props:{
         })}
     },[props.bookmarks,props.userid,props.announcementid])
     return <div>
-        
-        <Button disabled={MutateAddBookmark.isPending || MutateRemoveBookmark.isPending} variant={"ghost"}>
         {(bookmark)?<FaBookmark onClick={()=>{
             setBookmark(false)
             MutateRemoveBookmark.mutate()
@@ -34,6 +32,5 @@ export default function AnnouncementBookmark(props:{
             setBookmark(true)
             MutateAddBookmark.mutate()
         }} className="hover:cursor-pointer" />}
-        </Button>
     </div>
 }
