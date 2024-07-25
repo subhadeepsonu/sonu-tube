@@ -40,7 +40,7 @@ export default function  VideoHandler(props:{
             }
         })
     },[props.dislikeCount,props.likeCount,props.userdislikes,props.userlikes,props.userid])
-    return <div className="flex items-center m-2 bg-white shadow-sm text-xl  justify-center rounded-full border-2 border-gray-100 ">
+    return <div className="flex items-center m-2 bg-white shadow-sm text-xl  justify-center rounded-full ">
         {(isLiked)?<BiSolidLike className="m-2 hover:cursor-pointer" onClick={()=>{
             setLikes(likes-1)
             setIsLiked(false)

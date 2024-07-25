@@ -7,7 +7,7 @@ import AnnouncementBookmark from "./annoucementBookmark";
 export default function AnnoucementCard(props:any){
     const token:any = cookies().get('token')
     const decoded:any = jwtDecode(token?.value)
-    return <div className="bg-white w-[350px] h-80 p-3 border-2 border-gray-100 shadow-sm flex flex-col justify-start items-start text-black rounded-lg ">
+    return <div className="bg-white w-[350px] h-80 p-3  shadow-sm flex flex-col justify-start items-start text-black rounded-lg ">
         <div className="flex w-full justify-between items-center">
             <div className="flex justify-between items-center">
         <Avatar>

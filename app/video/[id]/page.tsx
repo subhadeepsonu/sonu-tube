@@ -26,7 +26,7 @@ export default async function VideoPlay({params}:{params:{
             {data?.title}
         </p>
         <div className="flex justify-start items-center ">
-        <div className="flex items-center px-2 mr-2 bg-white rounded-full border-2 border-gray-100">
+        <div className="flex items-center px-2 mr-2 bg-white rounded-full shadow-sm">
             <Avatar className="w-9 h-9 ">
                 <AvatarImage className="rounded-full object-cover" src={data?.user.imgurl}>
                 </AvatarImage>
@@ -39,7 +39,7 @@ export default async function VideoPlay({params}:{params:{
                 {data?.user.name}
             </p>
         </div>
-        <p className="pl-2 text-lg border-2 bg-white border-gray-100 rounded-full px-2 py-1 shadow-sm">views: {data?._count.views}</p>
+        <p className="pl-2 text-lg  bg-white  rounded-full px-2 py-1 shadow-sm">views: {data?._count.views}</p>
         <VideoHandler id={data?.id!} dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
         </div>
         </div>
