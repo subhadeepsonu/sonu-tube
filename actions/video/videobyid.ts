@@ -30,8 +30,16 @@ export async function GetVideoById(id:number){
                             }
                         }
                     },
+                },
+                comment:{
+                    include:{
+                        user:{
+                            
+                        }
+                    }
                 }
-            }
+            },
+
         })
         console.log(response)
         return response

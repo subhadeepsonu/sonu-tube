@@ -4,7 +4,7 @@ export default function CommentCard(props:{
     username:string,
     imgurl:string
 }){
-    return <div className="min-h-28 w-full border-2   border-gray-100 shadow-sm rounded-lg my-2 p-2">
+    return <div className="min-h-28 bg-white w-full   shadow-sm rounded-lg my-2 p-2  ">
         <div className="flex justify-start items-center ">
         <Avatar>
             <AvatarImage className="object-cover" src={props.imgurl}></AvatarImage>

@@ -1,5 +1,7 @@
 import { GetVideoById } from "@/actions/video/videobyid"
 import { views } from "@/actions/video/view";
+import CommentCard from "@/components/cards/commentCard";
+import VideoAddComment from "@/components/forms/videocommentform";
 import VideoHandler from "@/components/handlers/videohandler";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Avatar } from "@radix-ui/react-avatar";
@@ -43,9 +45,22 @@ export default async function VideoPlay({params}:{params:{
         <VideoHandler id={data?.id!} dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
         </div>
         </div>
-        <div className="w-full bg-white">
+        <div className="w-full bg-white px-5">
         <p className="pl-2 pt-2 text-lg font-semibold">Discription</p>
         <p className=" pl-2">{data?.discription}</p>
+        </div>
+        <div className=" mt-2 w-full  flex flex-col justify-start items-center px-5 ">
+        <div className="w-full flex justify-between items-center">
+            <p className="text-xl font-semibold py-1">Comments</p>
+            
+        </div>
+        <VideoAddComment Videoid={data?.id!} userid={decoded.id} ></VideoAddComment>
+        {data?.comment.map((comment)=>{
+            return <CommentCard imgurl={comment.user.imgurl} username={comment.user.name} key={comment.id} comment={comment.comment}></CommentCard>
+        })}
+        {/* {(data?.comment)?<p className="p-2">No Comments yet</p>:data?.comment.map((comment)=>{
+            return <CommentCard imgurl={comment.user.imgurl} username={comment.user.name} key={comment.id} comment={comment.comment}></CommentCard>
+        })} */}
         </div>
     </div>
 }
