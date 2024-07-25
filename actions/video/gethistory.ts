@@ -11,20 +11,19 @@ export async function GetHistory(userid:string){
             },
             include:{
                 video:{
-                    select:{
+                   
+                    include:{
+                        user:{
+
+                        },
                         _count:{
                             select:{
                                 views:true
                             }
-                        },
-                        id:true,
-                        thumnailurl:true,
-                        title:true
+                        }
                     }
                 },
-                user:{
-
-                }
+                
             }
         })
         return response
