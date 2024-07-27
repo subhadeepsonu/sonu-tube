@@ -10,7 +10,7 @@ export default function BottomNav(){
     if(pathname=="/auth"){
         return  null
     }
-    return <div className="w-full h-16 fixed bottom-0 bg-white border-t-2 items-center justify-around shadow-sm flex md:hidden">
+    return <div className="w-full h-16 fixed bottom-0 bg-white z-10 border-t-2 items-center justify-around shadow-sm flex md:hidden">
         <Link href={"/"}>
         {(()=>{
             if(pathname=="/"){

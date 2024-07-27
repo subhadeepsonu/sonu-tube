@@ -69,7 +69,7 @@ export default function SideBar(){
         </Link>
         <Link className="flex justify-center items-center flex-col" href={'/more'}>
         {(()=>{
-            if(pathname=="/more"){
+            if(pathname.startsWith("/more")){
                 return <AiFillProfile  className="text-2xl"/>
             }
             else{
