@@ -8,7 +8,34 @@ export async function GetBookmarkById(id:string){
             },
             include:{
                 annoucement:{
-                    
+                    include:{
+                        user:{
+
+                        },
+                       _count:{
+                        select:{
+                            annoucementlike:{
+
+                            },
+                            annoucementdislike:{
+                                
+                            }
+                        }
+                       }
+                    }
+                },
+                user:{
+                    include:{
+                        annoucementlike:{
+
+                        },
+                        annoucementdislike:{
+
+                        },
+                        annoucementbookmark:{
+
+                        }
+                    }
                 }
             }
         })

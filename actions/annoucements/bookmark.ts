@@ -11,6 +11,7 @@ try {
             userid:userid
         }
     })
+    revalidatePath("/more/bookmarks")
     revalidatePath('/announcement')
     return response
 } catch (error) {
@@ -25,6 +26,7 @@ export async function RemoveBookMark(userid:string,annoucementid:number){
                 annoucementid:annoucementid
             }
         })
+        revalidatePath("/more/bookmarks")
         revalidatePath('/announcement')
         return response
     } catch (error) {

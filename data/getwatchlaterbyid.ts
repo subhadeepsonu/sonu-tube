@@ -8,7 +8,16 @@ export async function GetWatchLaterById(id:string){
             },
             include:{
                 video:{
-                    
+                    include:{
+                        _count:{
+                            select:{
+                                views:true
+                            }
+                        }
+                    }
+                },
+                user:{
+
                 }
             }
         })

@@ -23,16 +23,6 @@ export default function MorePage(){
                 Your Videos
             </div>
             </Link>
-            <Link href={"/more/video"}>
-            <div className="h-16 w-64 bg-white cursor-pointer flex justify-center items-center rounded-lg shadow-sm ">
-                Add Announcement
-            </div>
-            </Link>
-            <Link href={"/more/video"}>
-            <div className="h-16 w-64 bg-white cursor-pointer flex justify-center items-center rounded-lg shadow-sm ">
-                Upload Video
-            </div>
-            </Link>
         </div>
             <div>
 

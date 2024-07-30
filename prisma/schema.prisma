@@ -44,7 +44,7 @@ model video {
   publish     Boolean      @default(true)
   createdat   DateTime     @default(now())
   userid      String
-  user        user         @relation(fields: [userid], references: [id])
+  user        user         @relation(fields: [userid], references: [id], onDelete: Cascade)
   comment     comment[]
   watchlater  watchlater[]
   dislike     dislike[]
@@ -58,8 +58,8 @@ model comment {
   userId      String
   videoId     Int
   createdat   DateTime      @default(now())
-  user        user          @relation(fields: [userId], references: [id])
-  video       video         @relation(fields: [videoId], references: [id])
+  user        user          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video       video         @relation(fields: [videoId], references: [id], onDelete: Cascade)
   commentlike commentlike[]
 }
 
@@ -68,39 +68,39 @@ model like {
   userId    String
   videoId   Int
   createdAt DateTime @default(now())
-  user      user     @relation(fields: [userId], references: [id])
-  video     video    @relation(fields: [videoId], references: [id])
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video     video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
 }
 
 model dislike {
   id      Int    @id @default(autoincrement())
   userId  String
   videoId Int
-  user    user   @relation(fields: [userId], references: [id])
-  video   video  @relation(fields: [videoId], references: [id])
+  user    user   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video   video  @relation(fields: [videoId], references: [id], onDelete: Cascade)
 }
 
 model watchlater {
   id      Int    @id @default(autoincrement())
   userId  String
   vedioId Int
-  user    user   @relation(fields: [userId], references: [id])
-  video   video  @relation(fields: [vedioId], references: [id])
+  user    user   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video   video  @relation(fields: [vedioId], references: [id], onDelete: Cascade)
 }
 
 model follows {
   id        Int    @id @default(autoincrement())
   follwerId String
   userId    String
-  follower  user   @relation(fields: [follwerId], references: [id])
+  follower  user   @relation(fields: [follwerId], references: [id], onDelete: Cascade)
 }
 
 model commentlike {
   id        Int     @id @default(autoincrement())
   userid    String
   commentid Int
-  user      user    @relation(fields: [userid], references: [id])
-  comment   comment @relation(fields: [commentid], references: [id])
+  user      user    @relation(fields: [userid], references: [id], onDelete: Cascade)
+  comment   comment @relation(fields: [commentid], references: [id], onDelete: Cascade)
 }
 
 model views {
@@ -109,8 +109,8 @@ model views {
   videoid   Int
   viewedat  DateTime @default(now())
   updatedat String   @default("0")
-  user      user     @relation(fields: [userid], references: [id])
-  video     video    @relation(fields: [videoid], references: [id])
+  user      user     @relation(fields: [userid], references: [id], onDelete: Cascade)
+  video     video    @relation(fields: [videoid], references: [id], onDelete: Cascade)
 }
 
 model annoucement {
@@ -119,7 +119,7 @@ model annoucement {
   discription         String
   userid              String
   createdat           DateTime              @default(now())
-  user                user                  @relation(fields: [userid], references: [id])
+  user                user                  @relation(fields: [userid], references: [id], onDelete: Cascade)
   annoucementlike     annoucementlike[]
   annoucementbookmark annoucementbookmark[]
   annoucementdislike  annoucementdislike[]
@@ -130,24 +130,24 @@ model annoucementlike {
   id            Int         @id @default(autoincrement())
   userid        String
   annoucementid Int
-  user          user        @relation(fields: [userid], references: [id])
-  annoucement   annoucement @relation(fields: [annoucementid], references: [id])
+  user          user        @relation(fields: [userid], references: [id], onDelete: Cascade)
+  annoucement   annoucement @relation(fields: [annoucementid], references: [id], onDelete: Cascade)
 }
 
 model annoucementdislike {
   id            Int         @id @default(autoincrement())
   userid        String
   annoucementid Int
-  user          user        @relation(fields: [userid], references: [id])
-  annoucement   annoucement @relation(fields: [annoucementid], references: [id])
+  user          user        @relation(fields: [userid], references: [id], onDelete: Cascade)
+  annoucement   annoucement @relation(fields: [annoucementid], references: [id], onDelete: Cascade)
 }
 
 model annoucementbookmark {
   id            Int         @id @default(autoincrement())
   userid        String
   annoucementid Int
-  user          user        @relation(fields: [userid], references: [id])
-  annoucement   annoucement @relation(fields: [annoucementid], references: [id])
+  user          user        @relation(fields: [userid], references: [id], onDelete: Cascade)
+  annoucement   annoucement @relation(fields: [annoucementid], references: [id], onDelete: Cascade)
 }
 
 model announcementcomment {
@@ -155,6 +155,6 @@ model announcementcomment {
   comment        String
   userid         String
   announcementid Int
-  user           user        @relation(fields: [userid], references: [id])
-  announcement   annoucement @relation(fields: [announcementid], references: [id])
+  user           user        @relation(fields: [userid], references: [id], onDelete: Cascade)
+  announcement   annoucement @relation(fields: [announcementid], references: [id], onDelete: Cascade)
 }

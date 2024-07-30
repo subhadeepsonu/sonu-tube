@@ -25,7 +25,7 @@ export default async function GetAllVideos(){
                 }
             }
         })
-        console.log(response)
+        
         return response
     } catch (error) {
         throw new Error(`${error}`)
