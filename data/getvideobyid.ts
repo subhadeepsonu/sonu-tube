@@ -5,6 +5,16 @@ export async function GetUserVideoById(id:string){
         const response = await prisma.video.findMany({
             where:{
                 userid:id
+            },
+            include:{
+                user:{
+                    
+                },
+                _count:{
+                    select:{
+                        views:true
+                    }
+                }
             }
         })
         return response

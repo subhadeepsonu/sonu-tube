@@ -1,6 +1,5 @@
 "use server"
 import prisma from "@/db"
-import { revalidatePath } from "next/cache"
 export async function GetAllAnnouncements(){
     try {
         const response = await prisma.annoucement.findMany({

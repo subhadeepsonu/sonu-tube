@@ -4,7 +4,18 @@ import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import CommentButton from "./commentButton";
 import AnnouncementBookmark from "./annoucementBookmark";
-export default function AnnoucementCard(props:any){
+export default function AnnoucementCard(props:{
+    userimg:string,
+    username:string,
+    userbookmark:any,
+    id:number,
+    title:string,
+    discription:string,
+    userlike:any,
+    userdislike:any,
+    likes:any,
+    dislikes:any
+}){
     const token:any = cookies().get('token')
     const decoded:any = jwtDecode(token?.value)
     return <div className="bg-white w-[350px] h-80 p-3  shadow-sm flex flex-col justify-start items-start text-black rounded-lg ">
