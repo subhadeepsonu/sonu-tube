@@ -13,12 +13,18 @@ export async function GetWatchLaterById(id:string){
                             select:{
                                 views:true
                             }
+                        },
+                        watchlater:{
+                            
                         }
                     }
                 },
                 user:{
 
                 }
+            },
+            orderBy:{
+                
             }
         })
         return response

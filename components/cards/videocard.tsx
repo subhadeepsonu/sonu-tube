@@ -4,10 +4,11 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+import WatchLaterHandler from "../handlers/watchlaterhandler";
+import { cookies } from "next/headers";
+import { jwtDecode } from "jwt-decode";
   
 export default function VideoCard(props:{
     id:number,
@@ -15,15 +16,22 @@ export default function VideoCard(props:{
     userimage:string,
     title:string,
     name:string,
-    views:number
+    views:number,
+    userid:string,
+    watchlater:any
 }){
-    return <Link href={`/video/${props.id}`}> <div className="w-80 h-72 bg-white rounded-lg   shadow-sm flex flex-col justify-center items-start hover:cursor-pointer">
+    const token = cookies().get('token')
+    const decoded:any = jwtDecode(token?.value!)
+    return <div className="w-80 h-72 bg-white rounded-lg relative  shadow-sm flex flex-col justify-center items-start hover:cursor-pointer">
+        <Link href={`/video/${props.id}`}> 
         <div className="w-80  h-56">
         <img className="object-cover h-full w-full rounded-t-lg" src={props.imgurl} alt="image"></img>
         </div>
         <div className="w-80 h-16 flex justify-start items-start py-1 ">
         <div className="flex h-full w-12 justify-center items-center  ">
+            <Link href={`/profile/${props.userid}`}>
         <img className="rounded-full w-9 h-9 object-cover" src={props.userimage}></img>
+        </Link>
         </div>
         <div className="flex h-16  flex-col justify-start py-1 items-center ">
         <p className=" truncate text-clip w-64 text-[17px] font-semibold" >{props.title}</p>
@@ -32,19 +40,20 @@ export default function VideoCard(props:{
         <p className =" text-sm font-light" >{props.views}  views</p>
         </div>
         </div>
-        <p className="flex justify-center items-center  w-4 h-full">
+        </div>
+        </Link>
+        <p className="flex absolute  bottom-5 right-0  justify-end items-end  w-4 h-full">
             <DropdownMenu>
                 <DropdownMenuTrigger>
                 <GoKebabHorizontal className="rotate-90 text-xl" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="border-0">
                     <DropdownMenuItem >
-                        Watch Later
+                        <WatchLaterHandler userid={decoded.id} watchlater={props.watchlater} videoid={props.id}></WatchLaterHandler>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </p>
-        </div>
     </div>
-    </Link>
+    
 }

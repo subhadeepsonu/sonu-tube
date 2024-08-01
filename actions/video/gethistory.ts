@@ -20,6 +20,9 @@ export async function GetHistory(userid:string){
                             select:{
                                 views:true
                             }
+                        },
+                        watchlater:{
+                            
                         }
                     }
                 },

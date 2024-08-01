@@ -81,11 +81,12 @@ model dislike {
 }
 
 model watchlater {
-  id      Int    @id @default(autoincrement())
-  userId  String
-  vedioId Int
-  user    user   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  video   video  @relation(fields: [vedioId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  userId    String
+  vedioId   Int
+  createdat DateTime @default(now())
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video     video    @relation(fields: [vedioId], references: [id], onDelete: Cascade)
 }
 
 model follows {
