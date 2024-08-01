@@ -14,6 +14,9 @@ export async function GetUserVideoById(id:string){
                     select:{
                         views:true
                     }
+                },
+                watchlater:{
+                    
                 }
             }
         })
