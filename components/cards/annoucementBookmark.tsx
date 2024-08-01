@@ -10,10 +10,16 @@ export default function AnnouncementBookmark(props:{
     bookmarks:[any]
 }){
     const MutateAddBookmark = useMutation({
-        mutationFn:()=>AddBookMark(props.userid,props.announcementid)
+        mutationFn:()=>AddBookMark(props.userid,props.announcementid),
+        onSettled:(data)=>{
+            console.log(data)
+        }
     })
     const MutateRemoveBookmark  =  useMutation({
-        mutationFn:()=>RemoveBookMark(props.userid,props.announcementid)
+        mutationFn:()=>RemoveBookMark(props.userid,props.announcementid),
+        onSettled:(data)=>{
+            console.log(data)
+        }
     })
     const [bookmark,setBookmark] = useState<boolean>(false)
     useEffect(()=>{
