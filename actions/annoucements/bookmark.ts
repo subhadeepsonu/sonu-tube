@@ -15,6 +15,7 @@ try {
     revalidatePath('/announcement')
     return response
 } catch (error) {
+    console.log(`${error}`)
  throw new Error(`${error}`)   
 }
 }
@@ -30,6 +31,7 @@ export async function RemoveBookMark(userid:string,annoucementid:number){
         revalidatePath('/announcement')
         return response
     } catch (error) {
+        console.log(`${error}`)
         throw new Error(`${error}`)   
     }
 }
