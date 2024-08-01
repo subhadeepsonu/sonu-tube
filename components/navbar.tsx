@@ -14,13 +14,13 @@ export default function Navbar(){
         <Link href={"/"} className="text-2xl font-bold">SonuTube</Link>
         <div className="w-1/2 flex">
         </div>
-        <Link href={"/auth"}>
+        
         <Button onClick={()=>{
             const cookie = new Cookies()
             cookie.remove('token')
             router.refresh()  
             router.push("/auth")
         }}>Log Out</Button>
-        </Link>
+        
         </div>
 }
