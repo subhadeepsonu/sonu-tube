@@ -1,8 +1,6 @@
 "use server"
-
 import prisma from "@/db"
 import { revalidatePath } from "next/cache"
-
 export async function AddBookMark(userid:string,annoucementid:number){
 try {
     const response = await prisma.annoucementbookmark.create({
