@@ -10,7 +10,7 @@ export default async function Watchlater(){
         <p className="text-2xl p-2 font-semibold">Watch Later</p>
          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
         {data.map((video)=>{
-            return <VideoCard userid={decoded.id} watchlater={video.video.watchlater} key={video.id} id={video.video.id} imgurl={video.video.thumnailurl} name={video.user.name} title={video.video.title} userimage={video.user.imgurl} views={video.video._count.views} >
+            return <VideoCard videourl={video.video.videourl} userid={decoded.id} watchlater={video.video.watchlater} key={video.id} id={video.video.id} imgurl={video.video.thumnailurl} name={video.user.name} title={video.video.title} userimage={video.user.imgurl} views={video.video._count.views} >
 
             </VideoCard>
         })}
