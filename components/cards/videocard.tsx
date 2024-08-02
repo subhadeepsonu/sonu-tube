@@ -9,6 +9,7 @@ import {
 import WatchLaterHandler from "../handlers/watchlaterhandler";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
+import HoverVideo from "./hovervideo";
   
 export default function VideoCard(props:{
     id:number,
@@ -18,14 +19,15 @@ export default function VideoCard(props:{
     name:string,
     views:number,
     userid:string,
-    watchlater:any
+    watchlater:any,
+    videourl:string
 }){
     const token = cookies().get('token')
     const decoded:any = jwtDecode(token?.value!)
     return <div className="w-80 h-72 bg-white rounded-lg relative  shadow-sm flex flex-col justify-center items-start hover:cursor-pointer">
         <Link href={`/video/${props.id}`}> 
         <div className="w-80  h-56">
-        <img className="object-cover h-full w-full rounded-t-lg" src={props.imgurl} alt="image"></img>
+        <HoverVideo imgurl={props.imgurl} videourl={props.videourl}></HoverVideo>
         </div>
         <div className="w-80 h-16 flex justify-start items-start py-1 ">
         <div className="flex h-full w-12 justify-center items-center  ">

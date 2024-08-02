@@ -52,7 +52,7 @@ export default async function Watchlater(){
                     </Sheet>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
             {data.map((video)=>{
-                return <VideoCard watchlater={video.watchlater} userid={video.userid} key={video.id} id={video.id} imgurl={video.thumnailurl} name={video.user.name} title={video.title} userimage={video.user.imgurl} views={video._count.views} >
+                return <VideoCard  videourl={video.videourl}  watchlater={video.watchlater} userid={video.userid} key={video.id} id={video.id} imgurl={video.thumnailurl} name={video.user.name} title={video.title} userimage={video.user.imgurl} views={video._count.views} >
                     
                 </VideoCard>
             })}
