@@ -8,6 +8,7 @@ import { Avatar } from "@radix-ui/react-avatar";
 import { jwtDecode } from "jwt-decode";
 import dynamic from "next/dynamic";
 import { cookies } from "next/headers";
+import Link from "next/link";
 const VideoPlayer = dynamic(() => import('@/components/cards/videoPlayer'), {
     ssr: false,
   });
@@ -28,6 +29,7 @@ export default async function VideoPlay({params}:{params:{
             {data?.title}
         </p>
         <div className="flex justify-start items-center px-5 ">
+        <Link href={`/profile/${data?.userid}`}>
         <div className="flex items-center  mr-2 bg-white rounded-full shadow-sm">
             <Avatar className="w-9 h-9 ">
                 <AvatarImage className="rounded-full object-cover" src={data?.user.imgurl}>
@@ -41,6 +43,7 @@ export default async function VideoPlay({params}:{params:{
                 {data?.user.name}
             </p>
         </div>
+        </Link>
         <p className="pl-2 text-lg  bg-white  rounded-full px-2 py-1 shadow-sm">views: {data?._count.views}</p>
         <VideoHandler id={data?.id!} dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
         </div>
