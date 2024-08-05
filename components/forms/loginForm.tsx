@@ -16,11 +16,12 @@ import { Input } from "@/components/ui/input"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { toast } from "sonner"
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import Cookies from "universal-cookie"
 export default function LoginForm(){
     const router = useRouter()
     const cookie = new Cookies()
+    const d = new Date("2075-03-25");
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver:zodResolver(loginSchema),
         mode:"onChange"
@@ -37,7 +38,7 @@ export default function LoginForm(){
         onSettled:(data,error)=>{
             if(data.success){
                 toast.success(data.message)
-                cookie.set('token',data.token)
+                cookie.set('token',data.token,{expires:d})
                 router.refresh()  
                 router.push("/")
             }

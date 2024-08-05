@@ -10,7 +10,7 @@ export default async function LikedPage(){
             <p className="text-2xl p-2 font-semibold">Liked Videos</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">                
                 {data.map((video)=>{
-                    return <VideoCard videourl={video.video.videourl} watchlater={video.video.watchlater} userid={video.userId} key={video.id} id={video.video.id} userimage={video.video.user.imgurl} name={video.video.user
+                    return <VideoCard videourl={video.video.videourl} watchlater={video.video.watchlater} userid={video.video.userid} key={video.id} id={video.video.id} userimage={video.video.user.imgurl} name={video.video.user
                         .name} views={video.video._count.views} imgurl={video.video.thumnailurl} title={video.video.title}
                     ></VideoCard>
                 })}
