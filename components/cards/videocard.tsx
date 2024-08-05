@@ -16,6 +16,7 @@ export default function VideoCard(props:{
     imgurl:string,
     userimage:string,
     title:string,
+    videoholderid:string,
     name:string,
     views:number,
     userid:string,
@@ -31,7 +32,7 @@ export default function VideoCard(props:{
         </div>
         <div className="w-80 h-16 flex justify-start items-start py-1 ">
         <div className="flex h-full w-12 justify-center items-center  ">
-            <Link href={`/profile/${props.userid}`}>
+            <Link href={`/profile/${props.videoholderid}`}>
         <img className="rounded-full w-9 h-9 object-cover" src={props.userimage}></img>
         </Link>
         </div>

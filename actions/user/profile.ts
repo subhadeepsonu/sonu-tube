@@ -1,6 +1,7 @@
 "use server"
 
 import prisma from "@/db"
+import { tree } from "next/dist/build/templates/app-page"
 
 export async function ProfileById(userid:string){
     try {
@@ -16,8 +17,18 @@ export async function ProfileById(userid:string){
                     },
                 },
                 video:{
-
+                   include:{
+                    _count:{
+                        select:{
+                            views:true
+                        }
+                    },
+                    watchlater:{
+                        
+                    }
+                   }
                 },
+                
                 annoucement:{
                     
                 }
