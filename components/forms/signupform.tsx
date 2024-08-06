@@ -56,11 +56,13 @@ export default function SignupForm(){
             data.append("file",files[0])
             data.append("upload_preset","GFGVITAP")
             console.log("haha")
-            const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,{
+            
+            const res = await fetch(`https://api.cloudinary.com/v1_1/djzuoefwo/image/upload`,{
               method:"POST",
               body:data
             })
             const file = await res.json()
+            
             form.setValue("imgurl",file.secure_url)
         }
     }) 
