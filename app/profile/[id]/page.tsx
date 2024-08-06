@@ -38,7 +38,7 @@ export default async function Profile({params}:{
                     <div className=" w-full bg-red-200">
                         <div className="grid grid-cols-3 gap-5">
                             {data?.video.map((video)=>{
-                                return <VideoCard id={video.id} title={video.title} videourl={video.videourl} imgurl={video.thumnailurl} views={video._count.views} key={video.id} watchlater={video.watchlater} name={data.name} userid={data.id} userimage={data.imgurl}></VideoCard>
+                                return <VideoCard videoholderid="" id={video.id} title={video.title} videourl={video.videourl} imgurl={video.thumnailurl} views={video._count.views} key={video.id} watchlater={video.watchlater} name={data.name} userid={data.id} userimage={data.imgurl}></VideoCard>
                             })}
                         </div>
                     </div>
