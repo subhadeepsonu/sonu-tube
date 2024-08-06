@@ -14,7 +14,7 @@ export default async function Watchlater(){
         <EmptyCard></EmptyCard>
         
        
-                    <Button className="absolute bottom-2 right-2">Upload Video</Button>
+        <Link href={"/more/uploadvideo"}><Button className="absolute bottom-2 right-2">Add Video</Button></Link>
                    
         
 </div>
