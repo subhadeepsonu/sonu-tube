@@ -16,7 +16,7 @@ import { signUpSchema } from "@/app/api/signup/schema"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { toast } from "sonner"
-import { redirect, useRouter } from "next/navigation"
+import {  useRouter } from "next/navigation"
 import Cookie from "universal-cookie"
 export default function SignupForm(){
     const cookie = new Cookie()
