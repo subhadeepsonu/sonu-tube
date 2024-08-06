@@ -10,7 +10,7 @@ export default async function HistoryPage(){
         <p className="text-2xl p-2 font-semibold">History</p>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
         {data.map((history)=>{
-                return <VideoCard videourl={history.video.videourl} watchlater={history.video.watchlater} userid={history.userid} key={history.id} id={history.video.id} imgurl={history.video.thumnailurl} name={history.video.user.name} title={history.video.title} userimage={history.video.user.imgurl} views={history.video._count.views}></VideoCard>
+                return <VideoCard videoholderid="" videourl={history.video.videourl} watchlater={history.video.watchlater} userid={history.userid} key={history.id} id={history.video.id} imgurl={history.video.thumnailurl} name={history.video.user.name} title={history.video.title} userimage={history.video.user.imgurl} views={history.video._count.views}></VideoCard>
             })}
         </div>
     </div>      
