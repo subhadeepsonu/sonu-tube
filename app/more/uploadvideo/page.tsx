@@ -36,6 +36,10 @@ export default  function UploadVideoPage(){
       mutationFn:()=>AddVideo(values.title,values.discription,values.videourl,values.thumbnailurl),
       onSuccess:()=>{
         toast.success("Video upload complete")
+        form.setValue("title","")
+        form.setValue("discription","")
+        form.setValue("thumbnailurl","")
+        form.setValue("videourl","")
       },
       onError:()=>{
         toast.error("could not upload video")
