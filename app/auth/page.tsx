@@ -5,8 +5,8 @@ import {
     TabsList,
     TabsTrigger,
   } from "@/components/ui/tabs"
-  import Lottie from "lottie-react";
-import  loginanimation from "@/public/loginanimation.json"
+//   import Lottie from "lottie-react";
+// import  loginanimation from "@/public/loginanimation.json"
 import LoginForm from "@/components/forms/loginForm";
 import SignupForm from "@/components/forms/signupform";
 export default function AuthPage(){
@@ -31,7 +31,7 @@ export default function AuthPage(){
             </TabsContent>
         </Tabs>
         <div className="h-full w-1/2 hidden md:flex     rounded-r-lg  justify-center items-center">
-            <Lottie animationData={loginanimation}></Lottie>
+            {/* <Lottie animationData={loginanimation}></Lottie> */}
         </div>
         </div>
     </div>
