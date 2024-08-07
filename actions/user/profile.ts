@@ -13,7 +13,8 @@ export async function ProfileById(userid:string){
                 _count:{
                     select:{
                         video:true,
-                        annoucement:true
+                        annoucement:true,
+                        follows:true
                     },
                 },
                 video:{
@@ -30,7 +31,26 @@ export async function ProfileById(userid:string){
                 },
                 
                 annoucement:{
-                    
+                    include:{
+                        user:{
+
+                        },
+                        _count:{
+                            select:{
+                                annoucementlike:true,
+                                annoucementdislike:true
+                            }
+                        },
+                        annoucementlike:{
+
+                        },
+                        annoucementdislike:{
+
+                        },
+                        annoucementbookmark:{
+                            
+                        }
+                    }
                 }
             }
         })
