@@ -18,13 +18,14 @@ import { toast } from "sonner";
 export default function Navbar(){
     const router = useRouter()
     const pathname = usePathname()
-    const cookie = new Cookies()
-    
     if(pathname=="/auth"){
         return null
     }
     else{
-        const decoded:any = jwtDecode(cookie.get('token'))
+        const cookie = new Cookies()
+        const token = cookie.get('token')
+        if(token){
+            const decoded:any = jwtDecode(cookie.get('token'))
     return <div className="h-16 w-screen z-20 fixed shadow-sm  text-black backdrop-blur-sm bg-white flex justify-between px-4 items-center top-0  ">
         <Link href={"/"} className="text-2xl font-bold">SonuTube</Link>
         <div className="w-1/2 flex">
@@ -35,25 +36,31 @@ export default function Navbar(){
                 <img src={decoded.imgurl} className="h-12 w-12 rounded-full object-cover "></img>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuItem onClick={()=>{
+                    <DropdownMenuItem className="flex justify-center items-center font-medium" onClick={()=>{
                         toast.warning("Still working on it")
                     }}>Profile</DropdownMenuItem>
                     <DropdownMenuSeparator></DropdownMenuSeparator>
-                    <DropdownMenuItem   onClick={()=>{
-                             console.log("log")
+                    <DropdownMenuItem className="bg-red-500 text-white flex justify-center items-center"  onClick={()=>{
+                             
                              cookie.remove('token')
-                             console.log("haha")
+                             
                              router.refresh()  
                              router.push("/auth")}}>
                    
-                        Log Out
+                        Logout
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         
         </div>
+        </div>
+        }
+        else{
+            return null;
+        }
+        
   
         
-        </div>
+        
     }
 }
