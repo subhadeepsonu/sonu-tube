@@ -3,7 +3,7 @@ import prisma from "@/db"
 import { jwtDecode } from "jwt-decode"
 import { revalidatePath } from "next/cache"
 import { cookies } from "next/headers"
-export async function AddVideo(title:string,discription:string,videourl:string,thumbnailurl:string){
+export async function AddVideo(title:string,discription:string,videourl:string,thumbnailurl:string,tag:any){
     try {
         const token = cookies().get('token')
         const decoded:any = jwtDecode(token?.value!)
@@ -13,7 +13,8 @@ export async function AddVideo(title:string,discription:string,videourl:string,t
                 discription:discription,
                 thumnailurl:thumbnailurl,
                 videourl:videourl,
-                userid:decoded.id
+                userid:decoded.id,
+                tag:tag
             }
         })
         revalidatePath("/")
