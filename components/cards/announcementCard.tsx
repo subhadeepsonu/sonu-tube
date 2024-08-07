@@ -13,8 +13,8 @@ export default function AnnoucementCard(props:{
     discription:string,
     userlike:any,
     userdislike:any,
-    likes:any,
-    dislikes:any
+    likes:number,
+    dislikes:number
 }){
     const token:any = cookies().get('token')
     const decoded:any = jwtDecode(token?.value)
