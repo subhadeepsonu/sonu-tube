@@ -50,7 +50,7 @@ export default async function VideoPlay({params}:{params:{
         </div>
         <div className="w-full  px-5">
         <p className="p-2 pt-2 text-xl font-semibold">Discription</p>
-        <p className=" bg-white w-full  shadow-sm p-2">{data?.discription}</p>
+        <pre className=" bg-white w-full  shadow-sm p-2">{data?.discription}</pre>
         </div>
         <div className=" mt-2 w-full  flex flex-col justify-start items-center px-5 ">
         <div className="w-full flex justify-between items-center">

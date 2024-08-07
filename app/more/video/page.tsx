@@ -1,4 +1,5 @@
 import EmptyCard from "@/components/cards/empty"
+import OwnerVideoCard from "@/components/cards/ownervideocard"
 import VideoCard from "@/components/cards/videocard"
 import { Button } from "@/components/ui/button"
 import { GetUserVideoById } from "@/data/getvideobyid"
@@ -26,9 +27,10 @@ export default async function Watchlater(){
                     
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
             {data.map((video)=>{
-                return <VideoCard videoholderid=""  videourl={video.videourl}  watchlater={video.watchlater} userid={video.userid} key={video.id} id={video.id} imgurl={video.thumnailurl} name={video.user.name} title={video.title} userimage={video.user.imgurl} views={video._count.views} >
+                return <OwnerVideoCard id={video.id} key={video.id} title={video.title}  tumbnail={video.thumnailurl}></OwnerVideoCard>
+                // <VideoCard videoholderid=""  videourl={video.videourl}  watchlater={video.watchlater} userid={video.userid} key={video.id} id={video.id} imgurl={video.thumnailurl} name={video.user.name} title={video.title} userimage={video.user.imgurl} views={video._count.views} >
                     
-                </VideoCard>
+                // </VideoCard>
             })}
           </div>
         </div>
