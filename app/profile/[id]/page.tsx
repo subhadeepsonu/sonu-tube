@@ -47,7 +47,7 @@ export default async function Profile({params}:{
                     <div className=" w-full flex justify-center items-center  py-5">
                         <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-5">
                             {data?.video.map((video)=>{
-                                return <VideoCard videoholderid="" id={video.id} title={video.title} videourl={video.videourl} imgurl={video.thumnailurl} views={video._count.views} key={video.id} watchlater={video.watchlater} name={data.name} userid={data.id} userimage={data.imgurl}></VideoCard>
+                                return <VideoCard videoholderid={video.userid} id={video.id} title={video.title} videourl={video.videourl} imgurl={video.thumnailurl} views={video._count.views} key={video.id} watchlater={video.watchlater} name={data.name} userid={data.id} userimage={data.imgurl}></VideoCard>
                             })}
                         </div>
                     </div>

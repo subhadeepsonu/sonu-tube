@@ -16,6 +16,7 @@ import { Textarea } from "../ui/textarea"
 import { useMutation } from "@tanstack/react-query"
 import { AddAnnouncement } from "@/actions/annoucements/addannouncement"
 import { toast } from "sonner"
+import { SheetClose } from "../ui/sheet"
 export default function AddAnnouncementForm(){
     const formScehma = z.object({
         title:z.string().min(3),
@@ -66,7 +67,9 @@ export default function AddAnnouncementForm(){
             </FormItem>
           )}
         />
+        <SheetClose>
          <Button type="submit" disabled={MutateAddAnnoucement.isPending}>Add Annoucement</Button>
+         </SheetClose>
         </form>
     </Form>
 }
