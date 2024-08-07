@@ -37,7 +37,7 @@ export default async function Profile({params}:{
             
             
         </div>
-        <div className="w-11/12 py-5 min-h-96  ">
+        <div className="w-11/12 py-5 min-h-96">
             <Tabs defaultValue="video" className="w-full">
                 <TabsList  className="w-full">
                     <TabsTrigger value="video" className="w-1/2">Video</TabsTrigger>

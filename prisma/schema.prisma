@@ -44,12 +44,35 @@ model video {
   publish     Boolean      @default(true)
   createdat   DateTime     @default(now())
   userid      String
+  tag         tag?
   user        user         @relation(fields: [userid], references: [id], onDelete: Cascade)
   comment     comment[]
   watchlater  watchlater[]
   dislike     dislike[]
   views       views[]
   like        like[]
+}
+
+enum tag {
+  vlog
+  education
+  gaming
+  tech
+  health
+  fashion
+  music
+  cooking
+  travel
+  science
+  finance
+  art
+  news
+  motivational
+  animals
+  automotive
+  books
+  sports
+  brainrot
 }
 
 model comment {

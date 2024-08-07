@@ -61,9 +61,6 @@ export default async function VideoPlay({params}:{params:{
         {data?.comment.map((comment)=>{
             return <CommentCard imgurl={comment.user.imgurl} username={comment.user.name} key={comment.id} comment={comment.comment}></CommentCard>
         })}
-        {/* {(data?.comment)?<p className="p-2">No Comments yet</p>:data?.comment.map((comment)=>{
-            return <CommentCard imgurl={comment.user.imgurl} username={comment.user.name} key={comment.id} comment={comment.comment}></CommentCard>
-        })} */}
         </div>
     </div>
 }
