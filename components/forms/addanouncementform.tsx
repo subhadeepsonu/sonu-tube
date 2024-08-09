@@ -48,7 +48,7 @@ export default function AddAnnouncementForm(){
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Discription" {...field} />
+                <Input placeholder="Title" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -68,7 +68,7 @@ export default function AddAnnouncementForm(){
           )}
         />
         <SheetClose>
-         <Button type="submit" disabled={MutateAddAnnoucement.isPending}>Add Annoucement</Button>
+         <Button type="submit" disabled={MutateAddAnnoucement.isPending}>Add Announcement</Button>
          </SheetClose>
         </form>
     </Form>

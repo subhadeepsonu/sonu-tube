@@ -38,7 +38,12 @@ export default function OwnerVideoCard(props:{
         <div className="flex flex-col justify-around items-start pl-2 h-full w-40">
         <p className="font-medium overflow-hidden truncate w-36">{props.title}</p>
         <div className=" w-full flex justify-around items-center">
-        <Button><FaEdit></FaEdit></Button>
+        
+        <AlertDialog>
+        <AlertDialogTrigger asChild>
+        <Button variant="destructive">{(mutateDelete.isPending)?"wait":<FaEdit></FaEdit>}</Button>
+      </AlertDialogTrigger>
+        </AlertDialog>
         <AlertDialog>
         <AlertDialogTrigger asChild>
         <Button variant="destructive">{(mutateDelete.isPending)?"wait":<BiTrash></BiTrash>}</Button>

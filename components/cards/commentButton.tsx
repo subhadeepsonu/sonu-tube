@@ -17,11 +17,11 @@ export default async function CommentButton(props:{
     const data = await GetComments(props.id)
     const token:any = cookies().get('token')
     const decoded:any = jwtDecode(token?.value)
-    return <Sheet>
+    return <Sheet >
         <SheetTrigger>
         <FaComments  className="hover:cursor-pointer text-2xl" />
         </SheetTrigger>
-        <SheetContent side={"bottom"}>
+        <SheetContent className="bg-gray-50" side={"bottom"}>
                 <SheetHeader className="font-bold text-3xl">
                     Comments
                 </SheetHeader>
