@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import { GoKebabHorizontal } from "react-icons/go";
 import {
@@ -7,7 +8,7 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 import WatchLaterHandler from "../handlers/watchlaterhandler";
-import { cookies } from "next/headers";
+import Cookies from "universal-cookie";
 import { jwtDecode } from "jwt-decode";
 import HoverVideo from "./hovervideo";
   
@@ -23,9 +24,10 @@ export default function VideoCard(props:{
     watchlater:any,
     videourl:string
 }){
-    const token = cookies().get('token')
-    const decoded:any = jwtDecode(token?.value!)
-    return <div className="w-80 h-72 bg-white rounded-lg relative  shadow-sm flex flex-col justify-center items-start hover:cursor-pointer">
+    const cookie = new Cookies()
+    const token = cookie.get('token')
+    const decoded:any = jwtDecode(token|| "")
+    return <div className="w-80 h-72 bg-white rounded-lg relative border-2 border-gray-100 shadow-sm flex flex-col justify-center items-start hover:cursor-pointer">
         <Link href={`/video/${props.id}`}> 
         <div className="w-80  h-56">
         <HoverVideo imgurl={props.imgurl} videourl={props.videourl}></HoverVideo>

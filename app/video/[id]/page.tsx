@@ -1,6 +1,7 @@
 import { GetVideoById } from "@/actions/video/videobyid"
 import { views } from "@/actions/video/view";
 import CommentCard from "@/components/cards/commentCard";
+import RecommandedVideo from "@/components/clientpages/RecommendingVideo";
 import VideoAddComment from "@/components/forms/videocommentform";
 import VideoHandler from "@/components/handlers/videohandler";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,7 +21,9 @@ export default async function VideoPlay({params}:{params:{
     const token:any = cookies().get("token")
     const decoded:any = jwtDecode(token?.value)
     const check = await views(decoded.id,id)
-    return <div className="min-h-screen w-full flex flex-col justify-start items-start pb-20 md:pb-0 pt-20   bg-gray-50">
+    return <div className="min-h-screen w-full flex justify-between items-start pb-20 md:pb-0 pt-20   bg-gray-50">
+        
+        <div className="w-3/4">
         <div className="md:h-[450px] h-[300px] w-full">
         <VideoPlayer url={data?.videourl!} ></VideoPlayer>
         </div>
@@ -63,6 +66,10 @@ export default async function VideoPlay({params}:{params:{
         {data?.comment.map((comment)=>{
             return <CommentCard imgurl={comment.user.imgurl} username={comment.user.name} key={comment.id} comment={comment.comment}></CommentCard>
         })}
+        </div>
+        </div>
+        <div className="w-1/4 min-h-screen flex justify-center items-start ">
+        <RecommandedVideo tag={data?.tag}></RecommandedVideo>
         </div>
     </div>
 }
