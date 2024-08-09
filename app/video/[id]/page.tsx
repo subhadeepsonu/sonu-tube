@@ -3,8 +3,10 @@ import { views } from "@/actions/video/view";
 import CommentCard from "@/components/cards/commentCard";
 import RecommandedVideo from "@/components/clientpages/RecommendingVideo";
 import VideoAddComment from "@/components/forms/videocommentform";
+import FollowerHandler from "@/components/handlers/followerhandler";
 import VideoHandler from "@/components/handlers/videohandler";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Avatar } from "@radix-ui/react-avatar";
 import { jwtDecode } from "jwt-decode";
 import dynamic from "next/dynamic";
@@ -33,22 +35,26 @@ export default async function VideoPlay({params}:{params:{
         </p>
         <div className="flex justify-start items-center px-5 ">
         <Link href={`/profile/${data?.userid}`}>
-        <div className="flex items-center  mr-2 bg-white rounded-full shadow-sm">
-            <Avatar className="w-9 h-9 ">
+        <div className="flex items-center w-40 p-2  mr-2 bg-white rounded-lg  shadow-sm">
+            <Avatar className="w-12 h-12  ">
                 <AvatarImage className="rounded-full object-cover" src={data?.user.imgurl}>
                 </AvatarImage>
                 <AvatarFallback className="px-4">
                     s
                 </AvatarFallback>
             </Avatar>
-            
-            <p className="p-2">
+            <div className="flex flex-col justify-around items-start pl-2">
+            <p className="font-medium text-lg">
                 {data?.user.name}
-            </p>
+
+          </p>
+          <p className="text-xs">{data?.user._count.follows} Followers</p>
+            </div>
         </div>
         </Link>
         <p className="pl-2 text-lg  bg-white  rounded-full px-2 py-1 shadow-sm">views: {data?._count.views}</p>
         <VideoHandler id={data?.id!} dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
+        <FollowerHandler name={data?.user.name!} follower={data?.user.follows} userid={decoded.id} channelid={data?.userid!} key={data?.id}></FollowerHandler>
         </div>
         </div>
         <div className="w-full  px-5">

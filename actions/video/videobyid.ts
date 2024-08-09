@@ -11,7 +11,8 @@ export async function GetVideoById(id:number){
                     select:{
                         dislike:true,
                         like:true,
-                        views:true
+                        views:true,
+                        
                     }
                 },
                 dislike:{
@@ -26,6 +27,9 @@ export async function GetVideoById(id:number){
                             select:{
                                 follows:true
                             }
+                        },
+                        follows:{
+                            
                         }
                     },
                 },
@@ -41,7 +45,7 @@ export async function GetVideoById(id:number){
                 }
             },
         })
-        console.log(response)
+        
         return response
     } catch (error) {
         console.log(error,"22222")

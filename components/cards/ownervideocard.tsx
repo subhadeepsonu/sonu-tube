@@ -41,7 +41,7 @@ export default function OwnerVideoCard(props:{
         
         <AlertDialog>
         <AlertDialogTrigger asChild>
-        <Button variant="destructive">{(mutateDelete.isPending)?"wait":<FaEdit></FaEdit>}</Button>
+        <Button >{(mutateDelete.isPending)?"wait":<FaEdit></FaEdit>}</Button>
       </AlertDialogTrigger>
         </AlertDialog>
         <AlertDialog>

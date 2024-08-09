@@ -23,7 +23,7 @@ export default function RecommandedVideo(props:{
     if(QueryRecommendedVideo.data){
         return <div>
             {QueryRecommendedVideo.data.map((video)=>{
-                return <SideVideoCard key={video.id} imgurl={video.thumnailurl} name={video.user.name} title={video.title} views={video._count.views}></SideVideoCard>
+                return <SideVideoCard id={video.id} key={video.id} imgurl={video.thumnailurl} name={video.user.name} title={video.title} views={video._count.views}></SideVideoCard>
             })}
         </div>
     }

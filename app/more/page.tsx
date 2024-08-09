@@ -49,7 +49,7 @@ export default function MorePage(){
                 Your Videos
             </div>
             </Link>
-            <Link href={"/more/video"}>
+            <Link href={"/more/following"}>
             <div className="h-16 w-64 bg-white cursor-pointer flex justify-center items-center rounded-lg shadow-sm ">
                 Following chaneels
             </div>
