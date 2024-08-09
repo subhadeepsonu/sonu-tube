@@ -73,6 +73,9 @@ enum tag {
   books
   sports
   brainrot
+  action
+  romance
+  love
 }
 
 model comment {
