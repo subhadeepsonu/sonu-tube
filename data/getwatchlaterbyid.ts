@@ -24,7 +24,7 @@ export async function GetWatchLaterById(id:string){
                 }
             },
             orderBy:{
-                
+                createdat:"desc"
             }
         })
         return response

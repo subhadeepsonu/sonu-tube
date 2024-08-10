@@ -1,20 +1,16 @@
 "use client"
 import Link from "next/link"
-import { Button } from "./ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-  
 import Cookies from "universal-cookie";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-import { toast } from "sonner";
 export default function Navbar(){
     const router = useRouter()
     const pathname = usePathname()
@@ -36,9 +32,9 @@ export default function Navbar(){
                 <img src={decoded.imgurl} className="h-12 w-12 rounded-full object-cover "></img>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuItem className="flex justify-center items-center font-medium" onClick={()=>{
-                        toast.warning("Still working on it")
-                    }}>Profile</DropdownMenuItem>
+                    <Link href={"/profile"}>
+                    <DropdownMenuItem className="flex justify-center items-center font-medium">Profile</DropdownMenuItem>
+                    </Link>
                     <DropdownMenuSeparator></DropdownMenuSeparator>
                     <DropdownMenuItem className="bg-red-500 text-white flex justify-center items-center"  onClick={()=>{
                              
