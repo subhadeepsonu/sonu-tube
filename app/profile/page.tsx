@@ -48,7 +48,7 @@ export default async function UerProfile(){
                     <div className=" w-full flex justify-center items-center  py-5">
                         <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-5">
                             {data?.video.map((video)=>{
-                                return <OwnerVideoCard id={video.id} title={video.title} tumbnail={video.thumnailurl} ></OwnerVideoCard>
+                                return <OwnerVideoCard key={video.id} id={video.id} title={video.title} tumbnail={video.thumnailurl} ></OwnerVideoCard>
                             })}
                         </div>
                     </div>
@@ -57,7 +57,7 @@ export default async function UerProfile(){
                 <div className=" w-full flex justify-center items-center  py-5">
                         <div className="grid grid-cols-1 lg:grid-cols-2  xl:grid-cols-3  gap-5">
                             {data?.annoucement.map((announcement)=>{
-                                return <AnnoucementCard title={announcement.title}discription={announcement.discription} userimg={announcement.user.imgurl} likes={announcement._count.annoucementlike} dislikes={announcement._count.annoucementdislike} username={announcement.user.name} userbookmark={announcement.annoucementbookmark} userlike={announcement.annoucementlike} userdislike={announcement.annoucementdislike} key={announcement.id} id={announcement.id} ></AnnoucementCard>
+                                return <AnnoucementCard  title={announcement.title}discription={announcement.discription} userimg={announcement.user.imgurl} likes={announcement._count.annoucementlike} dislikes={announcement._count.annoucementdislike} username={announcement.user.name} userbookmark={announcement.annoucementbookmark} userlike={announcement.annoucementlike} userdislike={announcement.annoucementdislike} key={announcement.id} id={announcement.id} ></AnnoucementCard>
                             })}
                         </div>
                     </div>
