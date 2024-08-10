@@ -12,6 +12,7 @@ export async function AddFollow(userid:string,channelid:string){
             }
         })
         revalidatePath("/video/path*")
+        revalidatePath("/profile/path*")
         return response
     } catch (error) {
         throw new Error(`${error}`)
