@@ -1,5 +1,4 @@
 import Link from "next/link"
-
 export default function SideVideoCard(props:{
     imgurl:string,
     title:string,
