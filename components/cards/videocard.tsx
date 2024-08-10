@@ -38,16 +38,16 @@ export default function VideoCard(props:{
         <img className="rounded-full w-9 h-9 object-cover" src={props.userimage}></img>
         </Link>
         </div>
-        <div className="flex h-16  flex-col justify-start py-1 items-center ">
-        <p className=" truncate text-clip w-64 text-[17px] font-semibold" >{props.title}</p>
+        <div className="flex h-16  flex-col justify-start py-2 items-center ">
+        <p className=" truncate  w-64 text-sm text-ellipsis font-semibold" >{props.title}</p>
         <div className="flex items-center justify-between w-full">
         <p className="text-sm  font-light" >{props.name}</p>
-        <p className =" text-sm font-light" >{props.views}  views</p>
+        <p className =" text-sm font-light pr-2" >{props.views}  views</p>
         </div>
         </div>
         </div>
         </Link>
-        <p className="flex absolute  bottom-5 right-0  justify-end items-end  w-4 h-full">
+        <p className="flex absolute  bottom-5 right-0  justify-end items-end ml-1  w-4 h-full">
             <DropdownMenu>
                 <DropdownMenuTrigger>
                 <GoKebabHorizontal className="rotate-90 text-xl" />

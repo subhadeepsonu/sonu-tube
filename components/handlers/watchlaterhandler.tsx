@@ -40,14 +40,14 @@ export default function WatchLaterHandler(props:{
         return <div onClick={()=>{
             SetCheck(false)
             MutateRemoveWacthLater.mutate()
-        }}>
+        }} className="flex justify-center items-center p-1" >
            Remove watchlater
         </div>
     }
     return <div onClick={()=>{
         SetCheck(true)
         MutateAddWatchLater.mutate()
-    }}>
+    }} className="flex justify-center items-center p-1">
         Add watchlater
     </div>
 }
