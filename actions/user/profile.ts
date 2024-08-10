@@ -29,6 +29,9 @@ export async function ProfileById(userid:string){
                     }
                    }
                 },
+                follows:{
+
+                },
                 
                 annoucement:{
                     include:{

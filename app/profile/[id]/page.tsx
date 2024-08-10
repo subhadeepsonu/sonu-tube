@@ -1,18 +1,22 @@
 import {ProfileById} from "@/actions/user/profile"
 import AnnoucementCard from "@/components/cards/announcementCard"
 import VideoCard from "@/components/cards/videocard"
-import { Button } from "@/components/ui/button"
+import FollowerHandler from "@/components/handlers/followerhandler"
 import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
   } from "@/components/ui/tabs"
+import { jwtDecode } from "jwt-decode"
+import { cookies } from "next/headers"
 export default async function Profile({params}:{
     params:{
         id:string
     }
 }){
+    const token = cookies().get('token')
+    const decoded:any = jwtDecode(token?.value!)
     const data = await  ProfileById(params.id)
     return <div className="min-h-screen flex flex-col bg-gray-50 justify-start md:pl-24 pt-16 items-center pb-10  ">
         <div className=" p-3 rounded-lg h-40 w-full ">
@@ -32,7 +36,7 @@ export default async function Profile({params}:{
                 <p className="text-sm pb-2">
                     {data?._count.video} Videos
                 </p>
-                <Button size={"sm"}>Follow</Button>
+                <FollowerHandler channelid={data?.id!} userid={decoded.id} follower={data?.follows}  name={data?.name!} ></FollowerHandler>
                 </div>
             
             
