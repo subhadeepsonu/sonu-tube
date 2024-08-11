@@ -4,11 +4,12 @@ import { useQuery } from "@tanstack/react-query"
 import SideVideoCard from "../cards/sidevideoCard"
 
 export default function RecommandedVideo(props:{
-    tag:any
+    tag:any,
+    currentvideoid:number
 }){
     const QueryRecommendedVideo = useQuery({
         queryKey:["RecVideo"],
-        queryFn:()=>GetvideoBytag(props.tag)
+        queryFn:()=>GetvideoBytag(props.tag,props.currentvideoid)
     })
     if(QueryRecommendedVideo.isLoading){
         return <div className="h-screen w-full flex justify-center items-center">

@@ -1,10 +1,13 @@
 "use server"
 import prisma from "@/db"
-export async function GetvideoBytag(tag:any){
+export async function GetvideoBytag(tag:any,currentid:number){
     try {
         const response  = await prisma.video.findMany({
             where:{
-                tag:tag
+                tag:tag,
+                NOT:{
+                    id:currentid
+                }
             },
             include:{
                 _count:{
@@ -21,6 +24,7 @@ export async function GetvideoBytag(tag:any){
                     
                 }
             },
+
             orderBy:{
                 createdat:"desc"
                }

@@ -75,7 +75,7 @@ export default async function VideoPlay({params}:{params:{
         </div>
         </div>
         <div className="w-1/4 min-h-screen flex justify-center items-start ">
-        <RecommandedVideo tag={data?.tag}></RecommandedVideo>
+        <RecommandedVideo currentvideoid={data?.id!} tag={data?.tag}></RecommandedVideo>
         </div>
     </div>
 }
