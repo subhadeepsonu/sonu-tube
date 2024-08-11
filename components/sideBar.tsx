@@ -4,7 +4,7 @@ import { BiSolidLike } from "react-icons/bi";
 import { AiFillProfile } from "react-icons/ai";
 import { IoHomeOutline } from "react-icons/io5";
 import { BiLike } from "react-icons/bi";
-import { RiChatHistoryLine } from "react-icons/ri";
+import { RiChatHistoryLine, RiFireFill, RiFireLine } from "react-icons/ri";
 import { RiChatHistoryFill } from "react-icons/ri";
 import { AiOutlineProfile } from "react-icons/ai";
 import { usePathname } from "next/navigation";
@@ -32,17 +32,17 @@ export default function SideBar(){
         })()}
         <p className="text-xs">Home</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col" href={'/liked'}>
+        <Link className="flex justify-center items-center flex-col" href={'/explore'}>
         {(()=>{
-            if(pathname=="/liked"){
-                return <BiSolidLike  className="text-2xl" />
+            if(pathname=="/explore"){
+                return <RiFireFill className="text-2xl" />
             }
             else{
-                return <BiLike  className="text-2xl" />
+                return <RiFireLine className="text-2xl" />
             }
         })()}
         
-        <p className="text-xs">Liked</p>
+        <p className="text-xs">explore</p>
         </Link>
         <Link className="flex justify-center items-center flex-col" href={'/history'}>
         {(()=>{
@@ -76,7 +76,7 @@ export default function SideBar(){
                 return <AiOutlineProfile  className="text-2xl"/>
             }
         })()}
-        <p className="text-xs">More</p>
+        <p className="text-xs">Library</p>
         </Link>
         </div>
     </div>
