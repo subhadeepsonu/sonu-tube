@@ -58,7 +58,7 @@ export default  function UploadVideoPage(){
       }
     })
     return <div className='min-h-screen w-full bg-gray-50 flex  justify-around items-center pt-20'>
-        <div className='h-5/6 w-5/6 bg-white rounded-lg flex flex-col  justify-center items-center'>
+        <div className='h-5/6 w-5/6 bg-white p-2 rounded-lg flex flex-col  justify-center items-center'>
       
       <Form  {...form}>
         <form onSubmit={form.handleSubmit(()=>{

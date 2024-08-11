@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { BiSolidLike } from "react-icons/bi";
 import { AiFillProfile } from "react-icons/ai";
-import { IoHomeOutline } from "react-icons/io5";
+import { IoHomeOutline, IoVideocamOutline, IoVideocamSharp } from "react-icons/io5";
 import { BiLike } from "react-icons/bi";
 import { RiChatHistoryLine, RiFireFill, RiFireLine } from "react-icons/ri";
 import { RiChatHistoryFill } from "react-icons/ri";
@@ -44,17 +44,17 @@ export default function SideBar(){
         
         <p className="text-xs">explore</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col" href={'/history'}>
+        <Link className="flex justify-center items-center flex-col" href={'/more/uploadvideo'}>
         {(()=>{
-            if(pathname=="/history"){
-                return <RiChatHistoryFill  className="text-2xl" />
+            if(pathname=="/more/uploadvideo"){
+                return <IoVideocamSharp  className="text-2xl" />
             }
             else{
-                return <RiChatHistoryLine  className="text-2xl" />
+                return <IoVideocamOutline className="text-2xl" />
             }
         })()}
         
-        <p className="text-xs">History</p>
+        <p className="text-xs">Upload</p>
         </Link>
         <Link className="flex justify-center items-center flex-col" href={'/announcement'}>
         {(()=>{
@@ -69,7 +69,7 @@ export default function SideBar(){
         </Link>
         <Link className="flex justify-center items-center flex-col" href={'/more'}>
         {(()=>{
-            if(pathname.startsWith("/more")){
+            if(pathname=="/more"){
                 return <AiFillProfile  className="text-2xl"/>
             }
             else{
