@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import CommentButton from "./commentButton";
 import AnnouncementBookmark from "./annoucementBookmark";
+import Link from "next/link";
 export default function AnnoucementCard(props:{
     userimg:string,
     username:string,
@@ -14,18 +15,21 @@ export default function AnnoucementCard(props:{
     userlike:any,
     userdislike:any,
     likes:number,
-    dislikes:number
+    dislikes:number,
+    owerid:string
 }){
     const token:any = cookies().get('token')
     const decoded:any = jwtDecode(token?.value)
     return <div className="bg-white w-[350px] h-80 p-3  shadow-sm flex flex-col justify-start items-start text-black rounded-lg ">
         <div className="flex w-full justify-between items-center">
             <div className="flex justify-between items-center">
+                <Link href={`/profile/${props.owerid}`}>
         <Avatar>
             <AvatarImage className="object-cover" src={props.userimg}>
             </AvatarImage>
             <AvatarFallback>s</AvatarFallback>
         </Avatar>
+        </Link>
         <div className="pl-2">{props.username}</div>
         </div>
         <AnnouncementBookmark bookmarks={props.userbookmark} userid={decoded.id} announcementid={props.id}></AnnouncementBookmark>

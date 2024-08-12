@@ -19,6 +19,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import AddAnnouncementForm from "@/components/forms/addanouncementform"
 import { Input } from "@/components/ui/input"
 import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -58,6 +66,19 @@ export default  function UploadVideoPage(){
       }
     })
     return <div className='min-h-screen w-full bg-gray-50 flex  justify-around items-center pt-20'>
+      <Sheet>
+                        <SheetTrigger>
+                    <Button className="absolute bottom-2 right-2">Add Announcement</Button>
+                    </SheetTrigger>
+                    <SheetContent>
+                        <SheetHeader>
+                            <SheetTitle >Add Announcement</SheetTitle>
+                            <SheetContent>
+                                <AddAnnouncementForm></AddAnnouncementForm>
+                            </SheetContent>
+                        </SheetHeader>
+                    </SheetContent>
+                    </Sheet>
         <div className='h-5/6 w-5/6 bg-white p-2 rounded-lg flex flex-col  justify-center items-center'>
       
       <Form  {...form}>

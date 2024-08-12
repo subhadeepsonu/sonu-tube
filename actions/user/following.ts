@@ -7,6 +7,11 @@ export async function Followingchannels(userId:string){
         const response = await prisma.follows.findMany({
             where:{
                 follwerId:userId
+            },
+            include:{
+                user:{
+                    
+                }
             }
         })
         return response
