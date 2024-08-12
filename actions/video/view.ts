@@ -38,6 +38,7 @@ export async  function views(userid:string,videoid:number){
             return create
         }
     } catch (error) {
+        
         throw new Error(`${error}`)
     }
 }

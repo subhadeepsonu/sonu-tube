@@ -25,7 +25,7 @@ export default async function VideoPlay({params}:{params:{
     const check = await views(decoded.id,id)
     return <div className="min-h-screen w-full flex justify-between items-start pb-20 md:pb-0 pt-20   bg-gray-50">
         
-        <div className="w-3/4">
+        <div className="lg:w-3/4 w-full">
         <div className="md:h-[450px] h-[300px] w-full">
         <VideoPlayer url={data?.videourl!} ></VideoPlayer>
         </div>
@@ -33,9 +33,9 @@ export default async function VideoPlay({params}:{params:{
         <p className="text-3xl font-semibold px-5">
             {data?.title}
         </p>
-        <div className="flex justify-start items-center px-5 ">
+        <div className="flex flex-wrap  px-5 ">
         <Link href={`/profile/${data?.userid}`}>
-        <div className="flex items-center w-40 p-2  mr-2 bg-white rounded-lg  shadow-sm">
+        <div className="flex items-center w-40 h-16 p-2  mr-2 bg-white rounded-lg  shadow-sm">
             <Avatar className="w-12 h-12  ">
                 <AvatarImage className="rounded-full object-cover" src={data?.user.imgurl}>
                 </AvatarImage>
@@ -52,7 +52,7 @@ export default async function VideoPlay({params}:{params:{
             </div>
         </div>
         </Link>
-        <p className="pl-2 text-lg  bg-white  rounded-full px-2 py-1 shadow-sm">views: {data?._count.views}</p>
+        <p className=" text-lg  bg-white h-16 px-2  rounded-lg flex justify-center items-center  shadow-sm">views: {data?._count.views}</p>
         <VideoHandler id={data?.id!} dislikeCount={data?._count.dislike!} likeCount={data?._count.like!} userdislikes={data?.dislike}userlikes={data?.like} userid={decoded.id}></VideoHandler>
         <FollowerHandler name={data?.user.name!} follower={data?.user.follows} userid={decoded.id} channelid={data?.userid!} key={data?.id}></FollowerHandler>
         </div>
@@ -74,7 +74,7 @@ export default async function VideoPlay({params}:{params:{
         })}
         </div>
         </div>
-        <div className="w-1/4 min-h-screen flex justify-center items-start ">
+        <div className="w-1/4 hidden min-h-screen lg:flex justify-center items-start ">
         <RecommandedVideo currentvideoid={data?.id!} tag={data?.tag}></RecommandedVideo>
         </div>
     </div>

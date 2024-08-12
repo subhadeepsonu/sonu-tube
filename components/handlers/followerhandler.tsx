@@ -39,7 +39,7 @@ export default function FollowerHandler(props:{
             }
         });
     },[props.follower,props.userid])
-    return <div>
+    return <div className=" h-20 rounded-lg flex justify-center items-center">
         {(follows)?<Button onClick={()=>{
             MutateUnfollow.mutate()
             SetFollows(false)

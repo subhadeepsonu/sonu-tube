@@ -7,7 +7,7 @@ export default function SideVideoCard(props:{
     id:number
 }){
     return <Link href={`/video/${props.id}`}>
-     <div className="h-40 w-80 rounded-lg bg-white flex py-2 border-2 border-gray-100 my-2">
+     <div className="h-40 w-72 rounded-lg bg-white flex py-2 border-2 border-gray-100 my-2">
         <img src={props.imgurl} alt="" className="h-full w-40 rounded-l-lg object-cover p-2"></img>
         <div className="w-40 h-full flex flex-col justify-around items-start pl-3">
             <p className="h-1/2 truncate text-wrap font-semibold pt-1">{props.title}</p>
