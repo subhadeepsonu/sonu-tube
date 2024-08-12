@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 export default function MorePage(){
-    return <div className="min-h-screen w-full flex justify-center items-start pt-20 md:pl-20 bg-gray-100">
+    return <div className="min-h-screen w-full flex justify-center items-start pt-20 md:pl-20 bg-gray-100 pb-20">
         <div className="grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 md:gird-cols-3 gap-5">
             <Link href={"/more/bookmarks"}>
             <div className="h-16 w-64 bg-white cursor-pointer flex justify-center items-center rounded-lg shadow-sm ">

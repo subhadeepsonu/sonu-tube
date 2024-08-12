@@ -6,7 +6,7 @@ export default async function HistoryPage(){
     const token = cookies().get('token')
     const decoded:any = jwtDecode(token?.value!)
     const data = await GetHistory(decoded.id)
-    return <div className="min-h-screen w-full flex flex-col justify-start bg-gray-100 items-center pt-20 md:pl-20">
+    return <div className="min-h-screen w-full flex flex-col justify-start bg-gray-100 items-center pt-20 md:pl-20 pb-20">
         <p className="text-2xl p-2 font-semibold">History</p>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
         {data.map((history)=>{

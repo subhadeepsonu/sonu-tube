@@ -7,8 +7,8 @@ export default async function FollowingPage(){
     const token = cookies().get('token')
     const decoded:any = jwtDecode(token?.value!)
     const data = await Followingchannels(decoded.id)
-    return <div className="min-h-screen w-full bg-gray-50 flex justify-center items-start pl-24 pt-20">
-        <div className="grid grid-cols-4 gap-5">
+    return <div className="min-h-screen w-full bg-gray-50 flex justify-center items-start md:pl-24 pt-20 pb-20 md:pb-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
         {data.map((channel)=>{
             return <Link key={channel.id} href={`/profile/${channel.userId}`}>
             <div className="w-80 h-16  rounded-lg bg-white shadow-sm  flex justify-center items-center">

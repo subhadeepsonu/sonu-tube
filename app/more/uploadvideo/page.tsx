@@ -65,7 +65,7 @@ export default  function UploadVideoPage(){
         toast.error("could not upload video")
       }
     })
-    return <div className='min-h-screen w-full bg-gray-50 flex  justify-around items-center pt-20'>
+    return <div className='min-h-screen w-full bg-gray-50 flex  justify-around items-center pt-20 pb-20'>
       <Sheet>
                         <SheetTrigger>
                     <Button className="absolute bottom-2 right-2">Add Announcement</Button>

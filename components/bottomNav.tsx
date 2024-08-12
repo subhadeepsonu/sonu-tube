@@ -2,9 +2,9 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { AiFillProfile, AiOutlineProfile } from "react-icons/ai"
-import { BiLike, BiSolidLike } from "react-icons/bi"
-import { IoHomeOutline, IoHomeSharp } from "react-icons/io5"
+import { IoHomeOutline, IoHomeSharp, IoVideocamOutline, IoVideocamSharp } from "react-icons/io5"
 import { PiSpeakerLowDuotone, PiSpeakerLowFill, PiTelevisionSimpleDuotone, PiTelevisionSimpleFill } from "react-icons/pi"
+import { RiFireFill, RiFireLine } from "react-icons/ri"
 export default function BottomNav(){
     const pathname = usePathname()
     if(pathname=="/auth"){
@@ -21,7 +21,31 @@ export default function BottomNav(){
             }
         })()}
         </Link>
-        <Link href={"/announcement"}>
+        <Link className="flex justify-center items-center flex-col" href={'/explore'}>
+        {(()=>{
+            if(pathname=="/explore"){
+                return <RiFireFill className="text-2xl" />
+            }
+            else{
+                return <RiFireLine className="text-2xl" />
+            }
+        })()}
+        
+        
+        </Link>
+        <Link className="flex justify-center items-center flex-col" href={'/more/uploadvideo'}>
+        {(()=>{
+            if(pathname=="/more/uploadvideo"){
+                return <IoVideocamSharp  className="text-2xl" />
+            }
+            else{
+                return <IoVideocamOutline className="text-2xl" />
+            }
+        })()}
+        
+        
+        </Link>
+        <Link className="flex justify-center items-center flex-col" href={'/announcement'}>
         {(()=>{
             if(pathname=="/announcement"){
                 return <PiSpeakerLowFill  className="text-2xl"/>
@@ -30,16 +54,7 @@ export default function BottomNav(){
                 return <PiSpeakerLowDuotone  className="text-2xl"/>
             }
         })()}
-        </Link>
-        <Link href={"/liked"}>
-        {(()=>{
-            if(pathname=="/liked"){
-                return <BiSolidLike  className="text-2xl" />
-            }
-            else{
-                return <BiLike  className="text-2xl" />
-            }
-        })()}
+        
         </Link>
         <Link href={"/more"}>
         {(()=>{

@@ -10,8 +10,8 @@ export default async function ExplorePage(){
     const token = cookies().get('token')
     const decoded:any = jwtDecode(token?.value!)
     const data = await ExploreVideos()
-    return <div className="min-h-screen w-full bg-gray-50 pt-20 md:pl-28 hide-scrollbar">
-        <p className="w-full  font-semibold text-2xl  flex justify-start items-center py-2 ">Explore your intrest</p>
+    return <div className="min-h-screen w-full bg-gray-50 pt-20 md:pl-28 hide-scrollbar pb-20">
+        <p className="w-full  font-semibold text-2xl  flex justify-center items-center py-2 ">Explore your intrest</p>
          <div className="flex  flex-wrap ">
                 <CatTag href="vlog" name="vlog"></CatTag>
                 <CatTag href="education" name="education"></CatTag>
@@ -37,11 +37,13 @@ export default async function ExplorePage(){
                 <CatTag href="love" name="love"></CatTag>
 
          </div>
-        <p className="w-full  font-semibold text-2xl  flex justify-start items-center py-2 ">Trending videos <MdOutlineTrendingUp className="pl-2 text-4xl" /></p>
+        <p className="w-full  font-semibold text-2xl  flex justify-center  items-center py-2 ">Trending videos <MdOutlineTrendingUp className="pl-2 text-4xl" /></p>
+        <div className="flex justify-center items-center w-full ">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
             {data.map((video)=>{
                 return <VideoCard  views={video._count.views} id={video.id} key={video.id} videoholderid={video.userid} title={video.title} videourl={video.videourl} userid={decoded.id} name={video.user.name} imgurl={video.thumnailurl} userimage={video.user.imgurl} watchlater={video.watchlater}  ></VideoCard>
             })}
+        </div>
         </div>
 
     </div>
