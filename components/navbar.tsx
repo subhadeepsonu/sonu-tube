@@ -11,6 +11,7 @@ import Cookies from "universal-cookie";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
+import { ModeToggle } from "./modetoggle";
 export default function Navbar(){
     const router = useRouter()
     const pathname = usePathname()
@@ -22,11 +23,12 @@ export default function Navbar(){
         const token = cookie.get('token')
         if(token){
             const decoded:any = jwtDecode(cookie.get('token'))
-    return <div className="h-16 w-screen z-20 fixed shadow-sm  text-black backdrop-blur-sm bg-white flex justify-between px-4 items-center top-0  ">
+    return <div className="h-16 w-screen dark:bg-black  dark:text-white z-20 fixed shadow-sm  text-black backdrop-blur-sm bg-white flex justify-between px-4 items-center top-0  ">
         <Link href={"/"} className="text-2xl font-bold">SonuTube</Link>
         <div className="w-1/2 flex">
         </div>
-        <div className="flex  justify-center items-center h-20 pr-2">
+        <div className="flex  justify-around w-32  items-center h-20 pr-2">
+            <ModeToggle></ModeToggle>
             <DropdownMenu>
                 <DropdownMenuTrigger>
                 <img src={decoded.imgurl} className="h-12 w-12 rounded-full object-cover "></img>

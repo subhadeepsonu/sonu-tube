@@ -8,6 +8,7 @@ import SideBar from "@/components/sideBar";
 const inter = Inter({ subsets: ["latin"] });
 import NextTopLoader from 'nextjs-toploader';
 import BottomNav from "@/components/bottomNav";
+import { ThemeProvider } from "@/components/theme-provider";
 export const metadata: Metadata = {
   title: "Sonu Tube",
   description: "Video Streaming platform",
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="">
+    <html lang="en">
       <body className={inter.className}>
         <ReactQuearyProvider>
         <Toaster richColors></Toaster>
@@ -33,10 +34,15 @@ export default function RootLayout({
  easing="ease"
  speed={200}
 />
+    <ThemeProvider 
+      attribute="class"
+      defaultTheme="dark"
+    >
         <Navbar></Navbar>
         <SideBar></SideBar>
         <BottomNav></BottomNav>
         {children}
+        </ThemeProvider>
         </ReactQuearyProvider>
         </body>
     </html>

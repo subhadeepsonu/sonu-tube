@@ -33,7 +33,7 @@ export default function VideoAddComment(props:{
     },
 )
     return <Form {...form} >
-        <form  className=" w-full bg-white mb-5" onSubmit={form.handleSubmit(()=>{
+        <form  className=" w-full dark:bg-black bg-white mb-5" onSubmit={form.handleSubmit(()=>{
             MutateAddComment.mutate()
         })}>
                 <FormField

@@ -19,7 +19,7 @@ export default function SideBar(){
     if(pathname=="/auth"){
         return null
     }
-    return <div className="w-24 z-10 h-full hidden md:flex fixed left-0  justify-start items-start pt-20  bg-white  shadow-sm ">
+    return <div className="w-24 z-10 dark:text-white dark:bg-black h-full hidden md:flex fixed left-0  justify-start items-start pt-20  bg-white  shadow-sm ">
         <div className="w-full h-4/6 flex-col flex justify-between items-center">
         <Link className="flex justify-center items-center flex-col" href={'/'}>
         {(()=>{

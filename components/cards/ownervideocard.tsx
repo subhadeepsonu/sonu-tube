@@ -33,7 +33,7 @@ export default function OwnerVideoCard(props:{
             toast.error("Something went wrong")
         }
     })
-    return <div className="w-80 h-40 bg-white border-2 border-gray-100 shadow-sm rounded-lg flex">
+    return <div className="w-80 h-40 dark:bg-black dark:text-white dark:border-zinc-800 bg-white border-2 border-gray-100 shadow-sm rounded-lg flex">
         <img src={props.tumbnail} className="h-full w-40 p-2 object-cover  "></img>
         <div className="flex flex-col justify-around items-start pl-2 h-full w-40">
         <p className="font-medium overflow-hidden truncate w-36">{props.title}</p>

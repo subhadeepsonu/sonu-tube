@@ -21,7 +21,7 @@ export default async function CommentButton(props:{
         <SheetTrigger>
         <FaComments  className="hover:cursor-pointer text-2xl" />
         </SheetTrigger>
-        <SheetContent className="bg-gray-50" side={"bottom"}>
+        <SheetContent className="bg-gray-50 dark:bg-zinc-900" side={"bottom"}>
                 <SheetHeader className="font-bold text-3xl">
                     Comments
                 </SheetHeader>

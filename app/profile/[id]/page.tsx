@@ -18,7 +18,7 @@ export default async function Profile({params}:{
     const token = cookies().get('token')
     const decoded:any = jwtDecode(token?.value!)
     const data = await  ProfileById(params.id)
-    return <div className="min-h-screen flex flex-col bg-gray-50 justify-start md:pl-24 pt-16 items-center pb-20  ">
+    return <div className="min-h-screen flex flex-col dark:bg-zinc-900 bg-gray-50 justify-start md:pl-24 pt-16 items-center pb-20  ">
         <div className=" p-3 rounded-lg h-40 w-full ">
             <img src="https://th.bing.com/th/id/OIG2.6bChLwKDF7ARn0f8J2PE?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="Bgurl"  className="h-full rounded-lg w-full object-cover " />
         </div>
