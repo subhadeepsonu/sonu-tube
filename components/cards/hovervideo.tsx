@@ -30,10 +30,10 @@ export default function HoverVideo(props:{
             className="w-80 h-56"
         >
             {check ? (
-                <ReactPlayer playing={true} url={props.videourl} height={224} width={320} />
+                <ReactPlayer playing={true} url={props.videourl} height={224} width={315} />
             ) : (
                 <img 
-                    className="object-cover h-full w-full rounded-t-lg" 
+                    className="object-cover h-full w-[315px]  rounded-t-lg" 
                     src={props.imgurl} 
                     alt="image"
                 />

@@ -10,7 +10,7 @@ export default async function Home(context:any) {
   const data = await GetAllVideos(skip)
   console.log(context.searchParams.page)
   return (
-    <div className="min-h-screen w-full flex-col flex justify-center md:justify-start items-center bg-gray-100 pt-20 md:pl-20 pb-20 md:pb-0" >
+    <div className="min-h-screen w-full dark:bg-zinc-900 flex-col flex justify-center md:justify-start items-center bg-gray-100 pt-20 md:pl-20 pb-20 md:pb-0" >
       
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
       {data.data.map((video,index:number)=>{
