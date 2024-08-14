@@ -1,11 +1,8 @@
 "use client"
 import Link from "next/link";
-import { BiSolidLike } from "react-icons/bi";
 import { AiFillProfile } from "react-icons/ai";
 import { IoHomeOutline, IoVideocamOutline, IoVideocamSharp } from "react-icons/io5";
-import { BiLike } from "react-icons/bi";
-import { RiChatHistoryLine, RiFireFill, RiFireLine } from "react-icons/ri";
-import { RiChatHistoryFill } from "react-icons/ri";
+import {  RiFireFill, RiFireLine } from "react-icons/ri";
 import { AiOutlineProfile } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 import { IoHomeSharp } from "react-icons/io5";
@@ -21,7 +18,7 @@ export default function SideBar(){
     }
     return <div className="w-20  dark:text-white dark:bg-zinc-950 h-full hidden md:flex fixed left-0  justify-start items-start pt-20  bg-white   ">
         <div className="w-full  flex-col flex justify-between items-center">
-        <Link className="flex justify-center items-center flex-col pb-8" href={'/'}>
+        <Link className="flex justify-center items-center flex-col mb-10" href={'/'}>
         {(()=>{
             if(pathname=="/"){
                 return <IoHomeSharp className="text-xl" />
@@ -32,7 +29,7 @@ export default function SideBar(){
         })()}
         <p className="text-[11px] font-light ">Home</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col pb-8" href={'/explore'}>
+        <Link className="flex justify-center items-center flex-col mb-10" href={'/explore'}>
         {(()=>{
             if(pathname=="/explore"){
                 return <RiFireFill className="text-2xl" />
@@ -44,7 +41,7 @@ export default function SideBar(){
         
         <p className="text-[11px] font-light ">explore</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col pb-8" href={'/more/uploadvideo'}>
+        <Link className="flex justify-center items-center flex-col mb-10" href={'/more/uploadvideo'}>
         {(()=>{
             if(pathname=="/more/uploadvideo"){
                 return <IoVideocamSharp  className="text-2xl" />
@@ -56,7 +53,7 @@ export default function SideBar(){
         
         <p className="text-[11px] font-light ">Upload</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col pb-8" href={'/announcement'}>
+        <Link className="flex justify-center items-center flex-col mb-10" href={'/announcement'}>
         {(()=>{
             if(pathname=="/announcement"){
                 return <PiSpeakerLowFill  className="text-2xl"/>
@@ -67,7 +64,7 @@ export default function SideBar(){
         })()}
         <p className="text-[11px] font-light ">Announments</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col pb-8" href={'/more'}>
+        <Link className="flex justify-center items-center flex-col mb-10" href={'/more'}>
         {(()=>{
             if(pathname=="/more"){
                 return <AiFillProfile  className="text-2xl"/>
