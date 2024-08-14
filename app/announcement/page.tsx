@@ -2,7 +2,7 @@ import AnnoucementCard from "@/components/cards/announcementCard"
 import { GetAllAnnouncements } from "@/data/getallannouncement"
 export default async  function AnnouncementPage(){
     const data = await GetAllAnnouncements()
-    return <div className="min-h-screen w-full dark:bg-zinc-900 flex flex-col md:justify-start justify-center items-center mb-20 pt-20 md:pl-20  bg-gray-50 pb-20">
+    return <div className="min-h-screen w-full dark:bg-zinc-950 flex flex-col md:justify-start justify-center items-center mb-20 pt-20 md:pl-20  bg-gray-50 pb-20">
             <p className="p-2 text-3xl font-semibold">Announcements</p>
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
                 {data.map((announcement,index)=>{

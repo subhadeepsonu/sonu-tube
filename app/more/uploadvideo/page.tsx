@@ -65,7 +65,7 @@ export default  function UploadVideoPage(){
         toast.error("could not upload video")
       }
     })
-    return <div className='min-h-screen dark:bg-zinc-900 w-full bg-gray-50 flex  justify-around items-center pt-20 pb-20'>
+    return <div className='min-h-screen dark:bg-zinc-950 w-full bg-gray-50 flex  justify-around items-center pt-20 pb-20'>
       <Sheet>
                         <SheetTrigger>
                     <Button className="absolute bottom-2 right-2">Add Announcement</Button>
@@ -79,7 +79,7 @@ export default  function UploadVideoPage(){
                         </SheetHeader>
                     </SheetContent>
                     </Sheet>
-        <div className='h-5/6 w-5/6 bg-white dark:bg-black p-2 rounded-lg flex flex-col  justify-center items-center'>
+        <div className='h-5/6 w-5/6 bg-white dark:bg-transparent p-2 rounded-lg flex flex-col  justify-center items-center'>
       
       <Form  {...form}>
         <form onSubmit={form.handleSubmit(()=>{

@@ -19,9 +19,9 @@ export default function SideBar(){
     if(pathname=="/auth"){
         return null
     }
-    return <div className="w-24 z-10 dark:text-white dark:bg-black h-full hidden md:flex fixed left-0  justify-start items-start pt-20  bg-white  shadow-sm ">
-        <div className="w-full h-4/6 flex-col flex justify-between items-center">
-        <Link className="flex justify-center items-center flex-col" href={'/'}>
+    return <div className="w-20  dark:text-white dark:bg-zinc-950 h-full hidden md:flex fixed left-0  justify-start items-start pt-20  bg-white   ">
+        <div className="w-full  flex-col flex justify-between items-center">
+        <Link className="flex justify-center items-center flex-col pb-8" href={'/'}>
         {(()=>{
             if(pathname=="/"){
                 return <IoHomeSharp className="text-xl" />
@@ -30,9 +30,9 @@ export default function SideBar(){
                 return <IoHomeOutline className="text-xl" />
             }
         })()}
-        <p className="text-xs">Home</p>
+        <p className="text-[11px] font-light ">Home</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col" href={'/explore'}>
+        <Link className="flex justify-center items-center flex-col pb-8" href={'/explore'}>
         {(()=>{
             if(pathname=="/explore"){
                 return <RiFireFill className="text-2xl" />
@@ -42,9 +42,9 @@ export default function SideBar(){
             }
         })()}
         
-        <p className="text-xs">explore</p>
+        <p className="text-[11px] font-light ">explore</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col" href={'/more/uploadvideo'}>
+        <Link className="flex justify-center items-center flex-col pb-8" href={'/more/uploadvideo'}>
         {(()=>{
             if(pathname=="/more/uploadvideo"){
                 return <IoVideocamSharp  className="text-2xl" />
@@ -54,9 +54,9 @@ export default function SideBar(){
             }
         })()}
         
-        <p className="text-xs">Upload</p>
+        <p className="text-[11px] font-light ">Upload</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col" href={'/announcement'}>
+        <Link className="flex justify-center items-center flex-col pb-8" href={'/announcement'}>
         {(()=>{
             if(pathname=="/announcement"){
                 return <PiSpeakerLowFill  className="text-2xl"/>
@@ -65,9 +65,9 @@ export default function SideBar(){
                 return <PiSpeakerLowDuotone  className="text-2xl"/>
             }
         })()}
-        <p className="text-xs">Announments</p>
+        <p className="text-[11px] font-light ">Announments</p>
         </Link>
-        <Link className="flex justify-center items-center flex-col" href={'/more'}>
+        <Link className="flex justify-center items-center flex-col pb-8" href={'/more'}>
         {(()=>{
             if(pathname=="/more"){
                 return <AiFillProfile  className="text-2xl"/>
@@ -76,7 +76,7 @@ export default function SideBar(){
                 return <AiOutlineProfile  className="text-2xl"/>
             }
         })()}
-        <p className="text-xs">Library</p>
+        <p className="text-[11px] font-light ">Library</p>
         </Link>
         </div>
     </div>

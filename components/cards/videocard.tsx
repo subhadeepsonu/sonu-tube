@@ -26,7 +26,7 @@ export default function VideoCard(props:{
     
     const token = cookies().get('token')
     const decoded:any = jwtDecode(token?.value!)
-    return <div className="   w-80 h-72 bg-white dark:border-zinc-900 dark:bg-black dark:text-white  rounded-lg relative border-2 border-gray-100 shadow-sm flex flex-col justify-center items-start hover:cursor-pointer">
+    return <div className="   w-80 h-72 bg-transparent dark:border-zinc-950 dark:bg-transparent dark:text-white  rounded-lg relative   flex flex-col justify-center items-start hover:cursor-pointer">
         <Link href={`/video/${props.id}`}> 
         <div className="w-80  h-56">
         <HoverVideo imgurl={props.imgurl} videourl={props.videourl}></HoverVideo>

@@ -23,7 +23,7 @@ export default function Navbar(){
         const token = cookie.get('token')
         if(token){
             const decoded:any = jwtDecode(cookie.get('token'))
-    return <div className="h-16 w-screen dark:bg-black  dark:text-white z-20 fixed shadow-sm  text-black backdrop-blur-sm bg-white flex justify-between px-4 items-center top-0  ">
+    return <div className="h-16 w-screen dark:bg-zinc-950  dark:text-white z-20 fixed   text-black backdrop-blur-sm bg-white flex justify-between px-4 items-center top-0  ">
         <Link href={"/"} className="text-2xl font-bold">SonuTube</Link>
         <div className="w-1/2 flex">
         </div>
