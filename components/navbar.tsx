@@ -25,7 +25,6 @@ export default function Navbar(){
             const decoded:any = jwtDecode(cookie.get('token'))
     return <div className="h-16 w-screen dark:bg-zinc-950  dark:text-white z-20 fixed   text-black backdrop-blur-sm bg-white flex justify-between px-4 items-center top-0  ">
         <Link href={"/"} className="text-2xl font-bold flex justify-start items-center w-40">
-        <img src="https://utfs.io/f/238bc160-c13e-434f-a0ff-c684a7840e2c-57wq72.png" className="h-12"></img>
         sonutube
         </Link>
         <div className="w-1/2 flex">
