@@ -23,6 +23,7 @@ import EditAnnouncement from "../forms/editAnnoucement";
 export default function OwnerAnnouncementCard(props:{
     id:number,
     title:string,
+    description:string,
 }){
     const mutateDelete = useMutation({
         mutationFn:()=>DeleteAnnouncement(props.id),
@@ -41,9 +42,9 @@ export default function OwnerAnnouncementCard(props:{
                 
             <Sheet>
                 <SheetTrigger><Button>edit</Button></SheetTrigger>
-                  <SheetContent>
-                     <SheetHeader>
-                        <EditAnnouncement></EditAnnouncement>
+                  <SheetContent className="bg-black">
+                     <SheetHeader className="h-full flex justify-center items-center">
+                        <EditAnnouncement description={props.description} id={props.id} title={props.title} key={props.id}></EditAnnouncement>
                     </SheetHeader>
                  </SheetContent>
 </Sheet>

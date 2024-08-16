@@ -49,7 +49,7 @@ export default async function UerProfile(){
                     <div className=" w-full flex justify-center items-center  py-5">
                         <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-5">
                             {data?.video.map((video)=>{
-                                return <OwnerVideoCard key={video.id} id={video.id} title={video.title} tumbnail={video.thumnailurl} ></OwnerVideoCard>
+                                return <OwnerVideoCard  description={video.discription} key={video.id} id={video.id} title={video.title} tumbnail={video.thumnailurl} ></OwnerVideoCard>
                             })}
                         </div>
                     </div>
@@ -58,7 +58,7 @@ export default async function UerProfile(){
                 <div className=" w-full flex justify-center items-center  py-5">
                 <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-5">
                             {data?.annoucement.map((announcement)=>{
-                                return <OwnerAnnouncementCard id={announcement.id} title={announcement.title} key={announcement.id}></OwnerAnnouncementCard>
+                                return <OwnerAnnouncementCard description={announcement.discription} id={announcement.id} title={announcement.title} key={announcement.id}></OwnerAnnouncementCard>
                             })}
                         </div>
                     </div>

@@ -25,7 +25,8 @@ import EditVideo from "../forms/editvideo";
 export default function OwnerVideoCard(props:{
     id:number,
     title:string,
-    tumbnail:string
+    tumbnail:string,
+    description:string,
 }){
     const mutateDelete = useMutation({
         mutationFn:()=>DeleteVideo(props.id),
@@ -47,7 +48,7 @@ export default function OwnerVideoCard(props:{
                 <SheetTrigger><Button >{(mutateDelete.isPending)?"wait":<FaEdit></FaEdit>}</Button></SheetTrigger>
                   <SheetContent>
                      <SheetHeader>
-                      <EditVideo></EditVideo>
+                      <EditVideo id={props.id} title={props.title} description={props.description}></EditVideo>
                     </SheetHeader>
                  </SheetContent>
         </Sheet>
