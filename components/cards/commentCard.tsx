@@ -3,7 +3,7 @@ export default function CommentCard(props:{
     username:string,
     imgurl:string
 }){
-    return <div className="min-h-28 dark:bg-black dark:text-white bg-white w-full   shadow-sm rounded-lg my-2 p-2  ">
+    return <div className="min-h-28 dark:bg-transparent dark:text-white bg-white w-full   shadow-sm rounded-lg my-2 p-2  ">
         <div className="flex justify-start items-center ">
         <img src={props.imgurl} alt="photo" className="rounded-full  h-10 w-10 object-cover"></img>
         <div className="pl-2 font-semibold">

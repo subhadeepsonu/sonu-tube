@@ -1,5 +1,6 @@
 import {ProfileById} from "@/actions/user/profile"
 import AnnoucementCard from "@/components/cards/announcementCard"
+import OwnerAnnouncementCard from "@/components/cards/ownerannouncementcard"
 import OwnerVideoCard from "@/components/cards/ownervideocard"
 import VideoCard from "@/components/cards/videocard"
 import FollowerHandler from "@/components/handlers/followerhandler"
@@ -55,9 +56,9 @@ export default async function UerProfile(){
                 </TabsContent>
                 <TabsContent value="announcement">
                 <div className=" w-full flex justify-center items-center  py-5">
-                        <div className="grid grid-cols-1 lg:grid-cols-2  xl:grid-cols-3  gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-5">
                             {data?.annoucement.map((announcement)=>{
-                                return <AnnoucementCard owerid={announcement.userid} title={announcement.title}discription={announcement.discription} userimg={announcement.user.imgurl} likes={announcement._count.annoucementlike} dislikes={announcement._count.annoucementdislike} username={announcement.user.name} userbookmark={announcement.annoucementbookmark} userlike={announcement.annoucementlike} userdislike={announcement.annoucementdislike} key={announcement.id} id={announcement.id} ></AnnoucementCard>
+                                return <OwnerAnnouncementCard id={announcement.id} title={announcement.title} key={announcement.id}></OwnerAnnouncementCard>
                             })}
                         </div>
                     </div>

@@ -20,7 +20,7 @@ export default function AnnoucementCard(props:{
 }){
     const token:any = cookies().get('token')
     const decoded:any = jwtDecode(token?.value)
-    return <div className="bg-white dark:bg-transparent dark:border-zinc-900 border-2 border-gray-100 dark:border-2 dark:text-gray-100 w-[350px] h-80 p-3  shadow-sm flex flex-col justify-start items-start text-black rounded-lg ">
+    return <div className="bg-white dark:bg-transparent dark:border-zinc-800 border-2 border-gray-100 dark:border-2 dark:text-gray-100 w-[350px] h-80 p-3  shadow-sm flex flex-col justify-start items-start text-black rounded-lg ">
         <div className="flex w-full justify-between items-center">
             <div className="flex justify-between items-center">
                 <Link href={`/profile/${props.owerid}`}>

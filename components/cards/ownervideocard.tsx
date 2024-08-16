@@ -6,16 +6,21 @@ import { useMutation } from "@tanstack/react-query";
 import { DeleteVideo } from "@/actions/video/deletevideo";
 import { toast } from "sonner";
 import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import {
     AlertDialog,
-    AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
-    AlertDialogTitle,
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
+import EditVideo from "../forms/editvideo";
 
 export default function OwnerVideoCard(props:{
     id:number,
@@ -33,17 +38,19 @@ export default function OwnerVideoCard(props:{
             toast.error("Something went wrong")
         }
     })
-    return <div className="w-80 h-40 dark:bg-transparent dark:border-transparent dark:text-white bg-white border-2 border-gray-100 shadow-sm rounded-lg flex">
+    return <div className="w-80 h-40 dark:bg-transparent dark:border-zinc-800 dark:text-white bg-white border-2 border-gray-100 shadow-sm rounded-lg flex">
         <img src={props.tumbnail} className="h-full w-40 p-2 object-cover  "></img>
         <div className="flex flex-col justify-around items-start pl-2 h-full w-40">
         <p className="font-medium overflow-hidden truncate w-36">{props.title}</p>
         <div className=" w-full flex justify-around items-center">
-        
-        <AlertDialog>
-        <AlertDialogTrigger asChild>
-        <Button >{(mutateDelete.isPending)?"wait":<FaEdit></FaEdit>}</Button>
-      </AlertDialogTrigger>
-        </AlertDialog>
+        <Sheet>
+                <SheetTrigger><Button >{(mutateDelete.isPending)?"wait":<FaEdit></FaEdit>}</Button></SheetTrigger>
+                  <SheetContent>
+                     <SheetHeader>
+                      <EditVideo></EditVideo>
+                    </SheetHeader>
+                 </SheetContent>
+        </Sheet>
         <AlertDialog>
         <AlertDialogTrigger asChild>
         <Button variant="destructive">{(mutateDelete.isPending)?"wait":<BiTrash></BiTrash>}</Button>
