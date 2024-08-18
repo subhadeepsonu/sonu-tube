@@ -30,7 +30,7 @@ A modern video streaming platform built using cutting-edge technologies.
 
 1. Clone the repository:
    ```bash
-   git clone https://lnkd.in/geUZKuM9
+   git clone https://github.com/subhadeepsonu/sonu-tube
    cd sonu-tube
    ```
 
