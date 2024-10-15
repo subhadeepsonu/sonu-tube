@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import { GoKebabHorizontal } from "react-icons/go";
 import {
@@ -7,7 +8,7 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 import WatchLaterHandler from "../handlers/watchlaterhandler";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
 import HoverVideo from "./hovervideo";
   
@@ -24,11 +25,11 @@ export default function VideoCard(props:{
     videourl:string
 }){
     
-    const token = cookies().get('token')
-    const decoded:any = jwtDecode(token?.value!)
-    return <div className="   w-80 h-72 bg-transparent dark:border-zinc-950 dark:bg-transparent dark:text-white  rounded-lg relative   flex flex-col justify-center items-start hover:cursor-pointer">
+    // const token = cookies().get('token')
+    // const decoded:any = jwtDecode(token?.value!)
+    return <div className="w-full h-72 bg-white border-2 dark:border-zinc-950 dark:bg-transparent dark:text-white  rounded-lg relative   flex flex-col justify-center items-start hover:cursor-pointer">
         <Link href={`/video/${props.id}`}> 
-        <div className="w-80  h-56">
+        <div className="w-full  h-56">
         <HoverVideo imgurl={props.imgurl} videourl={props.videourl}></HoverVideo>
         </div>
         <div className="w-80 h-16 flex justify-start items-start py-1 ">
@@ -53,7 +54,7 @@ export default function VideoCard(props:{
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="border-0">
                     <DropdownMenuItem >
-                        <WatchLaterHandler userid={decoded.id} watchlater={props.watchlater} videoid={props.id}></WatchLaterHandler>
+                        <WatchLaterHandler userid={"1"} watchlater={props.watchlater} videoid={props.id}></WatchLaterHandler>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

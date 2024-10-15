@@ -7,10 +7,10 @@ import { PiSpeakerLowDuotone, PiSpeakerLowFill, PiTelevisionSimpleDuotone, PiTel
 import { RiFireFill, RiFireLine } from "react-icons/ri"
 export default function BottomNav(){
     const pathname = usePathname()
-    if(pathname=="/auth"){
+    if(pathname=="/landing"){
         return  null
     }
-    return <div className="w-full h-16 fixed bottom-0 bg-white dark:bg-zinc-950 z-10 items-center justify-around  flex md:hidden">
+    return <div className="w-full h-16 border-2  fixed bottom-0 bg-white dark:bg-zinc-950 z-10 items-center justify-around  flex md:hidden">
         <Link href={"/"}>
         {(()=>{
             if(pathname=="/"){

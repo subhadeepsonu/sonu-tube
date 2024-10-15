@@ -1,20 +1,31 @@
+"use client"
 import VideoCard from "@/components/cards/videocard";
 import PaginationCard from "@/components/pagination";
 import GetAllVideos from "@/data/getallvideo";
-import { jwtDecode } from "jwt-decode";
-import { cookies } from "next/headers";
-export default async function Home(context:any) {
-  const token = cookies().get('token')
-  const decoded:any = jwtDecode(token?.value!)
+import { useQuery } from "@tanstack/react-query";
+
+export default  function Home(context:any) {
   const skip = (parseInt(context.searchParams.page) || 1)-1
-  const data = await GetAllVideos(skip)
+  const data:any={
+    data:[]
+  }
   console.log(context.searchParams.page)
+  const QueryVideos = useQuery({
+    queryKey: ['videos',skip],
+    queryFn:()=> GetAllVideos(skip),
+  })
+  if(QueryVideos.isLoading){
+    return <div className="h-screen w-full flex justify-center items-center">Loading</div>
+  }
+  if(QueryVideos.isError){
+    return <div>Error</div>
+  }
+  if(QueryVideos.data){
   return (
-    <div className="min-h-screen w-full dark:bg-zinc-950 flex-col flex justify-center md:justify-start items-center bg-white pt-20 md:pl-20 pb-20 md:pb-0" >
-      
+    <div className="min-h-screen w-full bg-gray-50 dark:bg-zinc-950 flex-col flex justify-center md:justify-start items-center  pt-20 md:pl-20 pb-20 md:pb-0" >
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
-      {data.data.map((video,index:number)=>{
-          return <VideoCard videoholderid={video.userid} videourl={video.videourl} watchlater={video.watchlater} userid={decoded.id} key={index} id={video.id} userimage={video.user.imgurl} name={video.user.name} views={video._count.views} imgurl={video.thumnailurl} title={video.title} >
+      {QueryVideos.data.data.map((video,index:number)=>{
+          return <VideoCard videoholderid={video.userid} videourl={video.videourl} watchlater={video.watchlater} userid={"1"} key={index} id={video.id} userimage={video.user.imgurl} name={video.user.name} views={video._count.views} imgurl={video.thumnailurl} title={video.title} >
           </VideoCard>
       })}
       
@@ -22,4 +33,5 @@ export default async function Home(context:any) {
       <PaginationCard  page={skip+1} total={data.count}></PaginationCard>
     </div>
   );
+}
 }

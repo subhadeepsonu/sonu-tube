@@ -6,24 +6,22 @@ import {
     DropdownMenuItem,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
+}from "@/components/ui/dropdown-menu"
 import Cookies from "universal-cookie";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { ModeToggle } from "./modetoggle";
+import { Button } from "./ui/button";
 export default function Navbar(){
     const router = useRouter()
     const pathname = usePathname()
-    if(pathname=="/auth"){
-        return null
-    }
-    else{
+    
         const cookie = new Cookies()
         const token = cookie.get('token')
         if(token){
             const decoded:any = jwtDecode(cookie.get('token'))
-    return <div className="h-16 w-screen dark:bg-zinc-950  dark:text-white z-20 fixed   text-black backdrop-blur-sm bg-white flex justify-between px-4 items-center top-0  ">
+    return <div className="h-16 w-screen dark:backdrop-blur-sm dark:bg-black border-b-2 shadow-sm  dark:text-white z-20 fixed   text-black backdrop-blur-sm bg-white flex justify-between px-4 items-center top-0  ">
         <Link href={"/"} className="text-2xl font-bold flex justify-start items-center w-40">
         sonutube
         </Link>
@@ -45,7 +43,7 @@ export default function Navbar(){
                              cookie.remove('token')
                              
                              router.refresh()  
-                             router.push("/auth")}}>
+                             router.push("/landing")}}>
                    
                         Logout
                     </DropdownMenuItem>
@@ -53,13 +51,26 @@ export default function Navbar(){
             </DropdownMenu>
         </div>
         </div>
-        }
-        else{
-            return null;
-        }
+        
+ 
         
   
         
         
+    }
+    else{
+        return <div className="h-16 w-screen dark:backdrop-blur-sm dark:bg-black border-b-2 shadow-sm  dark:text-white z-20 fixed   text-black backdrop-blur-sm bg-white flex justify-between px-4 items-center top-0  ">
+        <Link href={"/"} className="text-2xl font-bold flex justify-start items-center w-40">
+        sonutube
+        </Link>
+        <div className="w-1/2 flex">
+        </div>
+        <div className="flex  justify-around w-32  items-center h-20 pr-2">
+            <ModeToggle></ModeToggle>
+            <Link href={"/landing"}>
+            <Button>Login</Button>
+            </Link>
+        </div>
+        </div>
     }
 }

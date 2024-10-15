@@ -13,12 +13,12 @@ export default function SideBar(){
     if(pathname.startsWith("/video")){
         return null
     }
-    if(pathname=="/auth"){
+    if(pathname=="/landing"){
         return null
     }
-    return <div className="w-20  dark:text-white dark:bg-zinc-950 h-full hidden md:flex fixed left-0  justify-start items-start pt-20  bg-white   ">
+    return <div className="w-20 border-r-2 shadow-sm dark:text-white dark:bg-zinc-950 h-full hidden md:flex fixed left-0  justify-start items-start pt-20  bg-white   ">
         <div className="w-full  flex-col flex justify-between items-center">
-        <Link className="flex justify-center items-center flex-col mb-10" href={'/'}>
+        <Link className="flex justify-center  items-center flex-col mb-10" href={'/'}>
         {(()=>{
             if(pathname=="/"){
                 return <IoHomeSharp className="text-xl" />

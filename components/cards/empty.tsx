@@ -1,5 +1,4 @@
 "use client"
-
 import Lottie from "lottie-react"
 import empty from "@/public/empty.json"
 export default function EmptyCard(){

@@ -27,13 +27,13 @@ export default function HoverVideo(props:{
         <div 
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="w-80 h-56"
+            className="w-full h-56"
         >
             {check ? (
-                <ReactPlayer playing={true} url={props.videourl} height={224} width={315} />
+                <ReactPlayer muted={true} playing={true} url={props.videourl} height={224} width={315} />
             ) : (
                 <img 
-                    className="object-cover h-full w-[315px]  rounded-lg" 
+                    className="object-cover h-full w-full  rounded-t-lg" 
                     src={props.imgurl} 
                     alt="image"
                 />

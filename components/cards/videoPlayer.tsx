@@ -6,6 +6,4 @@ export default function VideoPlayer(props:{
     return <div className='h-full w-full px-2 '>
         <ReactPlayer playing={true} controls={true} height={"100%"} width={"100%"}   url={props.url}></ReactPlayer>
     </div>
-    
-    
 }
