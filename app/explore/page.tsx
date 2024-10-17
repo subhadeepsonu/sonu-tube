@@ -1,16 +1,27 @@
+"use client"
 import VideoCard from "@/components/cards/videocard"
 import CatTag from "@/components/utils/cattag";
 import { ExploreVideos } from "@/data/explore"
-import { jwtDecode } from "jwt-decode";
-import { cookies } from "next/headers";
-import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
 import { MdOutlineTrendingUp } from "react-icons/md";
 
-export default async function ExplorePage(){
-    const token = cookies().get('token')
-    const decoded:any = jwtDecode(token?.value!)
-    const data = await ExploreVideos()
-    return <div className="min-h-screen w-full dark:bg-zinc-950 bg-white  pt-20 md:pl-44 hide-scrollbar pb-20">
+export default  function ExplorePage(){
+    
+    
+    
+    const trending = useQuery({
+        queryKey:['explore'],
+        queryFn:()=>ExploreVideos()
+    })
+    if(trending.isLoading){
+        return <div className="h-screen w-full  flex justify-center items-center">Loading</div>
+    }
+    if(trending.isError){
+        return <div>Error</div>
+    }
+    if(trending.data){
+        
+    return <div className="min-h-screen w-full dark:bg-zinc-950 bg-white  pt-20 md:pl-60 hide-scrollbar pb-20">
          <div className="flex  flex-wrap ">
                 <CatTag href="vlog" name="vlog"></CatTag>
                 <CatTag href="education" name="education"></CatTag>
@@ -43,12 +54,13 @@ export default async function ExplorePage(){
         <p className="w-full  font-semibold text-2xl  flex justify-start pl-2   items-center py-2 ">Trending videos</p>
         </div>
         <div className="flex justify-center items-center w-full ">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
-            {data.map((video)=>{
-                return <VideoCard  views={video._count.views} id={video.id} key={video.id} videoholderid={video.userid} title={video.title} videourl={video.videourl} userid={decoded.id} name={video.user.name} imgurl={video.thumnailurl} userimage={video.user.imgurl} watchlater={video.watchlater}  ></VideoCard>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5">
+            {trending.data.map((video)=>{
+                return <VideoCard  views={video._count.views} id={video.id} key={video.id} videoholderid={video.userid} title={video.title} videourl={video.videourl} userid={"dd"} name={video.user.name} imgurl={video.thumnailurl} userimage={video.user.imgurl} watchlater={video.watchlater}  ></VideoCard>
             })}
         </div>
         </div>
 
     </div>
+    }
 }

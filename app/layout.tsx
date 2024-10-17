@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 import NextTopLoader from 'nextjs-toploader';
 import BottomNav from "@/components/bottomNav";
 import { ThemeProvider } from "@/components/theme-provider";
+
 export const metadata: Metadata = {
   title: "Sonu Tube",
   description: "Video Streaming platform",
@@ -36,7 +37,7 @@ export default function RootLayout({
 />
     <ThemeProvider 
       attribute="class"
-      defaultTheme="dark"
+      defaultTheme="light"
     >
         <Navbar></Navbar>
         <SideBar></SideBar>

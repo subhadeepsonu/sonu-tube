@@ -1,7 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import AnnoucementHandler from "../handlers/announcementhandler";
-import { jwtDecode } from "jwt-decode";
-import { cookies } from "next/headers";
 import CommentButton from "./commentButton";
 import AnnouncementBookmark from "./annoucementBookmark";
 import Link from "next/link";
@@ -18,8 +16,7 @@ export default function AnnoucementCard(props:{
     dislikes:number,
     owerid:string
 }){
-    const token:any = cookies().get('token')
-    const decoded:any = jwtDecode(token?.value)
+    
     return <div className="bg-white dark:bg-transparent dark:border-zinc-800 border-2 border-gray-100 dark:border-2 dark:text-gray-100 w-[350px] h-80 p-3  shadow-sm flex flex-col justify-start items-start text-black rounded-lg ">
         <div className="flex w-full justify-between items-center">
             <div className="flex justify-between items-center">
@@ -32,7 +29,7 @@ export default function AnnoucementCard(props:{
         </Link>
         <div className="pl-2">{props.username}</div>
         </div>
-        <AnnouncementBookmark bookmarks={props.userbookmark} userid={decoded.id} announcementid={props.id}></AnnouncementBookmark>
+        <AnnouncementBookmark bookmarks={props.userbookmark} userid={""} announcementid={props.id}></AnnouncementBookmark>
         </div>
         <div className="pt-2">
         <p className="font-semibold text-lg">{props.title}</p>

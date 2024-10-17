@@ -1,13 +1,11 @@
 "use client"
-import Link from "next/link";
-import { AiFillProfile } from "react-icons/ai";
-import { IoHomeOutline, IoVideocamOutline, IoVideocamSharp } from "react-icons/io5";
-import {  RiFireFill, RiFireLine } from "react-icons/ri";
+import {IoVideocamOutline } from "react-icons/io5";
+import {   RiFireLine } from "react-icons/ri";
 import { AiOutlineProfile } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 import { IoHomeSharp } from "react-icons/io5";
 import { PiSpeakerLowDuotone } from "react-icons/pi";
-import { PiSpeakerLowFill } from "react-icons/pi";
+
 import SideBarComp from "./SideBarComp";
 export default function SideBar(){
     const pathname = usePathname()

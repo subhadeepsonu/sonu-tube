@@ -19,7 +19,7 @@ export default function SideBarComp(props:{
             setActive(false)
         }
     },[path])
-    return <Link className="w-full px-2 my-2" href={`${props.href}`}><div className={`rounded-2xl  ${(active)?"bg-white text-black":"bg-black border-2"} flex justify-start gap-5 px-5 items-center h-14 `}>
+    return <Link className="w-full px-2 my-2" href={`${props.href}`}><div className={`rounded-lg  ${(active)?"dark:bg-white dark:text-black bg-black text-white":"dark:bg-black border-2 "} flex justify-start gap-5 px-5 items-center h-14 transition-all `}>
       {props.Icon} {props.pathname}
     </div>
     </Link>

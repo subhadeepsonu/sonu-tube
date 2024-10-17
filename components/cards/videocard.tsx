@@ -8,8 +8,6 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 import WatchLaterHandler from "../handlers/watchlaterhandler";
-// import { cookies } from "next/headers";
-import { jwtDecode } from "jwt-decode";
 import HoverVideo from "./hovervideo";
   
 export default function VideoCard(props:{
@@ -24,10 +22,7 @@ export default function VideoCard(props:{
     watchlater:any,
     videourl:string
 }){
-    
-    // const token = cookies().get('token')
-    // const decoded:any = jwtDecode(token?.value!)
-    return <div className="w-full h-72 bg-white border-2 dark:border-zinc-950 dark:bg-transparent dark:text-white  rounded-lg relative   flex flex-col justify-center items-start hover:cursor-pointer">
+    return <div className="w-full h-72 bg-white border-2  dark:bg-black dark:border-gray-800 dark:text-white  rounded-lg relative   flex flex-col justify-center items-start hover:cursor-pointer">
         <Link href={`/video/${props.id}`}> 
         <div className="w-full  h-56">
         <HoverVideo imgurl={props.imgurl} videourl={props.videourl}></HoverVideo>
