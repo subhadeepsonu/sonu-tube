@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { ModeToggle } from "./modetoggle";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+
 export default function Navbar(){
     const router = useRouter()
     const pathname = usePathname()
@@ -25,7 +27,8 @@ export default function Navbar(){
         <Link href={"/"} className="text-2xl font-bold flex justify-start items-center w-40">
         sonutube
         </Link>
-        <div className="w-1/2 flex">
+        <div className="w-1/2 flex bg-red">
+            <Input placeholder="Search" className="w-full dark:focus:border-gray-800"></Input>
         </div>
         <div className="flex  justify-around w-32  items-center h-20 pr-2">
             <ModeToggle></ModeToggle>

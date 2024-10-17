@@ -10,7 +10,7 @@ export default async function ExplorePage(){
     const token = cookies().get('token')
     const decoded:any = jwtDecode(token?.value!)
     const data = await ExploreVideos()
-    return <div className="min-h-screen w-full dark:bg-zinc-950 bg-white  pt-20 md:pl-28 hide-scrollbar pb-20">
+    return <div className="min-h-screen w-full dark:bg-zinc-950 bg-white  pt-20 md:pl-44 hide-scrollbar pb-20">
          <div className="flex  flex-wrap ">
                 <CatTag href="vlog" name="vlog"></CatTag>
                 <CatTag href="education" name="education"></CatTag>
