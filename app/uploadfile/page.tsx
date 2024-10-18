@@ -7,7 +7,6 @@ import { useMutation} from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
-
 export default function Home() {
     const [file,setFile] = useState<File | undefined>();
     const [url,setUrl] = useState<string | undefined>();

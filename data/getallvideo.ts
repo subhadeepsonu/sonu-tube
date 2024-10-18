@@ -1,40 +1,38 @@
 "use server"
 import prisma from "@/db"
-export default async function GetAllVideos(skip:number){
+export default async function GetAllVideos(skip: number) {
+
     try {
         const response = await prisma.video.findMany({
-            skip:skip*10,
-            take:10,
-            orderBy:{
-                createdat:"desc"
+            skip: skip * 10,
+            take: 10,
+            orderBy: {
+                createdat: "desc"
             },
-            where:{
-                publish:true
-            },include:{
-                user:{
-                    select:{
-                        name:true,
-                        imgurl:true,
-                        id:true
+            where: {
+                publish: true
+            }, include: {
+                user: {
+                    select: {
+                        name: true,
+                        imgurl: true,
+                        id: true
                     }
                 },
-                _count:{
-                    select:{
-                        views:{
-                            
+                _count: {
+                    select: {
+                        views: {
+
                         }
                     }
                 },
-                watchlater:{
-                    
-                }
             }
         })
-        const count= await prisma.video.count()
-        
+        const count = await prisma.video.count()
+        console.log(response)
         return {
-            data:response,
-            count:count
+            data: response,
+            count: count
         }
     } catch (error) {
         throw new Error(`${error}`)

@@ -19,27 +19,23 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import AddAnnouncementForm from "@/components/forms/addanouncementform"
 import { Input } from "@/components/ui/input"
 import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { useMutation } from '@tanstack/react-query';
-import { CldUploadWidget } from 'next-cloudinary';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import axios from 'axios';
+import { Progress } from '@/components/ui/progress';
 export default  function UploadVideoPage(){
-  const [loading,Setloading] = useState(false)
+  const [file,setFile] = useState<File | undefined>();
+  const [file2,setFile2] = useState<File | undefined>();
+  const [progress,setProgress] = useState<number>(0);
+  const [progress2,setProgress2] = useState<number>(0);
+
   const uploadSchema = z.object({
     title:z.string().min(3),
     discription:z.string().min(20),
@@ -65,22 +61,43 @@ export default  function UploadVideoPage(){
         toast.error("could not upload video")
       }
     })
-    return <div className='min-h-screen dark:bg-zinc-950 w-full bg-gray-50 flex  justify-around items-center pt-20 pb-20'>
-      <Sheet>
-                        <SheetTrigger>
-                    <Button className="absolute bottom-2 right-2">Add Announcement</Button>
-                    </SheetTrigger>
-                    <SheetContent>
-                        <SheetHeader>
-                            <SheetTitle >Add Announcement</SheetTitle>
-                            <SheetContent>
-                                <AddAnnouncementForm></AddAnnouncementForm>
-                            </SheetContent>
-                        </SheetHeader>
-                    </SheetContent>
-                    </Sheet>
-        <div className='h-5/6 w-5/6 bg-white dark:bg-transparent p-2 rounded-lg flex flex-col  justify-center items-center'>
-      
+    const GetUrl = useMutation({
+      mutationFn:async(type:String)=>{
+          const response = await axios.post('/api/signedurl')
+          if(response.data.url){
+              const upload = await axios.put(response.data.url,file,{
+                  onUploadProgress:(progressEvent)=>{
+                    if(type=="video"){
+                      setProgress(Math.round((progressEvent.loaded * 100) / progressEvent.total!))
+                    }
+                    else if(type=="thumbnail"){
+                      setProgress2(Math.round((progressEvent.loaded * 100) / progressEvent.total!))
+                    }
+                  }
+              })
+              console.log(upload)
+              if(upload.status==200){
+                  if(type=="thumbnail"){
+                    form.setValue('thumbnailurl',`https://sonutube.s3.ap-south-1.amazonaws.com/${response.data.id}`)
+                  }
+                  else if(type=="video"){
+                  form.setValue('videourl',`https://sonutube.s3.ap-south-1.amazonaws.com/${response.data.id}`)
+                  }
+              }
+          }
+          return response.data
+          
+      },
+      onSuccess:(data)=>{ 
+          console.log()
+      },
+      onError:(error)=>{
+          console.log(error)
+          toast.error("Something went wrong")
+      }
+  })
+    return <div className='min-h-screen dark:bg-zinc-950 md:pl-40  w-full bg-gray-50 flex  justify-around items-center pt-20 pb-20 md:pb-0 '>
+        <div className='h-5/6 w-5/6 bg-white dark:bg-transparent p-2 rounded-lg flex flex-col border-2  justify-center items-center'>
       <Form  {...form}>
         <form onSubmit={form.handleSubmit(()=>{
           MutateUpload.mutate()
@@ -89,69 +106,39 @@ export default  function UploadVideoPage(){
           <div className='w-full flex justify-center items-center pt-10'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
           <FormField 
-  control={form.control}
-  name="videourl"
-  render={({ field }) => (
+    control={form.control}
+    name="videourl"
+    render={() => (
     <FormItem className='pb-5' >
       <FormLabel>Upload Video</FormLabel>
       <FormControl>
-      <CldUploadWidget 
-      onClose={()=>{
-        Setloading(false)
-      }}
-        options={{sources:["local"]}}
-        onSuccess={(result:any, { widget  }) => {
-            form.setValue("videourl",result.info.secure_url)
-             widget.close();
-  }} uploadPreset="sonu-tube"
-  >
-  {({ open }) => {
-    return (
-      <Button disabled={loading} className='block'  onClick={() =>{
-        Setloading(true)
-        open()
-      }
-      
-      }>
-        {(loading)?"Uploading...":"Upload Video"}
-      </Button>
-    );
-  }}
-</CldUploadWidget>
+        <Input disabled={(progress>0 && progress<100)?true:false} accept='video/*' onChange={(e)=>{
+            if(e.target.files){
+                setFile(e.target.files[0])
+                GetUrl.mutate("video")
+            }
+        }} type="file" />
       </FormControl>
-      <FormMessage />
+      {(progress>0 )?`${progress}%`:<p></p>}
+      {(progress>0)?<Progress className="w-full" value={progress} />:<p></p>}
     </FormItem>
   )}
 /><FormField
   control={form.control}
   name="thumbnailurl"
-  render={({ field }) => (
+  render={() => (
     <FormItem className='pb-5'>
       <FormLabel>Upload Thumbnail</FormLabel>
       <FormControl>
-      <CldUploadWidget 
-      onClose={()=>{
-        Setloading(false)
-      }}
-        options={{sources:["local"]}}
-        onSuccess={(result:any, { widget }) => {
-            form.setValue("thumbnailurl",result.info.secure_url)
-
-             widget.close();
-  }} uploadPreset="sonu-tube"
-  >
-  {({ open }) => {
-    return (
-      <Button disabled={loading} className='block'  onClick={() => {
-        Setloading(true)
-        open()}}>
-        {(loading)?"Uploading...":"Upload Thumbnail"}
-      </Button>
-    );
-  }}
-</CldUploadWidget>
+        <Input disabled={(progress2>0 && progress<100)?true:false} accept='image/*' onChange={(e)=>{
+            if(e.target.files){
+                setFile2(e.target.files[0])
+                GetUrl.mutate("thumbnail")
+            }
+        }}  type='file'  placeholder="Thumbnail"  />
       </FormControl>
-      <FormMessage />
+      {(progress2>0)?`${progress2}%`:<p></p>}
+      {(progress2>0)?<Progress className="w-full" value={progress2} />:<p></p>}
     </FormItem>
   )}
 />
