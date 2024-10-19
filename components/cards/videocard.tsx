@@ -7,6 +7,8 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useHomeVideoStore } from "@/store/homeVideoStore";
+
 export default function VideoCard(props: {
     id: number,
     imgurl: string,
@@ -16,24 +18,22 @@ export default function VideoCard(props: {
     name: string,
     views: number,
     userid: string,
-    watchlater: boolean,
+    watchlater: Boolean,
 }) {
-    return <div className="w-full h-72  border-2  dark:bg-black dark:border-gray-800 dark:text-white  rounded-lg relative   flex flex-col justify-center items-start hover:cursor-pointer">
+    const { addWatchLater } = useHomeVideoStore()
+    return <div className="w-full h-72  border-2 bg-white  dark:bg-black dark:border-gray-800 dark:text-white  rounded-md relative   flex flex-col justify-center items-start hover:cursor-pointer">
         <Link href={`/video/${props.id}`} className="w-full">
-            <div className="w-full bg-cyan-50  h-56">
-                <img className="w-full h-full bg-red-200 object-cover rounded-t-lg" src={props.imgurl}></img>
+            <div className="w-full   h-56">
+                <img className="w-full h-full  object-cover rounded-t-md" src={props.imgurl}></img>
             </div>
-            <div className="w-80 h-16 flex justify-start items-start py-1 ">
-                <div className="flex h-full w-12 justify-center items-center  ">
-                    <Link href={`/profile/${props.videoholderid}`}>
-                        <img className="rounded-full w-9 h-9 object-cover" src={props.userimage}></img>
-                    </Link>
-                </div>
-                <div className="flex h-16  flex-col justify-start py-2 items-center ">
-                    <p className=" truncate  w-64 text-sm text-ellipsis font-semibold" >{props.title}</p>
-                    <div className="flex items-center justify-between w-full">
-                        <p className="text-sm  font-light" >{props.name}</p>
-                        <p className=" text-sm font-light pr-2" >{props.views}  views</p>
+            <div className="w-full  h-16 flex justify-start items-start py-1 ">
+                <div className="flex h-16 w-full  flex-col justify-start py-2 items-start px-2 ">
+                    <p className=" truncate  w-full text-sm text-ellipsis font-semibold" >{props.title}</p>
+                    <div className="flex items-center justify-between w-full ">
+                        <Link className="hover:underline" href={`/profile/${props.videoholderid}`}>
+                            <p className="text-sm  font-light" >{props.name}</p>
+                        </Link>
+                        <p className=" text-sm font-light pr-3" >{props.views}  views</p>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,12 @@ export default function VideoCard(props: {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="border-0">
                     <DropdownMenuItem >
-                        {(props.watchlater) ? <p>remove from watch later </p> : <p>Add to watch later</p>}
+                        {(props.watchlater) ? <p className="w-full h-full" onClick={() => {
+                            addWatchLater(props.id, !props.watchlater)
+                        }}>remove from watch later </p> : <p className="w-full h-full" onClick={() => {
+
+                            addWatchLater(props.id, !props.watchlater)
+                        }}>Add to watch later</p>}
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

@@ -2,60 +2,107 @@ import { NextRequest, NextResponse } from "next/server";
 import z from "zod"
 import { announcementDeleteSchema, announcementSchema } from "./schema";
 import prisma from "@/db";
-import { revalidatePath } from "next/cache";
-export async function POST(req:NextRequest){
+export async function GET(req: NextRequest) {
     try {
-        const data:z.infer<typeof announcementSchema> = await req.json()
-        const check = announcementSchema.safeParse(data)
-        if(!check.success){
+        const url = new URL(req.url)
+        const params = url.searchParams
+        if (!params.get("limit") || !params.get("offset")) {
             return NextResponse.json({
-                success:false,
-                message:`${check.error}`
+                success: false,
+                message: "Limit or off set not given"
             })
         }
-        revalidatePath('/announcement')
-        const response = await prisma.annoucement.create({
-            data:{
-                discription:data.discription,
-                title:data.title,
-                userid:data.userid
+        const response = await prisma.annoucement.findMany({
+            include: {
+                _count: {
+                    select: {
+                        annoucementlike: true,
+                        annoucementdislike: true
+                    }
+                },
+                annoucementbookmark: {
+                    where: {
+                        userid: req.headers.get("userid")!
+                    }
+                }
+            }
+        })
+        const UpdatedResponse = response.map((annoucement) => {
+            return {
+                id: annoucement.id,
+                likes: annoucement._count.annoucementlike,
+                dislikes: annoucement._count.annoucementdislike,
+                title: annoucement.title,
+                description: annoucement.discription,
+                createdAt: annoucement.createdat,
+                BookMarked: annoucement.annoucementbookmark.length > 0
             }
         })
         return NextResponse.json({
-            success:true,
-            message:response
+            success: true,
+            data: UpdatedResponse
+        })
+
+    } catch (error) {
+        return NextResponse.json({
+            success: false,
+            message: `${error}`
+        })
+    }
+
+}
+export async function POST(req: NextRequest) {
+    try {
+        const data: z.infer<typeof announcementSchema> = await req.json()
+        const check = announcementSchema.safeParse(data)
+        if (!check.success) {
+            return NextResponse.json({
+                success: false,
+                message: `${check.error}`
+            })
+        }
+        const response = await prisma.annoucement.create({
+            data: {
+                discription: data.discription,
+                title: data.title,
+                userid: data.userid
+            }
+        })
+        return NextResponse.json({
+            success: true,
+            message: response
         })
     } catch (error) {
         return NextResponse.json({
-            success:false,
-            message:`${error}`
+            success: false,
+            message: `${error}`
         })
     }
 }
 
-export async function DELETE(req:NextRequest){
+export async function DELETE(req: NextRequest) {
     try {
-        const data:z.infer<typeof announcementDeleteSchema> = await req.json()
+        const data: z.infer<typeof announcementDeleteSchema> = await req.json()
         const check = announcementDeleteSchema.safeParse(data)
-        if(!check.success){
+        if (!check.success) {
             return NextResponse.json({
-                success:false,
-                message:`${check.error}`
+                success: false,
+                message: `${check.error}`
             })
         }
         const response = await prisma.annoucement.delete({
-            where:{
-                id:data.id
+            where: {
+                id: data.id
             }
         })
         return NextResponse.json({
-            success:true,
-            message:response
+            success: true,
+            message: response
         })
     } catch (error) {
         return NextResponse.json({
-            success:false,
-            message:`${error}`
+            success: false,
+            message: `${error}`
         })
     }
 }

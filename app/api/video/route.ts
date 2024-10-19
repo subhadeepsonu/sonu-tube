@@ -3,75 +3,108 @@ import { videoDeleteSchema, videoSchema } from "./schema";
 import prisma from "@/db";
 import z from "zod"
 import { revalidatePath } from "next/cache";
-export async function GET(){
+export async function GET(req: NextRequest) {
     try {
-        const response = await prisma.video.findMany({})
-        return NextResponse.json({
-            success:true,
-            message:response
+        const userId = req.headers.get('x-user-id');
+        const response = await prisma.video.findMany({
+            orderBy: {
+                createdat: "desc"
+            },
+            where: {
+                publish: true
+            }, include: {
+                user: {
+                    select: {
+                        name: true,
+                        imgurl: true,
+                        id: true
+                    }
+                },
+                _count: {
+                    select: {
+                        views: {
+
+                        }
+                    }
+                },
+                watchlater: {
+                    where: {
+                        userId: userId!
+                    }
+                }
+            }
         })
-    } catch (error) {
+        const count = await prisma.video.count()
+        const updatedResponse = response.map((video) => ({
+            ...video,
+            MarkedAsWatchLater: video.watchlater.length > 0
+        }))
         return NextResponse.json({
-            success:false,
-            message:`${error}`
+            data: updatedResponse,
+            count: count
+        })
+    } catch (error: any) {
+        return NextResponse.json({
+            success: false,
+            message: error.message || "something went wrong"
         })
     }
 }
-export  async function POST(req:NextRequest){
+export async function POST(req: NextRequest) {
     try {
-        const data:z.infer<typeof videoSchema> = await req.json()
+        const data: z.infer<typeof videoSchema> = await req.json()
         const check = videoSchema.safeParse(data)
-        if(!check.success){
+        if (!check.success) {
             return NextResponse.json({
-                success:false,
-                message:`${check.error}`
+                success: false,
+                message: `${check.error}`
             })
         }
         const response = await prisma.video.create({
-            data:{
-                title:data.title,
-                discription:data.discription,
-                thumnailurl:data.thumbnail,
-                videourl:data.video,
-                userid:data.userid
+            data: {
+                title: data.title,
+                discription: data.discription,
+                thumnailurl: data.thumbnail,
+                videourl: data.video,
+                userid: data.userid
             }
         })
         revalidatePath('/')
         return NextResponse.json({
-            success:true,
-            message:response
+            success: true,
+            message: response
         })
     } catch (error) {
         return NextResponse.json({
-            success:false,
-            message:`${error}`
+            success: false,
+            message: `${error}`
         })
     }
 }
 
-export async function DELETE(req:NextRequest){
+export async function DELETE(req: NextRequest) {
     try {
-        const data:z.infer<typeof videoDeleteSchema> = await req.json()
+        const data: z.infer<typeof videoDeleteSchema> = await req.json()
         const check = videoDeleteSchema.safeParse(data)
-        if(!check.success){
+        if (!check.success) {
             return NextResponse.json({
-                success:false,
-                message:`${check.error}`
+                success: false,
+                message: `${check.error}`
             })
         }
         const response = await prisma.video.delete({
-            where:{
-                id:data.id
+            where: {
+                id: data.id
             }
         })
         return NextResponse.json({
-            success:true,
-            message:response
+            success: true,
+            message: response
         })
     } catch (error) {
         return NextResponse.json({
-            success:false,
-            message:`${error}`
+            success: false,
+            message: `${error}`
         })
     }
 }
