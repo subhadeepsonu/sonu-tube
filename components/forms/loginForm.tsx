@@ -89,7 +89,7 @@ export default function LoginForm() {
       />
       <Button className="w-72" disabled={MutateLogin.isPending} type="submit">Submit</Button>
       <div className="text-center text-sm">
-        Don't have an account?{' '}
+        Don&apos;t have an account?{' '}
         <Link href="/signup" className="font-medium text-red-600 hover:text-red-500">
           Sign up
         </Link>

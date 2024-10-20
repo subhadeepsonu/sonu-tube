@@ -53,7 +53,7 @@ export default function ExplorePage() {
             <div className="flex justify-center items-center w-full ">
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5">
                     {trending.data.map((video) => {
-                        return <VideoCard views={video._count.views} id={video.id} key={video.id} videoholderid={video.userid} title={video.title} userid={"dd"} name={video.user.name} imgurl={video.thumnailurl} userimage={video.user.imgurl} watchlater={false}  ></VideoCard>
+                        return <VideoCard views={video._count.views} id={video.id} key={video.id} videoholderid={video.userid} title={video.title} userid={"dd"} name={video.user.name} imgurl={video.thumnailurl} userimage={video.user.imgurl!} watchlater={false}  ></VideoCard>
                     })}
                 </div>
             </div>
