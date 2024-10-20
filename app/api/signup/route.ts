@@ -4,47 +4,47 @@ import bcrypt from "bcryptjs"
 import z from "zod"
 import { signUpSchema } from "./schema";
 import prisma from "@/db";
-export async function POST(req: NextRequest){
+export async function POST(req: NextRequest) {
     try {
-        const data:z.infer<typeof signUpSchema> = await req.json()
+        const data: z.infer<typeof signUpSchema> = await req.json()
         const check = signUpSchema.safeParse(data)
-        if(!check.success){
+        if (!check.success) {
             return NextResponse.json({
-                success:false,
-                message:"Invalid inputs"
+                success: false,
+                message: "Invalid inputs"
             })
         }
         const IsOld = await prisma.user.findUnique({
-            where:{
-                email:data.email.toLowerCase()
+            where: {
+                email: data.email.toLowerCase()
             }
         })
-        if(IsOld){
+        if (IsOld) {
             return NextResponse.json({
-                success:false,
-                message:"User already exists"
+                success: false,
+                message: "User already exists"
             })
         }
         const salt = await bcrypt.genSalt(10)
-        const hash = await bcrypt.hash(data.password,salt)
+        const hash = await bcrypt.hash(data.password, salt)
         const response = await prisma.user.create({
-            data:{
-                email:data.email.toLowerCase(),
-                name:data.name,
-                password:hash,
-                imgurl:data.imgurl
+            data: {
+                email: data.email.toLowerCase(),
+                name: data.name,
+                password: hash,
+                imgurl: "https://avatar.iran.liara.run/public"
             }
         })
-        const token = jwt.sign(response,process.env.JWT_SECERT!)
+        const token = jwt.sign(response, process.env.JWT_SECERT!)
         return NextResponse.json({
-            success:true,
-            message:"Signup successfull",
-            token:token
+            success: true,
+            message: "Signup successfull",
+            token: token
         })
     } catch (error) {
         return NextResponse.json({
-            success:false,
-            message:"Something went wrong"
+            success: false,
+            message: "Something went wrong"
         })
     }
 }

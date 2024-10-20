@@ -18,73 +18,82 @@ import axios from "axios"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import Cookies from "universal-cookie"
-export default function LoginForm(){
-    const router = useRouter()
-    const cookie = new Cookies()
-    const d = new Date("2075-03-25");
-    const form = useForm<z.infer<typeof loginSchema>>({
-        resolver:zodResolver(loginSchema),
-        mode:"onChange"
-    })
-    const values = form.getValues()
-    const MutateLogin = useMutation({
-        mutationFn:async ()=>{
-            const data = await axios.post("/api/login",{
-                email:values.email,
-                password:values.password
-            })
-            return data.data
-        },
-        onSettled:(data,error)=>{
-            if(data.success){
-                toast.success(data.message)
-                cookie.set('token',data.token,{expires:d})
-                router.refresh()  
-                router.push("/")
-            }
-            if(!data.success){
-                toast.error(data.message)
-            }
-            if(error){
-                toast.error(`${error}`)
-            }
-        }
-    })
-    
-   
-    return <Form  {...form}>
-        <form onSubmit={form.handleSubmit(()=>{
-            MutateLogin.mutate()
-            })} className="h-60 w-full flex justify-around items-center flex-col" >
-        <FormField 
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input className="w-72" placeholder="email" {...field} />
-              </FormControl>
+import Link from "next/link"
+export default function LoginForm() {
+  const router = useRouter()
+  const cookie = new Cookies()
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    mode: "onChange"
+  })
+  const values = form.getValues()
+  const MutateLogin = useMutation({
+    mutationFn: async () => {
+      const data = await axios.post("/api/login", {
+        email: values.email,
+        password: values.password
+      })
+      return data.data
+    },
+    onSettled: (data, error) => {
+      if (data.success) {
+        toast.success(data.message)
+        const expires = new Date();
+        expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000);
+        cookie.set('token', data.token, { expires })
+        router.refresh()
+        router.push("/")
+      }
+      if (!data.success) {
+        toast.error(data.message)
+      }
+      if (error) {
+        toast.error(`${error}`)
+      }
+    }
+  })
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-         <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input className="w-72" type="password" placeholder="password" {...field} />
-              </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button disabled={MutateLogin.isPending} type="submit">Submit</Button>
-        </form>
-    </Form>
+  return <Form {...form}>
+    <form onSubmit={form.handleSubmit(() => {
+      MutateLogin.mutate()
+    })} className=" w-full flex justify-around items-center flex-col gap-5  " >
+      <p className="font-bold text-4xl ">Login to SonuTube</p>
+      <FormField
+        control={form.control}
+        name="email"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Email</FormLabel>
+            <FormControl>
+              <Input className="w-72" placeholder="email" {...field} />
+            </FormControl>
+
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="password"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Password</FormLabel>
+            <FormControl>
+              <Input className="w-72" type="password" placeholder="password" {...field} />
+            </FormControl>
+
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <Button className="w-72" disabled={MutateLogin.isPending} type="submit">Submit</Button>
+      <div className="text-center text-sm">
+        Don't have an account?{' '}
+        <Link href="/signup" className="font-medium text-red-600 hover:text-red-500">
+          Sign up
+        </Link>
+      </div>
+    </form>
+  </Form>
 }

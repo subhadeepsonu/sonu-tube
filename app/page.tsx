@@ -51,7 +51,7 @@ export default function Home(context: any) {
     }
   }, [QueryVideos.data, setVideos]);
   if (QueryVideos.isLoading) {
-    return <div className="min-h-screen w-full bg-gray-50 dark:bg-zinc-900 flex-col flex justify-center md:justify-start items-center  pt-16 md:pl-52 pb-20 md:pb-0 " >
+    return <div className="min-h-screen w-full bg-gray-50 dark:bg-black flex-col flex justify-center md:justify-start items-center  pt-12 md:pl-52 pb-20 md:pb-0 " >
       <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 w-full  gap-2 px-2 pt-2">
         <Skeleton className="w-full h-72" />
         <Skeleton className="w-full h-72" />
@@ -73,7 +73,7 @@ export default function Home(context: any) {
   }
   if (QueryVideos.data) {
     return (
-      <div className="min-h-screen w-full bg-gray-50 dark:bg-zinc-900 flex-col flex justify-center md:justify-start items-center  pt-16 md:pl-52 pb-20 md:pb-0 " >
+      <div className="min-h-screen w-full bg-gray-50 dark:bg-black flex-col flex justify-center md:justify-start items-center  pt-12 md:pl-52 pb-20 md:pb-0 " >
         <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3  2xl:grid-cols-4 w-full  gap-2 px-2 pt-2">
           {videos.map((video: Daum, index: number) => {
             console.log(video.MarkedAsWatchLater)

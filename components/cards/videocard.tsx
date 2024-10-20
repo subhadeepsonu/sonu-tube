@@ -21,7 +21,7 @@ export default function VideoCard(props: {
     watchlater: Boolean,
 }) {
     const { addWatchLater } = useHomeVideoStore()
-    return <div className="w-full h-72  border-2 bg-white  dark:bg-black dark:border-gray-800 dark:text-white  rounded-md relative   flex flex-col justify-center items-start hover:cursor-pointer">
+    return <div className="w-full h-72  border-2 bg-white  dark:bg-black dark:border-gray-800 dark:border-0 dark:text-white  rounded-md relative   flex flex-col justify-center items-start hover:cursor-pointer">
         <Link href={`/video/${props.id}`} className="w-full">
             <div className="w-full   h-56">
                 <img className="w-full h-full  object-cover rounded-t-md" src={props.imgurl}></img>

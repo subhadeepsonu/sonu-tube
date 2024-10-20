@@ -6,12 +6,13 @@ export async function GET(req: NextRequest) {
     try {
         const url = new URL(req.url)
         const params = url.searchParams
-        if (!params.get("limit") || !params.get("offset")) {
-            return NextResponse.json({
-                success: false,
-                message: "Limit or off set not given"
-            })
-        }
+        const userId = req.headers.get("x-user-id")!
+        // if (!params.get("limit") || !params.get("offset")) {
+        //     return NextResponse.json({
+        //         success: false,
+        //         message: "Limit or off set not given"
+        //     })
+        // }
         const response = await prisma.annoucement.findMany({
             include: {
                 _count: {
@@ -20,9 +21,19 @@ export async function GET(req: NextRequest) {
                         annoucementdislike: true
                     }
                 },
+                annoucementlike: {
+                    where: {
+                        userid: userId
+                    }
+                },
+                annoucementdislike: {
+                    where: {
+                        userid: userId
+                    }
+                },
                 annoucementbookmark: {
                     where: {
-                        userid: req.headers.get("userid")!
+                        userid: userId
                     }
                 }
             }
@@ -35,7 +46,9 @@ export async function GET(req: NextRequest) {
                 title: annoucement.title,
                 description: annoucement.discription,
                 createdAt: annoucement.createdat,
-                BookMarked: annoucement.annoucementbookmark.length > 0
+                BookMarked: annoucement.annoucementbookmark.length > 0,
+                Liked: annoucement.annoucementlike.length > 0,
+                Disliked: annoucement.annoucementdislike.length > 0
             }
         })
         return NextResponse.json({

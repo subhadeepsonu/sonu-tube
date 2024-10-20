@@ -6,7 +6,6 @@ import { ReactQuearyProvider } from "@/utils/quaryprovider";
 import { Toaster } from 'sonner'
 import SideBar from "@/components/sideBar";
 const inter = Inter({ subsets: ["latin"] });
-import NextTopLoader from 'nextjs-toploader';
 import BottomNav from "@/components/bottomNav";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -24,28 +23,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReactQuearyProvider>
-        <Toaster richColors></Toaster>
-        <NextTopLoader
- color="#A020F0"
- initialPosition={0.08}
- crawlSpeed={200}
- height={3}
- crawl={true}
- showSpinner={true}
- easing="ease"
- speed={200}
-/>
-    <ThemeProvider 
-      attribute="class"
-      defaultTheme="light"
-    >
-        <Navbar></Navbar>
-        <SideBar></SideBar>
-        <BottomNav></BottomNav>
-        {children}
-        </ThemeProvider>
+          <Toaster richColors></Toaster>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+          >
+            <Navbar></Navbar>
+            <SideBar></SideBar>
+            <BottomNav></BottomNav>
+            {children}
+          </ThemeProvider>
         </ReactQuearyProvider>
-        </body>
+      </body>
     </html>
   );
 }
