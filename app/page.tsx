@@ -72,6 +72,7 @@ export default function Home(context: any) {
     return <div>Error</div>
   }
   if (QueryVideos.data) {
+    console.log(QueryVideos.data)
     return (
       <div className="min-h-screen w-full bg-gray-50 dark:bg-black flex-col flex justify-center md:justify-start items-center  pt-12 md:pl-52 pb-20 md:pb-0 " >
         <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3  2xl:grid-cols-4 w-full  gap-2 px-2 pt-2">
