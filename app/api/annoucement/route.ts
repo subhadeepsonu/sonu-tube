@@ -4,8 +4,6 @@ import { announcementDeleteSchema, announcementSchema } from "./schema";
 import prisma from "@/db";
 export async function GET(req: NextRequest) {
     try {
-        const url = new URL(req.url)
-        const params = url.searchParams
         const userId = req.headers.get("x-user-id")!
         // if (!params.get("limit") || !params.get("offset")) {
         //     return NextResponse.json({

@@ -26,7 +26,7 @@ export default function RootLayout({
           <Toaster richColors></Toaster>
           <ThemeProvider
             attribute="class"
-            defaultTheme="light"
+            defaultTheme="dark"
           >
             <Navbar></Navbar>
             <SideBar></SideBar>

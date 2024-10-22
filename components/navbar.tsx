@@ -38,8 +38,7 @@ export default function Navbar() {
                     </Link>
                     <DropdownMenuSeparator></DropdownMenuSeparator>
                     <DropdownMenuItem className="bg-red-500 text-white flex justify-center items-center" onClick={() => {
-                        cookie.remove('token')
-                        router.refresh()
+                        cookie.remove("token")
                         router.push("/login")
                     }}>
                         Logout

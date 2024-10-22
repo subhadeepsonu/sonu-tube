@@ -15,28 +15,31 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL("/login", req.url))
     }
 
-    if (!token?.value) {
-        return NextResponse.json({
-            success: false,
-            message: "Not authorized",
-        });
-    }
-    try {
-        const verify = await jwtVerify(token.value, new TextEncoder().encode("blog_secret"));
-        const payload = verify.payload as { id: string };
-        const reqHeaders = new Headers(req.headers);
-        reqHeaders.set("x-user-id", payload.id);
-        return NextResponse.rewrite(req.nextUrl, {
-            request: {
-                headers: reqHeaders,
-            },
-        });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json({
-            success: false,
-            message: "Not authorized",
-        });
+
+    if (path !== "/login" && path !== "/signup") {
+        if (!token?.value) {
+            return NextResponse.json({
+                success: false,
+                message: "Not authorized",
+            });
+        }
+        try {
+            const verify = await jwtVerify(token?.value!, new TextEncoder().encode("blog_secret"));
+            const payload = verify.payload as { id: string };
+            const reqHeaders = new Headers(req.headers);
+            reqHeaders.set("x-user-id", payload.id);
+            return NextResponse.rewrite(req.nextUrl, {
+                request: {
+                    headers: reqHeaders,
+                },
+            });
+        } catch (error) {
+            console.error(error);
+            return NextResponse.json({
+                success: false,
+                message: "Not authorized",
+            });
+        }
     }
 }
 
