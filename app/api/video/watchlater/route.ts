@@ -45,6 +45,7 @@ export async function GET(req: NextRequest) {
 }
 export async function POST(req: NextRequest) {
     try {
+        const userId = req.headers.get('x-user-id');
         const data: z.infer<typeof watchlaterSchema> = await req.json()
         const check = watchlaterSchema.safeParse(data)
         if (!check.success) {
@@ -53,17 +54,18 @@ export async function POST(req: NextRequest) {
                 message: `${check.error}`
             })
         }
-        const response = await prisma.watchlater.create({
+        await prisma.watchlater.create({
             data: {
-                userId: data.userId,
-                vedioId: data.videoId
+                userId: userId!,
+                vedioId: data.id
             }
         })
         return NextResponse.json({
             success: true,
-            message: response
+            message: "Added to watchlater"
         })
     } catch (error) {
+
         return NextResponse.json({
             success: false,
             message: `${error}`
@@ -73,6 +75,7 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
     try {
+        const userid = req.headers.get('x-user-id');
         const data: z.infer<typeof watchlaterDeleteSchema> = await req.json()
         const check = watchlaterDeleteSchema.safeParse(data)
         if (!check.success) {
@@ -81,14 +84,15 @@ export async function DELETE(req: NextRequest) {
                 message: `${check.error}`
             })
         }
-        const response = await prisma.watchlater.delete({
+        await prisma.watchlater.deleteMany({
             where: {
-                id: data.id
+                vedioId: data.id,
+                userId: userid!
             }
         })
         return NextResponse.json({
             success: true,
-            message: response
+            message: "Removed from watchlater"
         })
     } catch (error) {
         return NextResponse.json({

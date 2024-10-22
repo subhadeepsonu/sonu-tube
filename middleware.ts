@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
-
 export async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname
     const token = cookies().get("token")
@@ -50,6 +49,13 @@ export const config = {
         "/api/video/:path*",
         "/login",
         "/signup",
-        "/"
+        "/explore/:path*",
+        "/announcement",
+        "/history",
+        "/liked",
+        "/more/:path*",
+        "/profile/:path*",
+        "/video/:path*"
+
     ],
 };

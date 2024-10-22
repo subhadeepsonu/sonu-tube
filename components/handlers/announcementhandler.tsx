@@ -1,8 +1,6 @@
 "use client";
 import { BiLike, BiDislike, BiSolidLike, BiSolidDislike } from "react-icons/bi";
 import { useMutation } from "@tanstack/react-query";
-import { AnnouncementAddLike, AnnouncementDeletelike } from "@/actions/annoucements/like";
-import { AnnouncementAddDislike, AnnouncementDeleteDislike } from "@/actions/annoucements/unlike";
 import { useState } from "react";
 export default function AnnoucementHandler(props: {
   id: number,
@@ -16,16 +14,24 @@ export default function AnnoucementHandler(props: {
   const [liked, SetLiked] = useState(props.liked)
   const [disliked, SetDisliked] = useState(props.disliked)
   const MutateAddLike = useMutation({
-    mutationFn: () => AnnouncementAddLike("", props.id)
+    mutationFn: async () => {
+
+    }
   })
   const MutateRemoveLike = useMutation({
-    mutationFn: () => AnnouncementDeletelike("", props.id)
+    mutationFn: async () => {
+
+    }
   })
   const MutateAddDislike = useMutation({
-    mutationFn: () => AnnouncementAddDislike("", props.id)
+    mutationFn: async () => {
+
+    }
   })
   const MutateRemoveDislike = useMutation({
-    mutationFn: () => AnnouncementDeleteDislike("", props.id)
+    mutationFn: async () => {
+
+    }
   })
 
   return (

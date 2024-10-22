@@ -78,7 +78,7 @@ export default function Home(context: any) {
         <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3  2xl:grid-cols-4 w-full gap-3 px-3">
           {videos.map((video: Daum, index: number) => {
             console.log(video.MarkedAsWatchLater)
-            return <VideoCard watchlater={video.MarkedAsWatchLater} videoholderid={video.user.id} userid={"1"} key={index} id={video.id} userimage={video.user.imgurl} name={video.user.name} views={video._count.views} imgurl={video.thumnailurl} title={video.title} >
+            return <VideoCard watchlater={video.MarkedAsWatchLater} videoholderid={video.user.id} key={index} id={video.id} userimage={video.user.imgurl} name={video.user.name} views={video._count.views} imgurl={video.thumnailurl} title={video.title} >
             </VideoCard>
           })}
 

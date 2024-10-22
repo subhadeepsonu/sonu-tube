@@ -3,7 +3,6 @@ import { FaEdit } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { BiTrash } from "react-icons/bi";
 import { useMutation } from "@tanstack/react-query";
-import { DeleteVideo } from "@/actions/video/deletevideo";
 import { toast } from "sonner";
 import {
   Sheet,
@@ -29,7 +28,9 @@ export default function OwnerVideoCard(props: {
   description: string,
 }) {
   const mutateDelete = useMutation({
-    mutationFn: () => DeleteVideo(props.id),
+    mutationFn: async () => {
+
+    },
     onSuccess: () => {
       toast.success("Video deleted")
     },

@@ -1,7 +1,6 @@
 "use client"
-import { AddBookMark, RemoveBookMark } from "@/actions/annoucements/bookmark";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaRegBookmark } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa6";
 import { toast } from "sonner";
@@ -10,7 +9,9 @@ export default function AnnouncementBookmark(props: {
     bookmarks: boolean
 }) {
     const MutateAddBookmark = useMutation({
-        mutationFn: () => AddBookMark("", props.announcementid),
+        mutationFn: async () => {
+
+        },
         onSuccess: () => {
             toast.success("Bookmark added")
         },
@@ -19,7 +20,9 @@ export default function AnnouncementBookmark(props: {
         }
     })
     const MutateRemoveBookmark = useMutation({
-        mutationFn: () => RemoveBookMark("", props.announcementid),
+        mutationFn: async () => {
+
+        },
         onSuccess: () => {
             toast.warning("Bookmark removed")
         },

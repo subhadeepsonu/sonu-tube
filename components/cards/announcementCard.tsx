@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import AnnoucementHandler from "../handlers/announcementhandler";
-import CommentButton from "./commentButton";
 import AnnouncementBookmark from "./annoucementBookmark";
 import Link from "next/link";
 export default function AnnoucementCard(props: {

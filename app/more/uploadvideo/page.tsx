@@ -1,5 +1,4 @@
 "use client"
-import { AddVideo } from '@/actions/video/addvideo';
 import { Button } from "@/components/ui/button"
 import {
   Select,
@@ -49,13 +48,25 @@ export default function UploadVideoPage() {
   })
   const values = form.getValues()
   const MutateUpload = useMutation({
-    mutationFn: () => AddVideo(values.title, values.discription, values.videourl, values.thumbnailurl, values.tag),
-    onSuccess: () => {
-      toast.success("Video upload complete")
-      form.setValue("title", "")
-      form.setValue("discription", "")
-      form.setValue("thumbnailurl", "")
-      form.setValue("videourl", "")
+    mutationFn: async () => {
+      const data = await axios.post('/api/video', {
+        title: values.title,
+        discription: values.discription,
+        thumbnail: values.thumbnailurl,
+        video: values.videourl,
+        tag: values.tag
+      })
+      return data.data
+    },
+    onSuccess: (data) => {
+      if (data.success) {
+        form.setValue("title", "")
+        form.setValue("discription", "")
+        form.setValue("thumbnailurl", "")
+        form.setValue("videourl", "")
+      } else {
+        toast.error(data.message)
+      }
     },
     onError: () => {
       toast.error("could not upload video")

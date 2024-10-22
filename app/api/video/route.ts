@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { videoDeleteSchema, videoSchema } from "./schema";
 import prisma from "@/db";
 import z from "zod"
-import { revalidatePath } from "next/cache";
+
 export async function GET(req: NextRequest) {
     try {
         const userId = req.headers.get('x-user-id');
@@ -60,21 +60,23 @@ export async function POST(req: NextRequest) {
                 message: `${check.error}`
             })
         }
+        const userId = req.headers.get('x-user-id');
         const response = await prisma.video.create({
             data: {
                 title: data.title,
                 discription: data.discription,
                 thumnailurl: data.thumbnail,
                 videourl: data.video,
-                userid: data.userid
+                userid: userId!,
+                tag: data.tag as any
             }
         })
-        revalidatePath('/')
         return NextResponse.json({
             success: true,
             message: response
         })
     } catch (error) {
+        console.log(error)
         return NextResponse.json({
             success: false,
             message: `${error}`

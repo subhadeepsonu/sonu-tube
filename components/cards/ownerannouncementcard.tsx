@@ -17,8 +17,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-import { useMutation } from "@tanstack/react-query";
-import { DeleteAnnouncement } from "@/actions/annoucements/delete";
+import { useMutation } from "@tanstack/react-query"
 import EditAnnouncement from "../forms/editAnnoucement";
 export default function OwnerAnnouncementCard(props: {
   id: number,
@@ -26,7 +25,9 @@ export default function OwnerAnnouncementCard(props: {
   description: string,
 }) {
   const mutateDelete = useMutation({
-    mutationFn: () => DeleteAnnouncement(props.id),
+    mutationFn: async () => {
+
+    },
     onSuccess: () => {
       toast.success("deleted")
     },

@@ -8,6 +8,9 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useHomeVideoStore } from "@/store/homeVideoStore";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { MutatewatchlaterType } from "@/types/watchlaterType";
 
 export default function VideoCard(props: {
     id: number,
@@ -17,9 +20,37 @@ export default function VideoCard(props: {
     videoholderid: string,
     name: string,
     views: number,
-    userid: string,
     watchlater: Boolean,
 }) {
+    const mutateWatchLater = useMutation({
+        mutationFn: async ({ id, watchlater }: MutatewatchlaterType) => {
+            if (watchlater) {
+                const response = await axios.post("/api/video/watchlater", {
+                    id: id,
+                })
+                return response.data
+            }
+            else {
+                const response = await axios.delete("/api/video/watchlater", {
+                    data: {
+                        id: id,
+                    }
+                })
+                return response.data
+            }
+        },
+        onSettled: (data, error) => {
+            if (data.success) {
+                console.log(data.message)
+            }
+            if (!data.success) {
+                console.log(data.message)
+            }
+            if (error) {
+                console.log(`${error}`)
+            }
+        }
+    })
     const { addWatchLater } = useHomeVideoStore()
     return <div className="w-full h-72  border-2 bg-white  dark:bg-black dark:border-gray-800 dark:border-0 dark:text-white  rounded-md relative   flex flex-col justify-center items-start hover:cursor-pointer">
         <Link href={`/video/${props.id}`} className="w-full">
@@ -47,9 +78,10 @@ export default function VideoCard(props: {
                     <DropdownMenuItem >
                         {(props.watchlater) ? <p className="w-full h-full" onClick={() => {
                             addWatchLater(props.id, !props.watchlater)
+                            mutateWatchLater.mutate({ id: props.id, watchlater: !props.watchlater })
                         }}>remove from watch later </p> : <p className="w-full h-full" onClick={() => {
-
                             addWatchLater(props.id, !props.watchlater)
+                            mutateWatchLater.mutate({ id: props.id, watchlater: !props.watchlater })
                         }}>Add to watch later</p>}
                     </DropdownMenuItem>
                 </DropdownMenuContent>
