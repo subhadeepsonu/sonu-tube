@@ -88,7 +88,7 @@ export default function LoginForm() {
         )}
       />
       <Button className="w-72" disabled={MutateLogin.isPending} type="submit">Login</Button>
-      <Button className="w-72" onClick={() => {
+      <Button className="w-72 bg-green-500 hover:bg-green-500/80" onClick={() => {
         form.setValue("email", "test@gmail.com")
         form.setValue("password", "sonumonu")
       }}>Guest credentials</Button>
