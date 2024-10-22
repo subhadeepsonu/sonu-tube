@@ -6,7 +6,7 @@ export async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname
     const token = cookies().get("token")
     const isPublicPath = path === "/login" || path === "/signup"
-    const isprivatePath = path.startsWith("/explore") || path === "/announcement" || path === "/history" || path === "/liked" || path.startsWith("/more") || path.startsWith("profile") || path.startsWith("/video")
+    const isprivatePath = path === "/" || path.startsWith("/explore") || path === "/announcement" || path === "/history" || path === "/liked" || path.startsWith("/more") || path.startsWith("profile") || path.startsWith("/video")
     const isApiPath = path.startsWith("/api")
     if (isPublicPath && token?.value) {
         return NextResponse.redirect(new URL("/", req.url))
@@ -56,7 +56,7 @@ export const config = {
         "/liked",
         "/more/:path*",
         "/profile/:path*",
-        "/video/:path*"
-
+        "/video/:path*",
+        "/"
     ],
 };
