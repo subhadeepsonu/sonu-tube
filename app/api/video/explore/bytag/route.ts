@@ -5,7 +5,6 @@ import prisma from "@/db";
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json()
-        console.log(body)
         const check = byTagSchema.safeParse(body)
         if (!check.success) {
             return NextResponse.json({

@@ -1,6 +1,5 @@
 import prisma from "@/db";
 import { NextRequest, NextResponse } from "next/server";
-
 export async function GET(req: NextRequest) {
     try {
         const userId = req.headers.get('x-user-id');
@@ -42,10 +41,9 @@ export async function GET(req: NextRequest) {
         })
 
     } catch (error) {
-        NextResponse.json({
+        return NextResponse.json({
             success: false,
             message: `${error}`
         })
     }
-
 }
