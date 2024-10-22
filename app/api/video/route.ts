@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
         const userId = req.headers.get('x-user-id');
         const response = await prisma.video.findMany({
             orderBy: {
-                createdat: "asc"
+                createdat: "desc"
             },
             where: {
                 publish: true

@@ -75,7 +75,7 @@ export default function Home(context: any) {
     console.log(QueryVideos.data)
     return (
       <div className="min-h-screen w-full bg-gray-50 dark:bg-black flex-col flex justify-center md:justify-start items-center  pt-12 md:pl-52 pb-20 md:pb-0 " >
-        <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3  2xl:grid-cols-4 w-full  gap-2 px-2 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3  2xl:grid-cols-4 w-full gap-3 px-3">
           {videos.map((video: Daum, index: number) => {
             console.log(video.MarkedAsWatchLater)
             return <VideoCard watchlater={video.MarkedAsWatchLater} videoholderid={video.user.id} userid={"1"} key={index} id={video.id} userimage={video.user.imgurl} name={video.user.name} views={video._count.views} imgurl={video.thumnailurl} title={video.title} >

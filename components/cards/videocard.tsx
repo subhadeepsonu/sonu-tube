@@ -24,7 +24,7 @@ export default function VideoCard(props: {
     return <div className="w-full h-72  border-2 bg-white  dark:bg-black dark:border-gray-800 dark:border-0 dark:text-white  rounded-md relative   flex flex-col justify-center items-start hover:cursor-pointer">
         <Link href={`/video/${props.id}`} className="w-full">
             <div className="w-full   h-56">
-                <img className="w-full h-full  object-cover rounded-t-md" src={props.imgurl}></img>
+                <img className="w-full h-full object-cover  rounded-t-md" src={props.imgurl}></img>
             </div>
             <div className="w-full  h-16 flex justify-start items-start py-1 ">
                 <div className="flex h-16 w-full  flex-col justify-start py-2 items-start px-2 ">
