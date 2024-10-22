@@ -19,7 +19,7 @@ export default function ExplorePage() {
         return <div>Error</div>
     }
     if (trending.data) {
-        return <div className="min-h-screen w-full dark:bg-zinc-950 bg-gray-50  pt-20 md:pl-52 hide-scrollbar pb-20">
+        return <div className="min-h-screen w-full dark:bg-zinc-950 bg-gray-50  pt-12 md:pl-52 hide-scrollbar pb-20">
             <div className="flex  flex-wrap ">
                 <CatTag href="vlog" name="vlog"></CatTag>
                 <CatTag href="education" name="education"></CatTag>

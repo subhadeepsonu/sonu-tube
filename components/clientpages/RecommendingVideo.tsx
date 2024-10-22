@@ -1,29 +1,46 @@
 "use client"
-import { GetvideoBytag } from "@/actions/recommendations/video"
+
 import { useQuery } from "@tanstack/react-query"
 import SideVideoCard from "../cards/sidevideoCard"
+import axios from "axios"
 
-export default function RecommandedVideo(props:{
-    tag:any,
-    currentvideoid:number
-}){
+export default function RecommandedVideo(props: {
+    tag: any,
+    currentvideoid: number
+}) {
     const QueryRecommendedVideo = useQuery({
-        queryKey:["RecVideo"],
-        queryFn:()=>GetvideoBytag(props.tag,props.currentvideoid)
+        queryKey: ["RecVideo"],
+
+        queryFn: async () => {
+            if (!props.tag || !props.currentvideoid) {
+                throw new Error("Tag or current video ID missing");
+            }
+            const response = await axios.post("/api/video/recommended", {
+
+                tag: props.tag,
+                currentid: props.currentvideoid
+
+            })
+            console.log(response.data)
+            return response.data
+        },
+
+
     })
-    if(QueryRecommendedVideo.isLoading){
-        return <div className="h-screen w-full flex justify-center items-center">
+    if (QueryRecommendedVideo.isLoading) {
+        return <div className="h-screen  w-full flex justify-center items-center">
             loading
         </div>
     }
-    if(QueryRecommendedVideo.isError){
+    if (QueryRecommendedVideo.isError) {
         return <div className="h-screen w-full flex justify-center items-center">
             error
         </div>
     }
-    if(QueryRecommendedVideo.data){
+    if (QueryRecommendedVideo.data) {
+        console.log(QueryRecommendedVideo.data)
         return <div>
-            {QueryRecommendedVideo.data.map((video)=>{
+            {QueryRecommendedVideo.data.data.map((video: any) => {
                 return <SideVideoCard id={video.id} key={video.id} imgurl={video.thumnailurl} name={video.user.name} title={video.title} views={video._count.views}></SideVideoCard>
             })}
         </div>

@@ -5,17 +5,18 @@ import { cookies } from "next/headers";
 export async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname
     const token = cookies().get("token")
-    const isPublicPath = path === "/login" || path === "/signup" || path.startsWith("/explore") || path === "/announcement" || path === "/history" || path === "/liked" || path.startsWith("/more") || path.startsWith("profile") || path.startsWith("/video")
+    const isPublicPath = path === "/login" || path === "/signup"
+    const isprivatePath = path.startsWith("/explore") || path === "/announcement" || path === "/history" || path === "/liked" || path.startsWith("/more") || path.startsWith("profile") || path.startsWith("/video")
+    const isApiPath = path.startsWith("/api")
     if (isPublicPath && token?.value) {
         return NextResponse.redirect(new URL("/", req.url))
     }
 
-    if (path == "/" && !token?.value) {
+    if (isprivatePath && !token?.value) {
         return NextResponse.redirect(new URL("/login", req.url))
     }
 
-
-    if (path !== "/login" && path !== "/signup") {
+    if (isApiPath) {
         if (!token?.value) {
             return NextResponse.json({
                 success: false,
