@@ -7,6 +7,7 @@ import { videoIdSchema } from "./schema";
 export async function POST(req: NextRequest) {
     try {
         const data = await req.json()
+        const userId = req.headers.get("x-user-id")
         const check = videoIdSchema.safeParse(data)
         if (!check.success) {
             return NextResponse.json({
@@ -29,8 +30,14 @@ export async function POST(req: NextRequest) {
                     }
                 },
                 dislike: {
+                    where: {
+                        userId: userId!
+                    }
                 },
                 like: {
+                    where: {
+                        userId: userId!
+                    }
                 },
                 user: {
                     include: {
@@ -40,7 +47,9 @@ export async function POST(req: NextRequest) {
                             }
                         },
                         follows: {
-
+                            where: {
+                                follwerId: userId!
+                            }
                         }
                     },
                 },
@@ -55,9 +64,21 @@ export async function POST(req: NextRequest) {
                 }
             },
         })
+        if (!response) {
+            return NextResponse.json({
+                success: false,
+                message: "Video not found"
+            })
+        }
+        const updatedResponse = {
+            ...response,
+            liked: response.like.length > 0,
+            disliked: response.dislike.length > 0,
+            following: response.user.follows.length > 0
+        }
         return NextResponse.json({
             success: true,
-            data: response
+            data: updatedResponse
         })
     } catch (error) {
         return NextResponse.json({

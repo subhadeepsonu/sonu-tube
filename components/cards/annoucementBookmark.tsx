@@ -1,5 +1,6 @@
 "use client"
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { useState } from "react";
 import { FaRegBookmark } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa6";
@@ -8,11 +9,16 @@ export default function AnnouncementBookmark(props: {
     announcementid: number,
     bookmarks: boolean
 }) {
+    const queryClient = useQueryClient()
     const MutateAddBookmark = useMutation({
         mutationFn: async () => {
-
+            const response = await axios.post("/api/annoucement/bookmark", {
+                announcementid: props.announcementid
+            })
+            return response.data
         },
         onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["bookmark", "annoucements"] })
             toast.success("Bookmark added")
         },
         onError: () => {
@@ -21,9 +27,15 @@ export default function AnnouncementBookmark(props: {
     })
     const MutateRemoveBookmark = useMutation({
         mutationFn: async () => {
-
+            const response = await axios.delete("/api/annoucement/bookmark", {
+                data: {
+                    announcementid: props.announcementid
+                }
+            })
+            return response.data
         },
         onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["bookmark", "annoucements"] })
             toast.warning("Bookmark removed")
         },
         onError: () => {

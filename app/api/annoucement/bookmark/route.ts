@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { announcementBookmarkSchema } from "./schema";
 import z from "zod"
 import prisma from "@/db";
+import { revalidatePath } from "next/cache";
 export async function GET(req: NextRequest) {
     try {
         const userId = req.headers.get("x-user-id")
@@ -69,17 +70,32 @@ export async function POST(req: NextRequest) {
                 message: `${check.error}`
             })
         }
-        const response = await prisma.annoucementbookmark.create({
+        const find = await prisma.annoucementbookmark.findMany({
+            where: {
+                annoucementid: data.announcementid,
+                userid: userId!
+            }
+        })
+        if (find.length > 0) {
+            return NextResponse.json({
+                success: false,
+                message: "Already Bookmarked"
+            })
+        }
+        await prisma.annoucementbookmark.create({
             data: {
                 annoucementid: data.announcementid,
                 userid: userId!
             }
         })
+        revalidatePath("/more/bookmark")
+        revalidatePath("/announcement")
         return NextResponse.json({
             success: true,
-            message: response
+            message: "Bookmarked"
         })
     } catch (error) {
+        console.log(error)
         return NextResponse.json({
             success: false,
             message: `${error}`
@@ -98,17 +114,20 @@ export async function DELETE(req: NextRequest) {
                 message: `${check.error}`
             })
         }
-        const response = await prisma.annoucementbookmark.deleteMany({
+        await prisma.annoucementbookmark.deleteMany({
             where: {
                 annoucementid: data.announcementid,
                 userid: userId!
             }
         })
+        revalidatePath("/more/bookmark")
+        revalidatePath("/announcement")
         return NextResponse.json({
             success: true,
-            message: response
+            message: "Bookmark Removed"
         })
     } catch (error) {
+        console.log(error)
         return NextResponse.json({
             success: false,
             message: `${error}`

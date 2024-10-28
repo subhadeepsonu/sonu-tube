@@ -4,86 +4,86 @@ import { annoucementLikeSchema } from "./schema";
 import z from "zod"
 import prisma from "@/db";
 import { revalidatePath } from "next/cache";
-export async function POST(req:NextRequest){
+export async function POST(req: NextRequest) {
     try {
-        const data:z.infer<typeof annoucementLikeSchema> = await req.json()
+        const userId = req.headers.get("x-user-id")
+        const data: z.infer<typeof annoucementLikeSchema> = await req.json()
         const check = annoucementLikeSchema.safeParse(data)
-        if(!check.success){
+        if (!check.success) {
             return NextResponse.json({
-                success:false,
-                message:`${check.error}`
+                success: false,
+                message: `${check.error}`
             })
         }
         const Isdislike = await prisma.annoucementdislike.findMany({
-            where:{
-                annoucementid:data.announcementid,
-                userid:data.userid
+            where: {
+                annoucementid: data.announcementid,
+                userid: userId!
             }
         })
-        if(Isdislike){
+        if (Isdislike) {
             await prisma.annoucementdislike.deleteMany({
-                where:{
-                    annoucementid:data.announcementid,
-                    userid:data.userid
+                where: {
+                    annoucementid: data.announcementid,
+                    userid: userId!
                 }
             })
             const response = await prisma.annoucementlike.create({
-                data:{
-                    annoucementid:data.announcementid,
-                    userid:data.userid
+                data: {
+                    annoucementid: data.announcementid,
+                    userid: data.userid
                 }
             })
-            revalidatePath('/announcement')
             return NextResponse.json({
-                success:true,
-                message:response
+                success: true,
+                message: response
             })
         }
         const response = await prisma.annoucementlike.create({
-            data:{
-                annoucementid:data.announcementid,
-                userid:data.userid
+            data: {
+                annoucementid: data.announcementid,
+                userid: userId!
             }
         })
-        revalidatePath('/announcement')
+
         return NextResponse.json({
-            success:true,
-            message:response
+            success: true,
+            message: "liked"
         })
     } catch (error) {
         return NextResponse.json({
-            success:false,
-            message:`${error}`
+            success: false,
+            message: `${error}`
         })
     }
 }
 
-export async function DELETE(req:NextRequest){
+export async function DELETE(req: NextRequest) {
     try {
-        const data:z.infer<typeof annoucementLikeSchema> = await req.json()
+        const userId = req.headers.get("x-user-id")
+        const data: z.infer<typeof annoucementLikeSchema> = await req.json()
         const check = annoucementLikeSchema.safeParse(data)
         console.log(data)
-        if(!check.success){
+        if (!check.success) {
             return NextResponse.json({
-                success:false,
-                message:`${check.error}`
+                success: false,
+                message: `${check.error}`
             })
         }
-        const response = await prisma.annoucementlike.deleteMany({
-            where:{
-                userid:data.userid,
-                annoucementid:data.announcementid
+        await prisma.annoucementlike.deleteMany({
+            where: {
+                userid: userId!,
+                annoucementid: data.announcementid
             }
         })
-        revalidatePath('/announcement')
         return NextResponse.json({
-            success:true,
-            message:response
+            success: true,
+            message: "unliked"
         })
     } catch (error) {
         return NextResponse.json({
-            success:false,
-            message:`${error}`
+            success: false,
+            message: `${error}`
         })
     }
 }

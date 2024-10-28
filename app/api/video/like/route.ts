@@ -47,6 +47,7 @@ export async function GET(req: NextRequest) {
 }
 export async function POST(req: NextRequest) {
     try {
+        const userId = req.headers.get("x-user-id")
         const data: z.infer<typeof videoLikeSchema> = await req.json()
         const check = videoLikeSchema.safeParse(data)
         if (!check.success) {
@@ -57,20 +58,20 @@ export async function POST(req: NextRequest) {
         }
         const Isdislike = await prisma.dislike.findMany({
             where: {
-                userId: data.userid,
+                userId: userId!,
                 videoId: data.videoid
             }
         })
         if (Isdislike) {
             await prisma.dislike.deleteMany({
                 where: {
-                    userId: data.userid,
+                    userId: userId!,
                     videoId: data.videoid
                 }
             })
             const resp = await prisma.like.create({
                 data: {
-                    userId: data.userid,
+                    userId: userId!,
                     videoId: data.videoid
                 }
             })
@@ -79,15 +80,15 @@ export async function POST(req: NextRequest) {
                 message: resp
             })
         }
-        const resp2 = await prisma.like.create({
+        await prisma.like.create({
             data: {
-                userId: data.userid,
+                userId: userId!,
                 videoId: data.videoid
             }
         })
         return NextResponse.json({
             success: true,
-            message: resp2
+            message: "liked"
         })
     } catch (error) {
         return NextResponse.json({
@@ -99,6 +100,7 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
     try {
+        const userId = req.headers.get("x-user-id")
         const data: z.infer<typeof videoLikeSchema> = await req.json()
         const check = videoLikeSchema.safeParse(data)
         if (!check.success) {
@@ -107,15 +109,15 @@ export async function DELETE(req: NextRequest) {
                 message: `${check.error}`
             })
         }
-        const response = await prisma.like.deleteMany({
+        await prisma.like.deleteMany({
             where: {
-                userId: data.userid,
+                userId: userId!,
                 videoId: data.videoid
             }
         })
         return NextResponse.json({
             success: true,
-            message: response
+            message: "like removed"
         })
     } catch (error) {
         return NextResponse.json({

@@ -1,18 +1,26 @@
 "use client"
 
 import { useMutation } from "@tanstack/react-query"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Button } from "../ui/button"
 import { toast } from "sonner"
+import axios from "axios"
 export default function FollowerHandler(props: {
-    follower: any,
-    userid: string,
+    following: boolean,
+    followerCount: number,
     channelid: string,
     name: string
 }) {
+    const [follow, setFollow] = useState(props.followerCount)
+    const [follows, SetFollows] = useState(props.following)
     const MutateFollow = useMutation({
         mutationFn: async () => {
-
+            console.log(follow)
+            console.log(follows)
+            const response = await axios.post("/api/user/follow", {
+                followerid: props.channelid
+            })
+            return response.data
         },
         onSuccess: () => {
             toast.success(`following ${props.name}`)
@@ -23,7 +31,12 @@ export default function FollowerHandler(props: {
     })
     const MutateUnfollow = useMutation({
         mutationFn: async () => {
-
+            const response = await axios.delete("/api/user/follow", {
+                data: {
+                    followerid: props.channelid
+                }
+            })
+            return response.data
         },
         onSuccess: () => {
             toast.warning(`UnFollowed ${props.name}`)
@@ -33,15 +46,18 @@ export default function FollowerHandler(props: {
         }
     })
 
-    const [follow, setFollow] = useState(props.follower)
-    const [follows, SetFollows] = useState(false)
+
     return <div className=" h-20 rounded-lg flex justify-center items-center">
         {(follows) ? <Button onClick={() => {
-            MutateUnfollow.mutate()
+            setFollow(follow - 1)
             SetFollows(false)
+            MutateUnfollow.mutate()
         }} variant={"secondary"}>Following</Button> : <Button onClick={() => {
-            MutateFollow.mutate()
+            setFollow(follow + 1)
             SetFollows(true)
+            MutateFollow.mutate()
+
         }}>Follow</Button>}
+        <p>{follow}</p>
     </div>
 }

@@ -2,82 +2,85 @@ import { NextRequest, NextResponse } from "next/server";
 import { videoDislikeSchema } from "./schema";
 import z from "zod"
 import prisma from "@/db";
-export async function POST(req:NextRequest){
+
+export async function POST(req: NextRequest) {
     try {
-        const data:z.infer<typeof videoDislikeSchema> = await req.json()
+        const userId = req.headers.get("x-user-id")
+        const data: z.infer<typeof videoDislikeSchema> = await req.json()
         const check = videoDislikeSchema.safeParse(data)
-        if(!check.success){
+        if (!check.success) {
             return NextResponse.json({
-                success:false,
-                message:`${check.error}`
+                success: false,
+                message: `${check.error}`
             })
         }
         const isLiked = await prisma.like.findMany({
-            where:{
-                userId:data.userid,
-                videoId:data.videoid
+            where: {
+                userId: userId!,
+                videoId: data.videoid
             }
         })
-        if(isLiked){
+        if (isLiked) {
             await prisma.like.deleteMany({
-                where:{
-                    userId:data.userid,
-                    videoId:data.videoid
+                where: {
+                    userId: userId!,
+                    videoId: data.videoid
                 }
             })
             const resp2 = await prisma.dislike.create({
-                data:{
-                    userId:data.userid,
-                    videoId:data.videoid
+                data: {
+                    userId: userId!,
+                    videoId: data.videoid
                 }
             })
             return NextResponse.json({
-                success:true,
-                message:resp2
+                success: true,
+                message: resp2
             })
         }
-        const resp3 = await prisma.dislike.create({
-            data:{
-                userId:data.userid,
-                videoId:data.videoid
+        await prisma.dislike.create({
+            data: {
+                userId: userId!,
+                videoId: data.videoid
             }
         })
         return NextResponse.json({
-            success:true,
-            message:resp3
+            success: true,
+            message: "disliked"
         })
     } catch (error) {
         return NextResponse.json({
-            success:false,
-            message:`${error}`
+            success: false,
+            message: `${error}`
         })
     }
 }
 
-export async function DELETE(req:NextRequest){
+export async function DELETE(req: NextRequest) {
     try {
-        const data:z.infer<typeof videoDislikeSchema> = await req.json()
+        const userId = req.headers.get("x-user-id")
+        const data: z.infer<typeof videoDislikeSchema> = await req.json()
         const check = videoDislikeSchema.safeParse(data)
-        if(!check.success){
+        if (!check.success) {
             return NextResponse.json({
-                success:false,
-                message:`${check.error}`
+                success: false,
+                message: `${check.error}`
             })
         }
-        const response = await prisma.dislike.deleteMany({
-            where:{
-                userId:data.userid,
-                videoId:data.videoid
+        await prisma.dislike.deleteMany({
+            where: {
+                userId: userId!,
+                videoId: data.videoid
             }
         })
         return NextResponse.json({
-            success:true,
-            message:response
+            success: true,
+            message: "dislike removed"
         })
     } catch (error) {
         return NextResponse.json({
-            success:false,
-            message:`${error}`
+            success: false,
+            message: `${error}`
         })
     }
 }

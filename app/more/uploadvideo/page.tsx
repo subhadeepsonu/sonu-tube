@@ -64,6 +64,7 @@ export default function UploadVideoPage() {
         form.setValue("discription", "")
         form.setValue("thumbnailurl", "")
         form.setValue("videourl", "")
+        redirect('/')
       } else {
         toast.error(data.message)
       }
@@ -74,9 +75,15 @@ export default function UploadVideoPage() {
   })
   const GetUrl = useMutation({
     mutationFn: async () => {
-      const response = await axios.post('/api/signedurl')
+      const response = await axios.post('/api/signedurl', {
+        contentType: "video/mp4"
+      })
+      console.log(response.data)
       if (response.data.url) {
         const upload = await axios.put(response.data.url, file, {
+          headers: {
+            'Content-Type': 'video/mp4'
+          },
           onUploadProgress: (progressEvent) => {
 
             setProgress(Math.round((progressEvent.loaded * 100) / progressEvent.total!))
@@ -84,10 +91,7 @@ export default function UploadVideoPage() {
         })
         console.log(upload)
         if (upload.status == 200) {
-
-
-          form.setValue('videourl', `https://sonutube.s3.ap-south-1.amazonaws.com/${response.data.id}`)
-
+          form.setValue('videourl', `https://d7lai2u3q1cf7.cloudfront.net/${response.data.id}`)
         }
       }
       return response.data
@@ -103,16 +107,21 @@ export default function UploadVideoPage() {
   })
   const GetUrl2 = useMutation({
     mutationFn: async () => {
-      const response = await axios.post('/api/signedurl')
+      const response = await axios.post('/api/signedurl', {
+        contentType: "image/jpeg"
+      })
       if (response.data.url) {
         const upload = await axios.put(response.data.url, file2, {
+          headers: {
+            'Content-Type': 'image/jpeg'
+          },
           onUploadProgress: (progressEvent) => {
             setProgress2(Math.round((progressEvent.loaded * 100) / progressEvent.total!))
           }
         })
         console.log(upload)
         if (upload.status == 200) {
-          form.setValue('thumbnailurl', `https://sonutube.s3.ap-south-1.amazonaws.com/${response.data.id}`)
+          form.setValue('thumbnailurl', `https://d7lai2u3q1cf7.cloudfront.net/${response.data.id}`)
         }
       }
       console.log(response.data.id)
@@ -142,7 +151,7 @@ export default function UploadVideoPage() {
                   <FormItem className='pb-5' >
                     <FormLabel>Upload Video</FormLabel>
                     <FormControl>
-                      <Input disabled={(progress > 0 && progress < 100) ? true : false} accept='video/*' onChange={(e) => {
+                      <Input disabled={(progress > 0 && progress < 100) ? true : false} accept='video/mp4' onChange={(e) => {
                         if (e.target.files) {
                           setFile(e.target.files[0])
                           GetUrl.mutate()
@@ -160,7 +169,7 @@ export default function UploadVideoPage() {
                   <FormItem className='pb-5'>
                     <FormLabel>Upload Thumbnail</FormLabel>
                     <FormControl>
-                      <Input disabled={(progress2 > 0 && progress < 100) ? true : false} accept='image/*' onChange={(e) => {
+                      <Input disabled={(progress2 > 0 && progress < 100) ? true : false} accept='image/jpg' onChange={(e) => {
                         if (e.target.files) {
                           setFile2(e.target.files[0])
                           GetUrl2.mutate()

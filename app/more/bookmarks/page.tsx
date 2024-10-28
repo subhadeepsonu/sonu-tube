@@ -1,17 +1,25 @@
 "use client"
 import AnnoucementCard from "@/components/cards/announcementCard"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useBookMarkStore } from "@/store/BookMarkStore"
 import { annoucementType } from "@/types/annoucementTypes"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import { useEffect } from "react"
 export default function Watchlater() {
+    const { setVideos } = useBookMarkStore()
     const QueryBookMarks = useQuery({
-        queryKey: ["Bookmark"],
+        queryKey: ["bookmark"],
         queryFn: async () => {
             const response = await axios.get("/api/annoucement/bookmark")
             return response.data
         }
     })
+    useEffect(() => {
+        if (QueryBookMarks.data) {
+            setVideos(QueryBookMarks.data.data)
+        }
+    }, [QueryBookMarks.data, setVideos])
     if (QueryBookMarks.isLoading) {
         return <div className="min-h-screen w-full flex flex-col justify-start dark:bg-zinc-950 bg-gray-50 items-center pt-12 md:pl-52 pb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 px-3 pt-3 w-full">
@@ -31,8 +39,8 @@ export default function Watchlater() {
         </div>
     }
     if (QueryBookMarks.isError) {
-        return <div>
-
+        return <div className="flex justify-center items-center h-screen w-full">
+            Error
         </div>
     }
     if (QueryBookMarks.data) {

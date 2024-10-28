@@ -11,7 +11,8 @@ export default function AnnouncementPage() {
             const response = await axios.get('/api/annoucement')
             console.log(response)
             return response.data
-        }
+        },
+        refetchOnMount: true
     })
     if (Annoucements.isLoading) {
         return <div className="min-h-screen bg-gray-50  w-full dark:bg-zinc-950 flex flex-col md:justify-start justify-center items-center mb-20 pt-12 md:pl-52   pb-20">

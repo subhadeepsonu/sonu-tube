@@ -22,11 +22,11 @@ export async function GET(req: NextRequest) {
             success: false,
             message: `${error}`
         })
-
     }
 }
 export async function POST(req: NextRequest) {
     try {
+        const userId = req.headers.get("x-user-id")
         const data: z.infer<typeof followschema> = await req.json()
         const check = followschema.safeParse(data)
         if (!check.success) {
@@ -35,15 +35,15 @@ export async function POST(req: NextRequest) {
                 message: `${check.error}`
             })
         }
-        const response = await prisma.follows.create({
+        await prisma.follows.create({
             data: {
-                follwerId: data.followerid,
-                userId: data.userid
+                follwerId: userId!,
+                userId: data.followerid
             }
         })
         return NextResponse.json({
             success: true,
-            message: response
+            message: "followed"
         })
     } catch (error) {
         return NextResponse.json({
@@ -54,6 +54,7 @@ export async function POST(req: NextRequest) {
 }
 export async function DELETE(req: NextRequest) {
     try {
+        const userId = req.headers.get("x-user-id")
         const data: z.infer<typeof followschema> = await req.json()
         const check = followschema.safeParse(data)
         if (!check.success) {
@@ -62,15 +63,15 @@ export async function DELETE(req: NextRequest) {
                 message: `${check.error}`
             })
         }
-        const response = await prisma.follows.deleteMany({
+        await prisma.follows.deleteMany({
             where: {
-                follwerId: data.followerid,
-                userId: data.userid
+                follwerId: userId!,
+                userId: data.followerid
             }
         })
         return NextResponse.json({
             success: true,
-            message: response
+            message: "unfollowed"
         })
     } catch (error) {
         return NextResponse.json({

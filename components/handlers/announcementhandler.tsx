@@ -2,6 +2,7 @@
 import { BiLike, BiDislike, BiSolidLike, BiSolidDislike } from "react-icons/bi";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import axios from "axios";
 export default function AnnoucementHandler(props: {
   id: number,
   likes: number,
@@ -15,22 +16,38 @@ export default function AnnoucementHandler(props: {
   const [disliked, SetDisliked] = useState(props.disliked)
   const MutateAddLike = useMutation({
     mutationFn: async () => {
-
+      const response = await axios.post("/api/annoucement/like", {
+        announcementid: props.id
+      })
+      return response.data
     }
   })
   const MutateRemoveLike = useMutation({
     mutationFn: async () => {
-
+      const response = await axios.delete("/api/annoucement/like", {
+        data: {
+          announcementid: props.id
+        }
+      })
+      return response.data
     }
   })
   const MutateAddDislike = useMutation({
     mutationFn: async () => {
-
+      const response = await axios.post("/api/annoucement/dislike", {
+        announcementid: props.id
+      })
+      return response.data
     }
   })
   const MutateRemoveDislike = useMutation({
     mutationFn: async () => {
-
+      const response = await axios.delete("/api/annoucement/dislike", {
+        data: {
+          announcementid: props.id
+        }
+      })
+      return response.data
     }
   })
 

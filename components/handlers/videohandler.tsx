@@ -1,31 +1,58 @@
 "use client"
 
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import { BiLike, BiDislike, BiSolidLike, BiSolidDislike } from "react-icons/bi";
 export default function VideoHandler(props: {
     userlikes: any,
     userdislikes: any,
     likeCount: number,
+    liked: boolean,
+    disliked: boolean,
     dislikeCount: number,
     userid: string,
     id: number
 }) {
     const [likes, setLikes] = useState(props.likeCount)
     const [dislikes, setDislikes] = useState(props.dislikeCount)
-    const [isLiked, setIsLiked] = useState(false)
-    const [isDisLiked, setIsDisLiked] = useState(false)
+    const [isLiked, setIsLiked] = useState(props.liked)
+    const [isDisLiked, setIsDisLiked] = useState(props.disliked)
     const MutateAddLike = useMutation({
-        mutationFn: async () => { }
+        mutationFn: async () => {
+            const response = await axios.post("/api/video/like", {
+                videoid: props.id
+            })
+            return response.data
+        }
     })
     const MutateAddDislike = useMutation({
-        mutationFn: async () => { }
+        mutationFn: async () => {
+            const response = await axios.post("/api/video/dislike", {
+                videoid: props.id
+            })
+            return response.data
+        }
     })
     const MutateRemoveLike = useMutation({
-        mutationFn: async () => { }
+        mutationFn: async () => {
+            const response = await axios.delete("/api/video/like", {
+                data: {
+                    videoid: props.id
+                }
+            })
+            return response.data
+        }
     })
     const MuatateRemoveDislike = useMutation({
-        mutationFn: async () => { }
+        mutationFn: async () => {
+            const response = await axios.delete("/api/video/dislike", {
+                data: {
+                    videoid: props.id
+                }
+            })
+            return response.data
+        }
     })
 
     return <div className="flex h-16 dark:bg-black items-center m-2 bg-white shadow-sm text-xl  justify-center rounded-lg ">

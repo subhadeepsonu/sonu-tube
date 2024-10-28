@@ -1,5 +1,4 @@
 import z from "zod"
-export const videoDislikeSchema= z.object({
-    userid:z.string(),
-    videoid:z.number()
+export const videoDislikeSchema = z.object({
+    videoid: z.number()
 })

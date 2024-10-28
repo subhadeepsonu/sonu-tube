@@ -5,6 +5,7 @@ import prisma from "@/db";
 export async function GET(req: NextRequest) {
     try {
         const userId = req.headers.get("x-user-id")!
+
         // if (!params.get("limit") || !params.get("offset")) {
         //     return NextResponse.json({
         //         success: false,

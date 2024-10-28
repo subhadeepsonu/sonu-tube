@@ -68,8 +68,8 @@ export default function VideoPlay({ params }: {
                             </div>
                         </Link>
                         <p className=" text-lg  bg-white dark:bg-transparent h-16 px-2  rounded-lg flex justify-center items-center  shadow-sm">views: {QueryVideo.data.data?._count.views}</p>
-                        <VideoHandler id={QueryVideo.data.data?.id!} dislikeCount={QueryVideo.data.data?._count.dislike!} likeCount={QueryVideo.data.data?._count.like!} userdislikes={QueryVideo.data.data?.dislike} userlikes={QueryVideo.data.data?.like} userid={""}></VideoHandler>
-                        <FollowerHandler name={QueryVideo.data.data?.user.name!} follower={QueryVideo.data.data?.user.follows} userid={""} channelid={QueryVideo.data.data?.userid!} key={QueryVideo.data.data?.id}></FollowerHandler>
+                        <VideoHandler disliked={QueryVideo.data.data.disliked} liked={QueryVideo.data.data.liked} id={QueryVideo.data.data?.id!} dislikeCount={QueryVideo.data.data?._count.dislike!} likeCount={QueryVideo.data.data?._count.like!} userdislikes={QueryVideo.data.data?.dislike} userlikes={QueryVideo.data.data?.like} userid={""}></VideoHandler>
+                        <FollowerHandler following={QueryVideo.data.data.following} name={QueryVideo.data.data?.user.name!} followerCount={QueryVideo.data.data.user._count.follows} channelid={QueryVideo.data.data?.userid!} key={QueryVideo.data.data?.id}></FollowerHandler>
                     </div>
                 </div>
                 <div className="w-full  px-5">
