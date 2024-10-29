@@ -11,6 +11,7 @@ import axios from "axios";
 import Link from "next/link";
 import ReactPlayer from "react-player";
 import { useEffect, useState } from "react";
+import { preload } from "react-dom";
 export default function VideoPlay({ params }: {
     params: {
         id: string
@@ -30,7 +31,13 @@ export default function VideoPlay({ params }: {
     })
     useEffect(() => {
         if (QueryVideo.data) {
-            setVideo(<ReactPlayer playing={true} controls={true} height={"100%"} width={"100%"} url={QueryVideo.data.data.videourl}></ReactPlayer>)
+            setVideo(<ReactPlayer config={{
+                file: {
+                    attributes: {
+                        preload: "auto"
+                    }
+                }
+            }} playing={true} controls={true} height={"100%"} width={"100%"} url={QueryVideo.data.data.videourl}></ReactPlayer>)
         }
     }, [QueryVideo.data])
     if (QueryVideo.isLoading) {
@@ -50,7 +57,7 @@ export default function VideoPlay({ params }: {
                     {video}
                 </div>
                 <div className="">
-                    <p className="text-3xl font-semibold px-5">
+                    <p className="text-xl font-semibold px-5">
                         {QueryVideo.data.data?.title}
                     </p>
                     <div className="flex flex-wrap  px-5 ">

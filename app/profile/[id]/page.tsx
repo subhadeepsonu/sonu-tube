@@ -40,7 +40,7 @@ export default function Profile({ params }: {
         </div>
     }
     if (QueryProfile.data) {
-        return <div className="min-h-screen flex flex-col dark:bg-zinc-950 bg-gray-50 justify-start md:pl-52 pt-16 items-center pb-20  ">
+        return <div className="min-h-screen flex flex-col dark:bg-black bg-gray-50 justify-start md:pl-52 pt-16 items-center pb-20  ">
             <div className=" p-3 rounded-lg h-40 w-full ">
                 <img src="https://th.bing.com/th/id/OIG2.6bChLwKDF7ARn0f8J2PE?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="Bgurl" className="h-full rounded-lg w-full object-cover " />
             </div>

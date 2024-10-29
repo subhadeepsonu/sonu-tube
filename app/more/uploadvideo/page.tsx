@@ -64,12 +64,12 @@ export default function UploadVideoPage() {
         form.setValue("discription", "")
         form.setValue("thumbnailurl", "")
         form.setValue("videourl", "")
-        redirect('/')
       } else {
         toast.error(data.message)
       }
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error)
       toast.error("could not upload video")
     }
   })
@@ -82,7 +82,8 @@ export default function UploadVideoPage() {
       if (response.data.url) {
         const upload = await axios.put(response.data.url, file, {
           headers: {
-            'Content-Type': 'video/mp4'
+            'Content-Type': 'video/mp4',
+            "Content-Disposition": "inline"
           },
           onUploadProgress: (progressEvent) => {
 
@@ -113,7 +114,8 @@ export default function UploadVideoPage() {
       if (response.data.url) {
         const upload = await axios.put(response.data.url, file2, {
           headers: {
-            'Content-Type': 'image/jpeg'
+            'Content-Type': 'image/jpeg',
+
           },
           onUploadProgress: (progressEvent) => {
             setProgress2(Math.round((progressEvent.loaded * 100) / progressEvent.total!))
