@@ -58,7 +58,7 @@ export default function Profile({ params }: {
                     <p className="text-sm pb-2">
                         {QueryProfile.data.data?._count.video} Videos
                     </p>
-                    <FollowerHandler channelid={QueryProfile.data.data?.id!} userid={""} follower={QueryProfile.data.data?.follows} name={QueryProfile.data.data?.name!} ></FollowerHandler>
+                    <FollowerHandler channelid={QueryProfile.data.data?.id!} followerCount={3} following={true} name={QueryProfile.data.data?.name!} ></FollowerHandler>
                 </div>
 
 

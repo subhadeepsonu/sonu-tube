@@ -15,7 +15,6 @@ export default function AnnoucementCard(props: {
     ownerImage: string,
     OwnerName: string
 }) {
-
     return <div className="bg-white w-full dark:bg-transparent dark:border-zinc-800 border-2 border-gray-100 dark:border-2 dark:text-gray-100  h-80 p-3  shadow-sm flex flex-col justify-start items-start text-black rounded-lg ">
         <div className="flex w-full justify-between items-center">
             <div className="flex justify-between items-center">

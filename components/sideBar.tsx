@@ -15,7 +15,7 @@ export default function SideBar() {
     if (pathname == "/login" || pathname == "/signup") {
         return null
     }
-    return <div className="w-52 border-r-2 shadow-sm dark:text-white dark:bg-zinc-950 h-full hidden md:flex fixed left-0  justify-start items-start pt-12  bg-white   ">
+    return <div className="w-52 border-r-2 shadow-sm dark:text-white dark:bg-black h-full hidden md:flex fixed left-0  justify-start items-start pt-12  bg-white   ">
         <div className="w-full   flex-col flex justify-between items-center">
             <SideBarComp pathname="Home" href="/" Icon={<IoHomeSharp className="text-xl" />}></SideBarComp>
             <SideBarComp pathname="Explore" href="/explore" Icon={<RiFireLine className="text-xl" />}></SideBarComp>

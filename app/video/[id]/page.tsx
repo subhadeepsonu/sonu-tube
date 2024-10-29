@@ -9,13 +9,14 @@ import { Avatar } from "@radix-ui/react-avatar";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Link from "next/link";
-import VideoPlayer from "@/components/cards/videoPlayer";
+import ReactPlayer from "react-player";
+import { useEffect, useState } from "react";
 export default function VideoPlay({ params }: {
     params: {
         id: string
     }
 }) {
-
+    const [video, setVideo] = useState<any>(null)
     const QueryVideo = useQuery({
         queryKey: ['video', params.id],
 
@@ -27,6 +28,11 @@ export default function VideoPlay({ params }: {
             return response.data
         }
     })
+    useEffect(() => {
+        if (QueryVideo.data) {
+            setVideo(<ReactPlayer playing={true} controls={true} height={"100%"} width={"100%"} url={QueryVideo.data.data.videourl}></ReactPlayer>)
+        }
+    }, [QueryVideo.data])
     if (QueryVideo.isLoading) {
         return <div className="min-h-screen w-full flex justify-center items-center">
             Loading
@@ -39,10 +45,9 @@ export default function VideoPlay({ params }: {
     }
     if (QueryVideo.data) {
         return <div className="min-h-screen w-full dark:bg-black ba flex justify-between items-start pb-20 md:pb-0 pt-20   bg-gray-50">
-
             <div className="lg:w-3/4 w-full">
                 <div className="md:h-[450px] h-[300px] w-full">
-                    <VideoPlayer url={QueryVideo.data.data?.videourl!} ></VideoPlayer>
+                    {video}
                 </div>
                 <div className="">
                     <p className="text-3xl font-semibold px-5">
@@ -61,7 +66,6 @@ export default function VideoPlay({ params }: {
                                 <div className="flex flex-col justify-around items-start pl-2">
                                     <p className="font-medium text-lg">
                                         {QueryVideo.data.data?.user.name}
-
                                     </p>
                                     <p className="text-xs">{QueryVideo.data.data?.user._count.follows} Followers</p>
                                 </div>

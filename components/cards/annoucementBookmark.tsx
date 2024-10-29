@@ -17,8 +17,8 @@ export default function AnnouncementBookmark(props: {
             })
             return response.data
         },
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["bookmark", "annoucements"] })
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: ["bookmark", "annoucements"] })
             toast.success("Bookmark added")
         },
         onError: () => {
@@ -27,11 +27,13 @@ export default function AnnouncementBookmark(props: {
     })
     const MutateRemoveBookmark = useMutation({
         mutationFn: async () => {
+
             const response = await axios.delete("/api/annoucement/bookmark", {
                 data: {
                     announcementid: props.announcementid
                 }
             })
+
             return response.data
         },
         onSuccess: () => {

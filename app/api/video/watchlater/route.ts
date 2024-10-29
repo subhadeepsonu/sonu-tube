@@ -30,9 +30,14 @@ export async function GET(req: NextRequest) {
                 createdat: "desc"
             }
         })
+        const updatedResponse = response.map((video) => ({
+            ...video,
+            id: video.vedioId,
+            MarkedAsWatchLater: true
+        }))
         return NextResponse.json({
             success: true,
-            data: response
+            data: updatedResponse
         })
 
     } catch (error) {

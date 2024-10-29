@@ -48,7 +48,7 @@ export default function UerProfile() {
                     <p className="text-sm pb-2">
                         {QUeryProfile.data.data?._count.video} Videos
                     </p>
-                    <FollowerHandler channelid={QUeryProfile.data.data?.id!} userid={""} follower={QUeryProfile.data.data?.follows} name={QUeryProfile.data.data?.name!} ></FollowerHandler>
+                    <FollowerHandler channelid={QUeryProfile.data.data?.id!} followerCount={3} following={false} name={QUeryProfile.data.data?.name!} ></FollowerHandler>
                 </div>
 
 

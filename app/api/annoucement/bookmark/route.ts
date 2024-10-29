@@ -37,6 +37,7 @@ export async function GET(req: NextRequest) {
         const UpdatedResponse = response.map((announcement) => {
             return {
                 id: announcement.id,
+                announcementId: announcement.annoucement.id,
                 title: announcement.annoucement.title,
                 description: announcement.annoucement.discription,
                 likes: announcement.annoucement._count.annoucementlike,
@@ -114,14 +115,27 @@ export async function DELETE(req: NextRequest) {
                 message: `${check.error}`
             })
         }
-        await prisma.annoucementbookmark.deleteMany({
+        console.log(data)
+        console.log(userId)
+        const find = await prisma.annoucementbookmark.findMany({
             where: {
                 annoucementid: data.announcementid,
                 userid: userId!
             }
         })
-        revalidatePath("/more/bookmark")
-        revalidatePath("/announcement")
+        if (find.length === 0) {
+            return NextResponse.json({
+                success: false,
+                message: "Not Bookmarked"
+            })
+        }
+        const h2 = await prisma.annoucementbookmark.deleteMany({
+            where: {
+                annoucementid: data.announcementid,
+                userid: userId!
+            }
+        })
+        console.log(h2)
         return NextResponse.json({
             success: true,
             message: "Bookmark Removed"
