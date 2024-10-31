@@ -10,16 +10,17 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Button } from "../ui/button";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { Textarea } from "../ui/textarea";
+import axios from "axios";
 export default function AnnouncementAddComment(props: {
-    userid: string,
     announcementid: number
 }) {
     const CommentSchema = z.object({
         comment: z.string().min(3, { message: "Minimum 3 letters" })
     })
+    const querClient = useQueryClient();
     const form = useForm<z.infer<typeof CommentSchema>>({
         resolver: zodResolver(CommentSchema),
         mode: "onChange"
@@ -27,10 +28,15 @@ export default function AnnouncementAddComment(props: {
     const values = form.getValues()
     const MutateAddComment = useMutation({
         mutationFn: async () => {
-
+            const response = await axios.post(`/api/annoucement/comment`, {
+                comment: values.comment,
+                announcementid: props.announcementid
+            })
+            return response.data
         },
         onSettled: () => {
-            form.setValue("comment", "")
+            form.reset()
+            querClient.invalidateQueries({ queryKey: ["comments"] })
         }
     },
     )

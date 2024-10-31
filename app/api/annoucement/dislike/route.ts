@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { annoucementDislikeSchema } from "./schema";
 import z from "zod"
 import prisma from "@/db";
-import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest) {
     try {

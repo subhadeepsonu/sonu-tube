@@ -1,6 +1,5 @@
 "use client"
 import CommentCard from "@/components/cards/commentCard";
-import RecommandedVideo from "@/components/clientpages/RecommendingVideo";
 import VideoAddComment from "@/components/forms/videocommentform";
 import FollowerHandler from "@/components/handlers/followerhandler";
 import VideoHandler from "@/components/handlers/videohandler";
@@ -11,7 +10,6 @@ import axios from "axios";
 import Link from "next/link";
 import ReactPlayer from "react-player";
 import { useEffect, useState } from "react";
-import { preload } from "react-dom";
 export default function VideoPlay({ params }: {
     params: {
         id: string
@@ -25,19 +23,29 @@ export default function VideoPlay({ params }: {
             const response = await axios.post("/api/video/byid", {
                 id: parseInt(params.id)
             })
-            console.log(response.data)
             return response.data
         }
     })
+
+    useEffect(() => {
+        async function view() {
+            const response = await axios.post("/api/video/view", {
+                videoid: parseInt(params.id)
+            })
+            console.log(response.data)
+        }
+        view()
+    }, [])
     useEffect(() => {
         if (QueryVideo.data) {
             setVideo(<ReactPlayer config={{
                 file: {
                     attributes: {
-                        preload: "auto"
+                        preload: "auto",
                     }
                 }
-            }} playing={true} controls={true} height={"100%"} width={"100%"} url={QueryVideo.data.data.videourl}></ReactPlayer>)
+            }} loop={true} playing={true} controls={true} height={"100%"} width={"100%"} url={QueryVideo.data.data.videourl} ></ReactPlayer>)
+
         }
     }, [QueryVideo.data])
     if (QueryVideo.isLoading) {
@@ -52,7 +60,7 @@ export default function VideoPlay({ params }: {
     }
     if (QueryVideo.data) {
         return <div className="min-h-screen w-full dark:bg-black ba flex justify-between items-start pb-20 md:pb-0 pt-20   bg-gray-50">
-            <div className="lg:w-3/4 w-full">
+            <div className="w-full">
                 <div className="md:h-[450px] h-[300px] w-full">
                     {video}
                 </div>
@@ -100,9 +108,9 @@ export default function VideoPlay({ params }: {
                     })}
                 </div>
             </div>
-            <div className="w-1/4 hidden min-h-screen lg:flex justify-center items-start ">
+            {/* <div className="w-1/4 hidden min-h-screen lg:flex justify-center items-start ">
                 <RecommandedVideo currentvideoid={QueryVideo.data.data.id} tag={QueryVideo.data.data.tag}></RecommandedVideo>
-            </div>
+            </div> */}
         </div>
     }
 }

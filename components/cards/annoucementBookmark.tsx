@@ -18,7 +18,8 @@ export default function AnnouncementBookmark(props: {
             return response.data
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ["bookmark", "annoucements"] })
+            await queryClient.invalidateQueries({ queryKey: ["bookmark"] })
+            await queryClient.invalidateQueries({ queryKey: ["annoucements"] })
             toast.success("Bookmark added")
         },
         onError: () => {

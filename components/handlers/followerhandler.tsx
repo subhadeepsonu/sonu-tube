@@ -58,6 +58,6 @@ export default function FollowerHandler(props: {
             MutateFollow.mutate()
 
         }}>Follow</Button>}
-        <p>{follow}</p>
+
     </div>
 }

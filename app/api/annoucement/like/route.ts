@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { annoucementLikeSchema } from "./schema";
 import z from "zod"
 import prisma from "@/db";
-import { revalidatePath } from "next/cache";
 export async function POST(req: NextRequest) {
     try {
         const userId = req.headers.get("x-user-id")
@@ -31,7 +30,7 @@ export async function POST(req: NextRequest) {
             const response = await prisma.annoucementlike.create({
                 data: {
                     annoucementid: data.announcementid,
-                    userid: data.userid
+                    userid: userId!
                 }
             })
             return NextResponse.json({
@@ -39,7 +38,7 @@ export async function POST(req: NextRequest) {
                 message: response
             })
         }
-        const response = await prisma.annoucementlike.create({
+        await prisma.annoucementlike.create({
             data: {
                 annoucementid: data.announcementid,
                 userid: userId!

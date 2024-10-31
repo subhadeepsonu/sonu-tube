@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
                 userid: userId!
             },
             orderBy: {
-                updatedat: "desc"
+                viewedat: "desc"
             },
             include: {
                 video: {
@@ -42,29 +42,59 @@ export async function GET(req: NextRequest) {
             message: `${error}`
         })
     }
-
 }
 export async function POST(req: NextRequest) {
     try {
+        const userId = req.headers.get("x-user-id")
         const data: z.infer<typeof viewSchema> = await req.json()
-        const check = viewSchema.safeParse(viewSchema)
+        console.log(data)
+        const check = viewSchema.safeParse(data)
         if (!check.success) {
+            console.log(check.error)
             return NextResponse.json({
                 success: false,
                 message: `${check.error}`
             })
         }
-        const response = await prisma.views.create({
-            data: {
-                userid: data.userid,
+        const response = await prisma.views.findFirst({
+            where: {
+                userid: userId!,
                 videoid: data.videoid
             }
         })
-        return NextResponse.json({
-            success: true,
-            message: response
-        })
+        if (response) {
+            await prisma.views.deleteMany({
+                where: {
+                    userid: userId!,
+                    videoid: data.videoid
+                }
+            })
+            await prisma.views.create({
+                data: {
+                    userid: userId!,
+                    videoid: data.videoid
+                }
+            })
+
+            return NextResponse.json({
+                success: true,
+                message: "Viewed updated"
+            })
+        }
+        else {
+            await prisma.views.create({
+                data: {
+                    userid: userId!,
+                    videoid: data.videoid
+                }
+            })
+            return NextResponse.json({
+                success: true,
+                message: "Viewed"
+            })
+        }
     } catch (error) {
+        console.log(error)
         return NextResponse.json({
             success: false,
             message: `${error}`

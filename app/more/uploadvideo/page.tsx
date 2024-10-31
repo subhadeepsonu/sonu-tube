@@ -26,7 +26,7 @@ import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { z } from 'zod';
+import { set, z } from 'zod';
 import axios from 'axios';
 import { Progress } from '@/components/ui/progress';
 export default function UploadVideoPage() {
@@ -93,6 +93,7 @@ export default function UploadVideoPage() {
         console.log(upload)
         if (upload.status == 200) {
           form.setValue('videourl', `https://d7lai2u3q1cf7.cloudfront.net/${response.data.id}`)
+          setProgress(100)
         }
       }
       return response.data
@@ -119,6 +120,7 @@ export default function UploadVideoPage() {
           },
           onUploadProgress: (progressEvent) => {
             setProgress2(Math.round((progressEvent.loaded * 100) / progressEvent.total!))
+            setProgress2(100)
           }
         })
         console.log(upload)

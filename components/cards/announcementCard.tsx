@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import AnnoucementHandler from "../handlers/announcementhandler";
 import AnnouncementBookmark from "./annoucementBookmark";
 import Link from "next/link";
+import CommentButton from "./commentButton";
 export default function AnnoucementCard(props: {
     id: number,
     title: string,
@@ -35,7 +36,7 @@ export default function AnnoucementCard(props: {
         </div>
         <div className="flex w-full justify-between">
             <AnnoucementHandler disliked={props.disliked} liked={props.liked} id={props.id} likes={props.likes} dislikes={props.dislikes}></AnnoucementHandler>
-            {/* <CommentButton id={props.id}></CommentButton> */}
+            <CommentButton id={props.id}></CommentButton>
         </div>
     </div>
 }
